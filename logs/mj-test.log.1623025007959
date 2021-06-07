@@ -1,0 +1,30 @@
+INFO  02:12:18,490 - Compiling source file: C:\Users\Administrator\Desktop\Kompajler MJ\test\test302.mj
+INFO  02:12:18,788 - #2 program
+INFO  02:12:18,788 - #51 test302
+INFO  02:12:18,789 - #6 const
+INFO  02:12:18,791 - #51 int
+INFO  02:12:18,792 - #51 jedan
+INFO  02:12:18,792 - #11 = 
+INFO  02:12:18,792 - #48 1
+INFO  02:12:18,792 - #18 ;
+INFO  02:12:18,792 - #51 int
+INFO  02:12:18,793 - #51 i
+INFO  02:12:18,793 - #13 ,
+INFO  02:12:18,800 - #51 j
+INFO  02:12:18,800 - #18 ;
+INFO  02:12:18,800 - #51 bool
+INFO  02:12:18,801 - #51 ibool
+INFO  02:12:18,801 - #18 ;
+INFO  02:12:18,801 - #51 int
+INFO  02:12:18,801 - #51 niz
+INFO  02:12:18,802 - #8 [
+INFO  02:12:18,802 - #7 ]
+INFO  02:12:18,802 - #18 ;
+INFO  02:12:18,804 - #4 {
+INFO  02:12:18,805 - #51 int
+INFO  02:12:18,805 - #51 sum
+INFO  02:12:18,805 - #9 (
+INFO  02:12:18,805 - #51 int
+ERROR 02:12:18,805 - 
+Sintaksna greska na liniji 14
+ERROR 02:12:18,805 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 14

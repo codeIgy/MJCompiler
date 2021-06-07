@@ -1,0 +1,231 @@
+
+
+package rs.ac.bg.etf.pp1;
+
+import java_cup.runtime.*;
+import org.apache.log4j.*;
+import rs.ac.bg.etf.pp1.ast.*;
+
+parser code {:
+
+	Logger log = Logger.getLogger(getClass());
+   
+   
+    // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
+     
+    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+      done_parsing();
+      report_error(message, info);
+    }
+  
+    public void syntax_error(Symbol cur_token) {
+        report_error("\nSintaksna greska", cur_token);
+    }
+  
+    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+    }
+
+    public void report_error(String message, Object info) {
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append (" na liniji ").append(((Symbol)info).left);
+        log.error(msg.toString());
+    }
+
+:}
+
+scan with {:
+	Symbol s = this.getScanner().next_token();
+	if (s != null && s.value != null) 
+		log.info(s.toString() + " " + s.value.toString());
+	return s;
+:}
+ 
+ 
+terminal PROG, BREAK, LBRACE, RBRACE, CONST, RBRACKET, LBRACKET, LPAREN, RPAREN, ASSIGN, RETURN, COMMA, PRINT, VOID, IF, ELSE, SEMI, READ, COLON;
+terminal DEFAULT, YIELD, PLUS, MINUS, INC, DEC, MUL, DIV, MOD, LT, GT, LE, GE, DIF, EQUAL, NEW, SWITCH, CASE, QUESTION, OR, AND, CLASS, ENUM, DO, WHILE, EXTENDS, CONTINUE;
+terminal Integer NUMCONST;
+terminal Character CHARCONST;
+terminal String BOOLCONST;
+terminal String IDENT;
+
+nonterminal Program, MethodDeclList, NonMethodDeclList, NonMethodDecl, MethodDecl, ConstDecl, Type, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
+nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, Expr, ReturnStatement, Designator, ToPrint, StatementList, ReturnStmt;
+nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Term, Mulop, Factor, SwitchBodyWithoutDefault, StatementListWithYield;
+
+precedence left ELSE;
+
+Program ::= (Program_) PROG IDENT NonMethodDeclList LBRACE MethodDeclList RBRACE;
+
+NonMethodDeclList ::= (NonMethodDeclList_) NonMethodDeclList NonMethodDecl
+					| (NoNonMethodDeclList_) /* epsilon */
+					;
+NonMethodDecl ::= (ConstDecl1) ConstDecl
+					| (VarDecl1) VarDecl
+					;
+
+ConstDecl ::= (ConstDecl_) CONST Type ConstIdents SEMI;
+
+ConstIdents ::= (ConstIdents_) ConstIdents COMMA ConstIdent
+			| (ConstIdent1) ConstIdent
+			;
+			
+ConstIdent ::= (NumConst1) IDENT:vName ASSIGN NUMCONST:vValue
+				| (CharConst1) IDENT:vName ASSIGN CHARCONST:vValue
+				| (BoolConst1) IDENT ASSIGN BOOLCONST
+				;
+
+VarDecl ::= (VarDecl_) Type VarIdents SEMI;
+
+VarIdents ::= (VarIdents_) VarIdents COMMA VarIdent
+			| (VarIdent1) VarIdent
+			;
+			
+VarIdent ::= (VarIdent_) IDENT IsArray;
+
+IsArray ::= (IsArray_) LBRACKET RBRACKET
+			| (NoArray_) /* epsilon */
+			;
+
+Type ::= (Type_) IDENT:vType;
+
+MethodDeclList ::= (MethodDeclList_) MethodDeclList MethodDecl
+				| (NoMethods_) /* epsilon */
+				;
+				
+MethodDecl ::= (MethodDecl_) ReturnStmt IDENT LPAREN FormParsList RPAREN MethodVarDecls LBRACE StatementList RBRACE;
+
+MethodVarDecls ::= (MethodVarDecls_) MethodVarDecls VarDecl
+				| (NoMethodVarDecls_) /* epsilon */
+				;
+
+ReturnStmt ::= (TypeReturn) Type
+			| (Void1) VOID
+			;
+
+FormParsList ::= (FormParsList_)  FormPars  
+			| (NoFormParamsList) /* epsilon */
+			;
+		
+FormPars ::= (FormPars_) FormPar COMMA FormPars
+			| (FormPar1) FormPar
+			;
+
+FormPar ::= (FormPar_) Type IDENT IsArray;
+
+Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
+			| (IfOrElseStatement1) IfOrElseStatement
+			| (DoWhileStatement_) DO Statement WHILE LPAREN Condition RPAREN SEMI
+			| (YieldStatement_) YIELD Expr SEMI
+			| (BreakStatement_) BREAK SEMI
+			| (ContinueStatement_) CONTINUE SEMI
+			| (ReturnStatement1) ReturnStatement SEMI
+			| (ReadStatement_) READ LPAREN Designator RPAREN SEMI
+			| (PrintStatement_) PRINT LPAREN ToPrint RPAREN SEMI
+			| (StatementList1) LBRACE StatementList RBRACE 
+			; 
+
+IfOrElseStatement ::= (IfStatement_) IF LPAREN Condition RPAREN Statement
+					| (ElseStatement_) IF LPAREN Condition RPAREN Statement ELSE Statement
+					;
+
+ReturnStatement ::= (ReturnVoidStatement_) RETURN
+					| (ReturnExprStatement_) RETURN Expr
+					;
+
+ToPrint ::= (NoNumConstPrint_) Expr 
+			| (NumConstPrint_) Expr COMMA NUMCONST
+			;
+
+StatementList ::= (StatementList_) StatementList Statement 
+				| (NoStatementList_) /* epsilon */
+				;
+
+DesignatorStatement ::= (DesignatorStatement_) Designator OperationsWithDesignator;
+
+OperationsWithDesignator ::= (AssignExpression_) Assignop Expr
+							| (ActParsListExpression_) LPAREN ActParsList RPAREN 
+							| (IncExpression_) INC
+							| (DecExpression_) DEC
+							; 
+
+ActParsList ::= (ActParsList_) ActPars
+			| (NoActParsList_) /* epsilon */
+			;
+
+ActPars ::= (ActPars_)  Expr COMMA ActPars
+			| (ActPar_) Expr
+			;
+			
+Condition ::= (Conditions_) Condition OR CondTerm
+			| (CondTerm1) CondTerm
+			;
+
+CondTerm ::= (CondTerm_) CondTerm AND CondFact
+			| (CondFact1) CondFact
+			;
+
+CondFact ::= (CondFactExpr_) Expr
+			| (CondFactExprs_) Expr Relop Expr
+			;
+			
+Expr ::= (MinusExpr_) MINUS Term
+			| (PlusExpr_) Term
+			| (ExprList1) Expr Addop Term
+			| (SwitchStatement_) SWITCH LPAREN Expr RPAREN LBRACE SwitchBody RBRACE
+			;
+
+
+
+Term ::= (Term_) Term Mulop Factor
+			| (Factor1) Factor
+			;
+			
+Factor ::=  (Designator1) Designator
+			| (Designator2) Designator LPAREN ActParsList RPAREN
+			| (NumConst2) NUMCONST
+			| (CharConst2) CHARCONST
+			| (BoolConst2) BOOLCONST
+			| (New1) NEW Type
+			| (New2) NEW Type LBRACKET Expr RBRACKET
+			| (NestedExpr1) LPAREN Expr RPAREN
+			;
+
+Designator ::= (DesignatorNotArray_) IDENT
+			| (DesignatorArray1) DesignatorArray LBRACKET Expr RBRACKET
+			;
+			
+DesignatorArray ::= (DesignatorArray_) Designator;
+			
+SwitchBody ::= (SwitchBody_) SwitchBodyWithoutDefault DEFAULT COLON StatementListWithYield;
+
+SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault CASE NUMCONST COLON StatementList
+							| (NoSwitchBodyWithoutDefault_) /* epsilon */
+							;
+							
+StatementListWithYield ::= (StatementListWithYield) StatementList YIELD Expr SEMI;
+
+Assignop ::= (Assignop_) ASSIGN;
+
+
+Relop ::= (Eqop1) EQUAL 
+		| (Difop1) DIF
+		| (Ltop1) LT
+		| (Leop1) LE
+		| (Gtop1) GT
+		| (Geop1) GE
+		;
+
+Addop ::= (Plusop1) PLUS
+		| (Minusop1) MINUS
+		;
+
+Mulop ::= (Mulop1) MUL
+		| (Divop1) DIV
+		| (Modop1) MOD
+		;
+
+
+
+ 			

@@ -1,0 +1,2448 @@
+INFO  02:26:49,422 - Compiling source file: C:\Users\Administrator\Desktop\Kompajler MJ\test\test301.mj
+INFO  02:26:49,628 - #2 program
+INFO  02:26:49,628 - #51 test301
+INFO  02:26:49,628 - #6 const
+INFO  02:26:49,630 - #51 int
+INFO  02:26:49,631 - #51 nula
+INFO  02:26:49,632 - #11 = 
+INFO  02:26:49,632 - #48 0
+INFO  02:26:49,632 - #18 ;
+INFO  02:26:49,633 - #6 const
+INFO  02:26:49,634 - #51 int
+INFO  02:26:49,635 - #51 jedan
+INFO  02:26:49,635 - #11 = 
+INFO  02:26:49,635 - #48 1
+INFO  02:26:49,635 - #18 ;
+INFO  02:26:49,635 - #6 const
+INFO  02:26:49,636 - #51 int
+INFO  02:26:49,636 - #51 pet
+INFO  02:26:49,636 - #11 = 
+INFO  02:26:49,636 - #48 5
+INFO  02:26:49,637 - #18 ;
+INFO  02:26:49,637 - #51 int
+INFO  02:26:49,637 - #51 niz
+INFO  02:26:49,637 - #8 [
+INFO  02:26:49,638 - #7 ]
+INFO  02:26:49,638 - #18 ;
+INFO  02:26:49,640 - #51 char
+INFO  02:26:49,641 - #51 nizch
+INFO  02:26:49,641 - #8 [
+INFO  02:26:49,641 - #7 ]
+INFO  02:26:49,642 - #18 ;
+INFO  02:26:49,642 - #4 {
+INFO  02:26:49,642 - #15 void
+INFO  02:26:49,643 - #51 main
+INFO  02:26:49,644 - #9 (
+INFO  02:26:49,644 - #10 )
+INFO  02:26:49,646 - #51 int
+INFO  02:26:49,648 - #51 bodovi
+INFO  02:26:49,649 - #18 ;
+INFO  02:26:49,650 - #4 {
+INFO  02:26:49,650 - #51 bodovi
+INFO  02:26:49,651 - #11 = 
+INFO  02:26:49,652 - #48 0
+INFO  02:26:49,654 - #18 ;
+INFO  02:26:49,655 - #51 bodovi
+INFO  02:26:49,656 - #25 ++
+INFO  02:26:49,656 - #18 ;
+INFO  02:26:49,657 - #51 bodovi
+INFO  02:26:49,657 - #11 = 
+INFO  02:26:49,657 - #51 bodovi
+INFO  02:26:49,658 - #23 +
+INFO  02:26:49,658 - #51 jedan
+INFO  02:26:49,660 - #18 ;
+INFO  02:26:49,661 - #51 bodovi
+INFO  02:26:49,661 - #11 = 
+INFO  02:26:49,661 - #51 bodovi
+INFO  02:26:49,661 - #27 *
+INFO  02:26:49,661 - #51 pet
+INFO  02:26:49,663 - #18 ;
+INFO  02:26:49,664 - #51 bodovi
+INFO  02:26:49,664 - #26 --
+INFO  02:26:49,664 - #18 ;
+INFO  02:26:49,666 - #14 print
+INFO  02:26:49,666 - #9 (
+INFO  02:26:49,666 - #51 bodovi
+INFO  02:26:49,666 - #10 )
+INFO  02:26:49,667 - #18 ;
+INFO  02:26:49,667 - #51 niz
+INFO  02:26:49,668 - #11 = 
+INFO  02:26:49,668 - #36 new
+INFO  02:26:49,668 - #51 int
+INFO  02:26:49,668 - #8 [
+INFO  02:26:49,668 - #48 3
+INFO  02:26:49,668 - #7 ]
+INFO  02:26:49,669 - #18 ;
+INFO  02:26:49,669 - #51 niz
+INFO  02:26:49,669 - #8 [
+INFO  02:26:49,670 - #51 nula
+INFO  02:26:49,670 - #7 ]
+INFO  02:26:49,670 - #11 = 
+INFO  02:26:49,671 - #51 jedan
+INFO  02:26:49,671 - #18 ;
+INFO  02:26:49,671 - #51 niz
+INFO  02:26:49,671 - #8 [
+INFO  02:26:49,671 - #48 1
+INFO  02:26:49,672 - #7 ]
+INFO  02:26:49,672 - #11 = 
+INFO  02:26:49,672 - #48 2
+INFO  02:26:49,672 - #18 ;
+INFO  02:26:49,672 - #51 niz
+INFO  02:26:49,672 - #8 [
+INFO  02:26:49,672 - #51 niz
+INFO  02:26:49,673 - #8 [
+INFO  02:26:49,673 - #51 jedan
+INFO  02:26:49,673 - #7 ]
+INFO  02:26:49,673 - #7 ]
+INFO  02:26:49,673 - #11 = 
+INFO  02:26:49,674 - #51 niz
+INFO  02:26:49,674 - #8 [
+INFO  02:26:49,674 - #51 niz
+INFO  02:26:49,674 - #8 [
+INFO  02:26:49,674 - #48 0
+INFO  02:26:49,674 - #7 ]
+INFO  02:26:49,674 - #7 ]
+INFO  02:26:49,675 - #27 *
+INFO  02:26:49,675 - #48 3
+INFO  02:26:49,675 - #18 ;
+INFO  02:26:49,675 - #51 bodovi
+INFO  02:26:49,675 - #11 = 
+INFO  02:26:49,675 - #51 niz
+INFO  02:26:49,676 - #8 [
+INFO  02:26:49,676 - #48 2
+INFO  02:26:49,676 - #7 ]
+INFO  02:26:49,676 - #28 /
+INFO  02:26:49,676 - #51 niz
+INFO  02:26:49,677 - #8 [
+INFO  02:26:49,677 - #48 0
+INFO  02:26:49,677 - #7 ]
+INFO  02:26:49,678 - #18 ;
+INFO  02:26:49,678 - #14 print
+INFO  02:26:49,678 - #9 (
+INFO  02:26:49,678 - #51 bodovi
+INFO  02:26:49,678 - #10 )
+INFO  02:26:49,678 - #18 ;
+INFO  02:26:49,678 - #14 print
+INFO  02:26:49,678 - #9 (
+INFO  02:26:49,678 - #51 niz
+INFO  02:26:49,678 - #8 [
+INFO  02:26:49,679 - #48 2
+INFO  02:26:49,679 - #7 ]
+INFO  02:26:49,679 - #10 )
+INFO  02:26:49,679 - #18 ;
+INFO  02:26:49,679 - #51 nizch
+INFO  02:26:49,679 - #11 = 
+INFO  02:26:49,679 - #36 new
+INFO  02:26:49,684 - #51 char
+INFO  02:26:49,685 - #8 [
+INFO  02:26:49,685 - #48 3
+INFO  02:26:49,686 - #7 ]
+INFO  02:26:49,686 - #18 ;
+INFO  02:26:49,686 - #51 nizch
+INFO  02:26:49,686 - #8 [
+INFO  02:26:49,687 - #48 0
+INFO  02:26:49,687 - #7 ]
+INFO  02:26:49,688 - #11 = 
+INFO  02:26:49,688 - #49 a
+INFO  02:26:49,688 - #18 ;
+INFO  02:26:49,688 - #51 nizch
+INFO  02:26:49,689 - #8 [
+INFO  02:26:49,689 - #51 jedan
+INFO  02:26:49,689 - #7 ]
+INFO  02:26:49,689 - #11 = 
+INFO  02:26:49,689 - #49 b
+INFO  02:26:49,689 - #18 ;
+INFO  02:26:49,690 - #51 nizch
+INFO  02:26:49,690 - #8 [
+INFO  02:26:49,690 - #51 pet
+INFO  02:26:49,690 - #24 -
+INFO  02:26:49,690 - #48 3
+INFO  02:26:49,691 - #7 ]
+INFO  02:26:49,692 - #11 = 
+INFO  02:26:49,692 - #49 c
+INFO  02:26:49,692 - #18 ;
+INFO  02:26:49,692 - #14 print
+INFO  02:26:49,692 - #9 (
+INFO  02:26:49,692 - #51 nizch
+INFO  02:26:49,692 - #8 [
+INFO  02:26:49,692 - #48 1
+INFO  02:26:49,692 - #7 ]
+INFO  02:26:49,692 - #10 )
+INFO  02:26:49,692 - #18 ;
+INFO  02:26:49,692 - #14 print
+INFO  02:26:49,692 - #9 (
+INFO  02:26:49,693 - #51 nizch
+INFO  02:26:49,693 - #8 [
+INFO  02:26:49,693 - #51 jedan
+INFO  02:26:49,693 - #27 *
+INFO  02:26:49,693 - #48 2
+INFO  02:26:49,693 - #7 ]
+INFO  02:26:49,693 - #10 )
+INFO  02:26:49,693 - #18 ;
+INFO  02:26:49,693 - #51 bodovi
+INFO  02:26:49,693 - #11 = 
+INFO  02:26:49,693 - #51 bodovi
+INFO  02:26:49,693 - #23 +
+INFO  02:26:49,693 - #9 (
+INFO  02:26:49,694 - #51 pet
+INFO  02:26:49,694 - #27 *
+INFO  02:26:49,694 - #51 jedan
+INFO  02:26:49,694 - #24 -
+INFO  02:26:49,694 - #48 1
+INFO  02:26:49,694 - #10 )
+INFO  02:26:49,694 - #27 *
+INFO  02:26:49,695 - #51 bodovi
+INFO  02:26:49,695 - #24 -
+INFO  02:26:49,695 - #9 (
+INFO  02:26:49,695 - #48 3
+INFO  02:26:49,695 - #29 %
+INFO  02:26:49,695 - #48 2
+INFO  02:26:49,697 - #23 +
+INFO  02:26:49,697 - #48 3
+INFO  02:26:49,698 - #27 *
+INFO  02:26:49,698 - #48 2
+INFO  02:26:49,698 - #24 -
+INFO  02:26:49,698 - #48 3
+INFO  02:26:49,698 - #10 )
+INFO  02:26:49,699 - #18 ;
+INFO  02:26:49,699 - #14 print
+INFO  02:26:49,699 - #9 (
+INFO  02:26:49,699 - #51 bodovi
+INFO  02:26:49,699 - #10 )
+INFO  02:26:49,699 - #18 ;
+INFO  02:26:49,699 - #19 read
+INFO  02:26:49,699 - #9 (
+INFO  02:26:49,699 - #51 bodovi
+INFO  02:26:49,699 - #10 )
+INFO  02:26:49,699 - #18 ;
+INFO  02:26:49,700 - #16 if
+INFO  02:26:49,700 - #9 (
+INFO  02:26:49,700 - #51 bodovi
+INFO  02:26:49,700 - #29 %
+INFO  02:26:49,700 - #48 2
+INFO  02:26:49,700 - #35 ==
+INFO  02:26:49,700 - #48 0
+INFO  02:26:49,702 - #10 )
+INFO  02:26:49,703 - #51 bodovi
+INFO  02:26:49,703 - #11 = 
+INFO  02:26:49,703 - #51 bodovi
+INFO  02:26:49,703 - #23 +
+INFO  02:26:49,703 - #48 10
+INFO  02:26:49,703 - #18 ;
+INFO  02:26:49,704 - #16 if
+INFO  02:26:49,704 - #9 (
+INFO  02:26:49,704 - #51 bodovi
+INFO  02:26:49,704 - #29 %
+INFO  02:26:49,704 - #48 2
+INFO  02:26:49,704 - #35 ==
+INFO  02:26:49,704 - #48 0
+INFO  02:26:49,704 - #10 )
+INFO  02:26:49,705 - #51 bodovi
+INFO  02:26:49,705 - #11 = 
+INFO  02:26:49,705 - #51 bodovi
+INFO  02:26:49,705 - #23 +
+INFO  02:26:49,705 - #48 10
+INFO  02:26:49,705 - #18 ;
+INFO  02:26:49,705 - #16 if
+INFO  02:26:49,705 - #9 (
+INFO  02:26:49,705 - #50 false
+INFO  02:26:49,705 - #10 )
+INFO  02:26:49,706 - #14 print
+INFO  02:26:49,706 - #9 (
+INFO  02:26:49,706 - #51 bodovi
+INFO  02:26:49,706 - #23 +
+INFO  02:26:49,706 - #48 20
+INFO  02:26:49,706 - #10 )
+INFO  02:26:49,706 - #18 ;
+INFO  02:26:49,707 - #17 else
+INFO  02:26:49,707 - #14 print
+INFO  02:26:49,707 - #9 (
+INFO  02:26:49,707 - #51 bodovi
+INFO  02:26:49,707 - #10 )
+INFO  02:26:49,707 - #18 ;
+INFO  02:26:49,707 - #5 }
+INFO  02:26:49,708 - #15 void
+INFO  02:26:49,708 - #51 main
+INFO  02:26:49,709 - #9 (
+INFO  02:26:49,709 - #10 )
+INFO  02:26:49,709 - #51 int
+INFO  02:26:49,709 - #51 bodovi
+INFO  02:26:49,709 - #18 ;
+INFO  02:26:49,709 - #4 {
+INFO  02:26:49,709 - #51 bodovi
+INFO  02:26:49,709 - #11 = 
+INFO  02:26:49,709 - #48 0
+INFO  02:26:49,709 - #18 ;
+INFO  02:26:49,710 - #51 bodovi
+INFO  02:26:49,710 - #25 ++
+INFO  02:26:49,710 - #18 ;
+INFO  02:26:49,710 - #51 bodovi
+INFO  02:26:49,710 - #11 = 
+INFO  02:26:49,711 - #51 bodovi
+INFO  02:26:49,711 - #23 +
+INFO  02:26:49,711 - #51 jedan
+INFO  02:26:49,711 - #18 ;
+INFO  02:26:49,711 - #51 bodovi
+INFO  02:26:49,711 - #11 = 
+INFO  02:26:49,711 - #51 bodovi
+INFO  02:26:49,711 - #27 *
+INFO  02:26:49,712 - #51 pet
+INFO  02:26:49,712 - #18 ;
+INFO  02:26:49,712 - #51 bodovi
+INFO  02:26:49,712 - #26 --
+INFO  02:26:49,712 - #18 ;
+INFO  02:26:49,712 - #14 print
+INFO  02:26:49,712 - #9 (
+INFO  02:26:49,712 - #51 bodovi
+INFO  02:26:49,712 - #10 )
+INFO  02:26:49,712 - #18 ;
+INFO  02:26:49,712 - #51 niz
+INFO  02:26:49,713 - #11 = 
+INFO  02:26:49,713 - #36 new
+INFO  02:26:49,713 - #51 int
+INFO  02:26:49,713 - #8 [
+INFO  02:26:49,713 - #48 3
+INFO  02:26:49,713 - #7 ]
+INFO  02:26:49,713 - #18 ;
+INFO  02:26:49,713 - #51 niz
+INFO  02:26:49,713 - #8 [
+INFO  02:26:49,713 - #51 nula
+INFO  02:26:49,713 - #7 ]
+INFO  02:26:49,714 - #11 = 
+INFO  02:26:49,714 - #51 jedan
+INFO  02:26:49,714 - #18 ;
+INFO  02:26:49,714 - #51 niz
+INFO  02:26:49,715 - #8 [
+INFO  02:26:49,715 - #48 1
+INFO  02:26:49,715 - #7 ]
+INFO  02:26:49,715 - #11 = 
+INFO  02:26:49,715 - #48 2
+INFO  02:26:49,715 - #18 ;
+INFO  02:26:49,715 - #51 niz
+INFO  02:26:49,716 - #8 [
+INFO  02:26:49,716 - #51 niz
+INFO  02:26:49,716 - #8 [
+INFO  02:26:49,716 - #51 jedan
+INFO  02:26:49,716 - #7 ]
+INFO  02:26:49,716 - #7 ]
+INFO  02:26:49,716 - #11 = 
+INFO  02:26:49,716 - #51 niz
+INFO  02:26:49,716 - #8 [
+INFO  02:26:49,716 - #51 niz
+INFO  02:26:49,716 - #8 [
+INFO  02:26:49,716 - #48 0
+INFO  02:26:49,716 - #7 ]
+INFO  02:26:49,716 - #7 ]
+INFO  02:26:49,716 - #27 *
+INFO  02:26:49,716 - #48 3
+INFO  02:26:49,716 - #18 ;
+INFO  02:26:49,717 - #51 bodovi
+INFO  02:26:49,717 - #11 = 
+INFO  02:26:49,717 - #51 niz
+INFO  02:26:49,717 - #8 [
+INFO  02:26:49,717 - #48 2
+INFO  02:26:49,717 - #7 ]
+INFO  02:26:49,717 - #28 /
+INFO  02:26:49,717 - #51 niz
+INFO  02:26:49,718 - #8 [
+INFO  02:26:49,718 - #48 0
+INFO  02:26:49,718 - #7 ]
+INFO  02:26:49,718 - #18 ;
+INFO  02:26:49,718 - #14 print
+INFO  02:26:49,718 - #9 (
+INFO  02:26:49,718 - #51 bodovi
+INFO  02:26:49,719 - #10 )
+INFO  02:26:49,719 - #18 ;
+INFO  02:26:49,719 - #14 print
+INFO  02:26:49,719 - #9 (
+INFO  02:26:49,719 - #51 niz
+INFO  02:26:49,719 - #8 [
+INFO  02:26:49,719 - #48 2
+INFO  02:26:49,719 - #7 ]
+INFO  02:26:49,720 - #10 )
+INFO  02:26:49,720 - #18 ;
+INFO  02:26:49,720 - #51 nizch
+INFO  02:26:49,720 - #11 = 
+INFO  02:26:49,720 - #36 new
+INFO  02:26:49,720 - #51 char
+INFO  02:26:49,720 - #8 [
+INFO  02:26:49,720 - #48 3
+INFO  02:26:49,721 - #7 ]
+INFO  02:26:49,721 - #18 ;
+INFO  02:26:49,721 - #51 nizch
+INFO  02:26:49,721 - #8 [
+INFO  02:26:49,721 - #48 0
+INFO  02:26:49,721 - #7 ]
+INFO  02:26:49,721 - #11 = 
+INFO  02:26:49,721 - #49 a
+INFO  02:26:49,721 - #18 ;
+INFO  02:26:49,722 - #51 nizch
+INFO  02:26:49,722 - #8 [
+INFO  02:26:49,722 - #51 jedan
+INFO  02:26:49,722 - #7 ]
+INFO  02:26:49,722 - #11 = 
+INFO  02:26:49,722 - #49 b
+INFO  02:26:49,722 - #18 ;
+INFO  02:26:49,722 - #51 nizch
+INFO  02:26:49,722 - #8 [
+INFO  02:26:49,722 - #51 pet
+INFO  02:26:49,722 - #24 -
+INFO  02:26:49,722 - #48 3
+INFO  02:26:49,722 - #7 ]
+INFO  02:26:49,722 - #11 = 
+INFO  02:26:49,723 - #49 c
+INFO  02:26:49,723 - #18 ;
+INFO  02:26:49,723 - #14 print
+INFO  02:26:49,723 - #9 (
+INFO  02:26:49,723 - #51 nizch
+INFO  02:26:49,723 - #8 [
+INFO  02:26:49,723 - #48 1
+INFO  02:26:49,723 - #7 ]
+INFO  02:26:49,723 - #10 )
+INFO  02:26:49,723 - #18 ;
+INFO  02:26:49,723 - #14 print
+INFO  02:26:49,723 - #9 (
+INFO  02:26:49,723 - #51 nizch
+INFO  02:26:49,723 - #8 [
+INFO  02:26:49,723 - #51 jedan
+INFO  02:26:49,723 - #27 *
+INFO  02:26:49,724 - #48 2
+INFO  02:26:49,724 - #7 ]
+INFO  02:26:49,724 - #10 )
+INFO  02:26:49,724 - #18 ;
+INFO  02:26:49,724 - #51 bodovi
+INFO  02:26:49,724 - #11 = 
+INFO  02:26:49,724 - #51 bodovi
+INFO  02:26:49,724 - #23 +
+INFO  02:26:49,724 - #9 (
+INFO  02:26:49,724 - #51 pet
+INFO  02:26:49,724 - #27 *
+INFO  02:26:49,724 - #51 jedan
+INFO  02:26:49,724 - #24 -
+INFO  02:26:49,724 - #48 1
+INFO  02:26:49,725 - #10 )
+INFO  02:26:49,725 - #27 *
+INFO  02:26:49,725 - #51 bodovi
+INFO  02:26:49,725 - #24 -
+INFO  02:26:49,725 - #9 (
+INFO  02:26:49,725 - #48 3
+INFO  02:26:49,725 - #29 %
+INFO  02:26:49,725 - #48 2
+INFO  02:26:49,725 - #23 +
+INFO  02:26:49,725 - #48 3
+INFO  02:26:49,725 - #27 *
+INFO  02:26:49,725 - #48 2
+INFO  02:26:49,725 - #24 -
+INFO  02:26:49,726 - #48 3
+INFO  02:26:49,726 - #10 )
+INFO  02:26:49,726 - #18 ;
+INFO  02:26:49,726 - #14 print
+INFO  02:26:49,726 - #9 (
+INFO  02:26:49,726 - #51 bodovi
+INFO  02:26:49,726 - #10 )
+INFO  02:26:49,726 - #18 ;
+INFO  02:26:49,726 - #19 read
+INFO  02:26:49,726 - #9 (
+INFO  02:26:49,726 - #51 bodovi
+INFO  02:26:49,726 - #10 )
+INFO  02:26:49,726 - #18 ;
+INFO  02:26:49,726 - #16 if
+INFO  02:26:49,726 - #9 (
+INFO  02:26:49,726 - #51 bodovi
+INFO  02:26:49,726 - #29 %
+INFO  02:26:49,727 - #48 2
+INFO  02:26:49,727 - #35 ==
+INFO  02:26:49,727 - #48 0
+INFO  02:26:49,727 - #10 )
+INFO  02:26:49,727 - #51 bodovi
+INFO  02:26:49,727 - #11 = 
+INFO  02:26:49,727 - #51 bodovi
+INFO  02:26:49,727 - #23 +
+INFO  02:26:49,727 - #48 10
+INFO  02:26:49,727 - #18 ;
+INFO  02:26:49,727 - #16 if
+INFO  02:26:49,727 - #9 (
+INFO  02:26:49,727 - #51 bodovi
+INFO  02:26:49,727 - #29 %
+INFO  02:26:49,727 - #48 2
+INFO  02:26:49,728 - #35 ==
+INFO  02:26:49,728 - #48 0
+INFO  02:26:49,728 - #10 )
+INFO  02:26:49,728 - #51 bodovi
+INFO  02:26:49,728 - #11 = 
+INFO  02:26:49,728 - #51 bodovi
+INFO  02:26:49,728 - #23 +
+INFO  02:26:49,728 - #48 10
+INFO  02:26:49,728 - #18 ;
+INFO  02:26:49,728 - #16 if
+INFO  02:26:49,729 - #9 (
+INFO  02:26:49,729 - #50 false
+INFO  02:26:49,729 - #10 )
+INFO  02:26:49,729 - #14 print
+INFO  02:26:49,729 - #9 (
+INFO  02:26:49,729 - #51 bodovi
+INFO  02:26:49,729 - #23 +
+INFO  02:26:49,729 - #48 20
+INFO  02:26:49,729 - #10 )
+INFO  02:26:49,729 - #18 ;
+INFO  02:26:49,729 - #17 else
+INFO  02:26:49,729 - #14 print
+INFO  02:26:49,729 - #9 (
+INFO  02:26:49,729 - #51 bodovi
+INFO  02:26:49,729 - #10 )
+INFO  02:26:49,729 - #18 ;
+INFO  02:26:49,730 - #5 }
+INFO  02:26:49,730 - #5 }
+INFO  02:26:49,762 - Program_(
+ test301
+  NonMethodDeclList_(
+    NonMethodDeclList_(
+      NonMethodDeclList_(
+        NonMethodDeclList_(
+          NonMethodDeclList_(
+            NoNonMethodDeclList_(
+            ) [NoNonMethodDeclList_]
+            ConstDecl1(
+              ConstDecl_(
+                Type_(
+                 int
+                ) [Type_]
+                ConstIdent1(
+                  NumConst1(
+                   nula
+                   0
+                  ) [NumConst1]
+                ) [ConstIdent1]
+              ) [ConstDecl_]
+            ) [ConstDecl1]
+          ) [NonMethodDeclList_]
+          ConstDecl1(
+            ConstDecl_(
+              Type_(
+               int
+              ) [Type_]
+              ConstIdent1(
+                NumConst1(
+                 jedan
+                 1
+                ) [NumConst1]
+              ) [ConstIdent1]
+            ) [ConstDecl_]
+          ) [ConstDecl1]
+        ) [NonMethodDeclList_]
+        ConstDecl1(
+          ConstDecl_(
+            Type_(
+             int
+            ) [Type_]
+            ConstIdent1(
+              NumConst1(
+               pet
+               5
+              ) [NumConst1]
+            ) [ConstIdent1]
+          ) [ConstDecl_]
+        ) [ConstDecl1]
+      ) [NonMethodDeclList_]
+      VarDecl1(
+        VarDecl_(
+          Type_(
+           int
+          ) [Type_]
+          VarIdent1(
+            VarIdent_(
+             niz
+              IsArray_(
+              ) [IsArray_]
+            ) [VarIdent_]
+          ) [VarIdent1]
+        ) [VarDecl_]
+      ) [VarDecl1]
+    ) [NonMethodDeclList_]
+    VarDecl1(
+      VarDecl_(
+        Type_(
+         char
+        ) [Type_]
+        VarIdent1(
+          VarIdent_(
+           nizch
+            IsArray_(
+            ) [IsArray_]
+          ) [VarIdent_]
+        ) [VarIdent1]
+      ) [VarDecl_]
+    ) [VarDecl1]
+  ) [NonMethodDeclList_]
+  MethodDeclList_(
+    MethodDeclList_(
+      NoMethods_(
+      ) [NoMethods_]
+      MethodDecl_(
+        Void1(
+        ) [Void1]
+       main
+        NoFormParamsList(
+        ) [NoFormParamsList]
+        MethodVarDecls_(
+          NoMethodVarDecls_(
+          ) [NoMethodVarDecls_]
+          VarDecl_(
+            Type_(
+             int
+            ) [Type_]
+            VarIdent1(
+              VarIdent_(
+               bodovi
+                NoArray_(
+                ) [NoArray_]
+              ) [VarIdent_]
+            ) [VarIdent1]
+          ) [VarDecl_]
+        ) [MethodVarDecls_]
+        StatementList_(
+          StatementList_(
+            StatementList_(
+              StatementList_(
+                StatementList_(
+                  StatementList_(
+                    StatementList_(
+                      StatementList_(
+                        StatementList_(
+                          StatementList_(
+                            StatementList_(
+                              StatementList_(
+                                StatementList_(
+                                  StatementList_(
+                                    StatementList_(
+                                      StatementList_(
+                                        StatementList_(
+                                          StatementList_(
+                                            StatementList_(
+                                              StatementList_(
+                                                StatementList_(
+                                                  StatementList_(
+                                                    StatementList_(
+                                                      StatementList_(
+                                                        StatementList_(
+                                                          NoStatementList_(
+                                                          ) [NoStatementList_]
+                                                          DesignatorStatement1(
+                                                            DesignatorStatement_(
+                                                              DesignatorNotArray_(
+                                                               bodovi
+                                                              ) [DesignatorNotArray_]
+                                                              AssignExpression_(
+                                                                Assignop_(
+                                                                ) [Assignop_]
+                                                                PlusExpr_(
+                                                                  Factor1(
+                                                                    NumConst2(
+                                                                     0
+                                                                    ) [NumConst2]
+                                                                  ) [Factor1]
+                                                                ) [PlusExpr_]
+                                                              ) [AssignExpression_]
+                                                            ) [DesignatorStatement_]
+                                                          ) [DesignatorStatement1]
+                                                        ) [StatementList_]
+                                                        DesignatorStatement1(
+                                                          DesignatorStatement_(
+                                                            DesignatorNotArray_(
+                                                             bodovi
+                                                            ) [DesignatorNotArray_]
+                                                            IncExpression_(
+                                                            ) [IncExpression_]
+                                                          ) [DesignatorStatement_]
+                                                        ) [DesignatorStatement1]
+                                                      ) [StatementList_]
+                                                      DesignatorStatement1(
+                                                        DesignatorStatement_(
+                                                          DesignatorNotArray_(
+                                                           bodovi
+                                                          ) [DesignatorNotArray_]
+                                                          AssignExpression_(
+                                                            Assignop_(
+                                                            ) [Assignop_]
+                                                            ExprList1(
+                                                              PlusExpr_(
+                                                                Factor1(
+                                                                  Designator1(
+                                                                    DesignatorNotArray_(
+                                                                     bodovi
+                                                                    ) [DesignatorNotArray_]
+                                                                  ) [Designator1]
+                                                                ) [Factor1]
+                                                              ) [PlusExpr_]
+                                                              Plusop1(
+                                                              ) [Plusop1]
+                                                              Factor1(
+                                                                Designator1(
+                                                                  DesignatorNotArray_(
+                                                                   jedan
+                                                                  ) [DesignatorNotArray_]
+                                                                ) [Designator1]
+                                                              ) [Factor1]
+                                                            ) [ExprList1]
+                                                          ) [AssignExpression_]
+                                                        ) [DesignatorStatement_]
+                                                      ) [DesignatorStatement1]
+                                                    ) [StatementList_]
+                                                    DesignatorStatement1(
+                                                      DesignatorStatement_(
+                                                        DesignatorNotArray_(
+                                                         bodovi
+                                                        ) [DesignatorNotArray_]
+                                                        AssignExpression_(
+                                                          Assignop_(
+                                                          ) [Assignop_]
+                                                          PlusExpr_(
+                                                            Term_(
+                                                              Factor1(
+                                                                Designator1(
+                                                                  DesignatorNotArray_(
+                                                                   bodovi
+                                                                  ) [DesignatorNotArray_]
+                                                                ) [Designator1]
+                                                              ) [Factor1]
+                                                              Mulop1(
+                                                              ) [Mulop1]
+                                                              Designator1(
+                                                                DesignatorNotArray_(
+                                                                 pet
+                                                                ) [DesignatorNotArray_]
+                                                              ) [Designator1]
+                                                            ) [Term_]
+                                                          ) [PlusExpr_]
+                                                        ) [AssignExpression_]
+                                                      ) [DesignatorStatement_]
+                                                    ) [DesignatorStatement1]
+                                                  ) [StatementList_]
+                                                  DesignatorStatement1(
+                                                    DesignatorStatement_(
+                                                      DesignatorNotArray_(
+                                                       bodovi
+                                                      ) [DesignatorNotArray_]
+                                                      DecExpression_(
+                                                      ) [DecExpression_]
+                                                    ) [DesignatorStatement_]
+                                                  ) [DesignatorStatement1]
+                                                ) [StatementList_]
+                                                PrintStatement_(
+                                                  NoNumConstPrint_(
+                                                    PlusExpr_(
+                                                      Factor1(
+                                                        Designator1(
+                                                          DesignatorNotArray_(
+                                                           bodovi
+                                                          ) [DesignatorNotArray_]
+                                                        ) [Designator1]
+                                                      ) [Factor1]
+                                                    ) [PlusExpr_]
+                                                  ) [NoNumConstPrint_]
+                                                ) [PrintStatement_]
+                                              ) [StatementList_]
+                                              DesignatorStatement1(
+                                                DesignatorStatement_(
+                                                  DesignatorNotArray_(
+                                                   niz
+                                                  ) [DesignatorNotArray_]
+                                                  AssignExpression_(
+                                                    Assignop_(
+                                                    ) [Assignop_]
+                                                    PlusExpr_(
+                                                      Factor1(
+                                                        New2(
+                                                          Type_(
+                                                           int
+                                                          ) [Type_]
+                                                          PlusExpr_(
+                                                            Factor1(
+                                                              NumConst2(
+                                                               3
+                                                              ) [NumConst2]
+                                                            ) [Factor1]
+                                                          ) [PlusExpr_]
+                                                        ) [New2]
+                                                      ) [Factor1]
+                                                    ) [PlusExpr_]
+                                                  ) [AssignExpression_]
+                                                ) [DesignatorStatement_]
+                                              ) [DesignatorStatement1]
+                                            ) [StatementList_]
+                                            DesignatorStatement1(
+                                              DesignatorStatement_(
+                                                DesignatorArray1(
+                                                  DesignatorArray_(
+                                                    DesignatorNotArray_(
+                                                     niz
+                                                    ) [DesignatorNotArray_]
+                                                  ) [DesignatorArray_]
+                                                  PlusExpr_(
+                                                    Factor1(
+                                                      Designator1(
+                                                        DesignatorNotArray_(
+                                                         nula
+                                                        ) [DesignatorNotArray_]
+                                                      ) [Designator1]
+                                                    ) [Factor1]
+                                                  ) [PlusExpr_]
+                                                ) [DesignatorArray1]
+                                                AssignExpression_(
+                                                  Assignop_(
+                                                  ) [Assignop_]
+                                                  PlusExpr_(
+                                                    Factor1(
+                                                      Designator1(
+                                                        DesignatorNotArray_(
+                                                         jedan
+                                                        ) [DesignatorNotArray_]
+                                                      ) [Designator1]
+                                                    ) [Factor1]
+                                                  ) [PlusExpr_]
+                                                ) [AssignExpression_]
+                                              ) [DesignatorStatement_]
+                                            ) [DesignatorStatement1]
+                                          ) [StatementList_]
+                                          DesignatorStatement1(
+                                            DesignatorStatement_(
+                                              DesignatorArray1(
+                                                DesignatorArray_(
+                                                  DesignatorNotArray_(
+                                                   niz
+                                                  ) [DesignatorNotArray_]
+                                                ) [DesignatorArray_]
+                                                PlusExpr_(
+                                                  Factor1(
+                                                    NumConst2(
+                                                     1
+                                                    ) [NumConst2]
+                                                  ) [Factor1]
+                                                ) [PlusExpr_]
+                                              ) [DesignatorArray1]
+                                              AssignExpression_(
+                                                Assignop_(
+                                                ) [Assignop_]
+                                                PlusExpr_(
+                                                  Factor1(
+                                                    NumConst2(
+                                                     2
+                                                    ) [NumConst2]
+                                                  ) [Factor1]
+                                                ) [PlusExpr_]
+                                              ) [AssignExpression_]
+                                            ) [DesignatorStatement_]
+                                          ) [DesignatorStatement1]
+                                        ) [StatementList_]
+                                        DesignatorStatement1(
+                                          DesignatorStatement_(
+                                            DesignatorArray1(
+                                              DesignatorArray_(
+                                                DesignatorNotArray_(
+                                                 niz
+                                                ) [DesignatorNotArray_]
+                                              ) [DesignatorArray_]
+                                              PlusExpr_(
+                                                Factor1(
+                                                  Designator1(
+                                                    DesignatorArray1(
+                                                      DesignatorArray_(
+                                                        DesignatorNotArray_(
+                                                         niz
+                                                        ) [DesignatorNotArray_]
+                                                      ) [DesignatorArray_]
+                                                      PlusExpr_(
+                                                        Factor1(
+                                                          Designator1(
+                                                            DesignatorNotArray_(
+                                                             jedan
+                                                            ) [DesignatorNotArray_]
+                                                          ) [Designator1]
+                                                        ) [Factor1]
+                                                      ) [PlusExpr_]
+                                                    ) [DesignatorArray1]
+                                                  ) [Designator1]
+                                                ) [Factor1]
+                                              ) [PlusExpr_]
+                                            ) [DesignatorArray1]
+                                            AssignExpression_(
+                                              Assignop_(
+                                              ) [Assignop_]
+                                              PlusExpr_(
+                                                Term_(
+                                                  Factor1(
+                                                    Designator1(
+                                                      DesignatorArray1(
+                                                        DesignatorArray_(
+                                                          DesignatorNotArray_(
+                                                           niz
+                                                          ) [DesignatorNotArray_]
+                                                        ) [DesignatorArray_]
+                                                        PlusExpr_(
+                                                          Factor1(
+                                                            Designator1(
+                                                              DesignatorArray1(
+                                                                DesignatorArray_(
+                                                                  DesignatorNotArray_(
+                                                                   niz
+                                                                  ) [DesignatorNotArray_]
+                                                                ) [DesignatorArray_]
+                                                                PlusExpr_(
+                                                                  Factor1(
+                                                                    NumConst2(
+                                                                     0
+                                                                    ) [NumConst2]
+                                                                  ) [Factor1]
+                                                                ) [PlusExpr_]
+                                                              ) [DesignatorArray1]
+                                                            ) [Designator1]
+                                                          ) [Factor1]
+                                                        ) [PlusExpr_]
+                                                      ) [DesignatorArray1]
+                                                    ) [Designator1]
+                                                  ) [Factor1]
+                                                  Mulop1(
+                                                  ) [Mulop1]
+                                                  NumConst2(
+                                                   3
+                                                  ) [NumConst2]
+                                                ) [Term_]
+                                              ) [PlusExpr_]
+                                            ) [AssignExpression_]
+                                          ) [DesignatorStatement_]
+                                        ) [DesignatorStatement1]
+                                      ) [StatementList_]
+                                      DesignatorStatement1(
+                                        DesignatorStatement_(
+                                          DesignatorNotArray_(
+                                           bodovi
+                                          ) [DesignatorNotArray_]
+                                          AssignExpression_(
+                                            Assignop_(
+                                            ) [Assignop_]
+                                            PlusExpr_(
+                                              Term_(
+                                                Factor1(
+                                                  Designator1(
+                                                    DesignatorArray1(
+                                                      DesignatorArray_(
+                                                        DesignatorNotArray_(
+                                                         niz
+                                                        ) [DesignatorNotArray_]
+                                                      ) [DesignatorArray_]
+                                                      PlusExpr_(
+                                                        Factor1(
+                                                          NumConst2(
+                                                           2
+                                                          ) [NumConst2]
+                                                        ) [Factor1]
+                                                      ) [PlusExpr_]
+                                                    ) [DesignatorArray1]
+                                                  ) [Designator1]
+                                                ) [Factor1]
+                                                Divop1(
+                                                ) [Divop1]
+                                                Designator1(
+                                                  DesignatorArray1(
+                                                    DesignatorArray_(
+                                                      DesignatorNotArray_(
+                                                       niz
+                                                      ) [DesignatorNotArray_]
+                                                    ) [DesignatorArray_]
+                                                    PlusExpr_(
+                                                      Factor1(
+                                                        NumConst2(
+                                                         0
+                                                        ) [NumConst2]
+                                                      ) [Factor1]
+                                                    ) [PlusExpr_]
+                                                  ) [DesignatorArray1]
+                                                ) [Designator1]
+                                              ) [Term_]
+                                            ) [PlusExpr_]
+                                          ) [AssignExpression_]
+                                        ) [DesignatorStatement_]
+                                      ) [DesignatorStatement1]
+                                    ) [StatementList_]
+                                    PrintStatement_(
+                                      NoNumConstPrint_(
+                                        PlusExpr_(
+                                          Factor1(
+                                            Designator1(
+                                              DesignatorNotArray_(
+                                               bodovi
+                                              ) [DesignatorNotArray_]
+                                            ) [Designator1]
+                                          ) [Factor1]
+                                        ) [PlusExpr_]
+                                      ) [NoNumConstPrint_]
+                                    ) [PrintStatement_]
+                                  ) [StatementList_]
+                                  PrintStatement_(
+                                    NoNumConstPrint_(
+                                      PlusExpr_(
+                                        Factor1(
+                                          Designator1(
+                                            DesignatorArray1(
+                                              DesignatorArray_(
+                                                DesignatorNotArray_(
+                                                 niz
+                                                ) [DesignatorNotArray_]
+                                              ) [DesignatorArray_]
+                                              PlusExpr_(
+                                                Factor1(
+                                                  NumConst2(
+                                                   2
+                                                  ) [NumConst2]
+                                                ) [Factor1]
+                                              ) [PlusExpr_]
+                                            ) [DesignatorArray1]
+                                          ) [Designator1]
+                                        ) [Factor1]
+                                      ) [PlusExpr_]
+                                    ) [NoNumConstPrint_]
+                                  ) [PrintStatement_]
+                                ) [StatementList_]
+                                DesignatorStatement1(
+                                  DesignatorStatement_(
+                                    DesignatorNotArray_(
+                                     nizch
+                                    ) [DesignatorNotArray_]
+                                    AssignExpression_(
+                                      Assignop_(
+                                      ) [Assignop_]
+                                      PlusExpr_(
+                                        Factor1(
+                                          New2(
+                                            Type_(
+                                             char
+                                            ) [Type_]
+                                            PlusExpr_(
+                                              Factor1(
+                                                NumConst2(
+                                                 3
+                                                ) [NumConst2]
+                                              ) [Factor1]
+                                            ) [PlusExpr_]
+                                          ) [New2]
+                                        ) [Factor1]
+                                      ) [PlusExpr_]
+                                    ) [AssignExpression_]
+                                  ) [DesignatorStatement_]
+                                ) [DesignatorStatement1]
+                              ) [StatementList_]
+                              DesignatorStatement1(
+                                DesignatorStatement_(
+                                  DesignatorArray1(
+                                    DesignatorArray_(
+                                      DesignatorNotArray_(
+                                       nizch
+                                      ) [DesignatorNotArray_]
+                                    ) [DesignatorArray_]
+                                    PlusExpr_(
+                                      Factor1(
+                                        NumConst2(
+                                         0
+                                        ) [NumConst2]
+                                      ) [Factor1]
+                                    ) [PlusExpr_]
+                                  ) [DesignatorArray1]
+                                  AssignExpression_(
+                                    Assignop_(
+                                    ) [Assignop_]
+                                    PlusExpr_(
+                                      Factor1(
+                                        CharConst2(
+                                         a
+                                        ) [CharConst2]
+                                      ) [Factor1]
+                                    ) [PlusExpr_]
+                                  ) [AssignExpression_]
+                                ) [DesignatorStatement_]
+                              ) [DesignatorStatement1]
+                            ) [StatementList_]
+                            DesignatorStatement1(
+                              DesignatorStatement_(
+                                DesignatorArray1(
+                                  DesignatorArray_(
+                                    DesignatorNotArray_(
+                                     nizch
+                                    ) [DesignatorNotArray_]
+                                  ) [DesignatorArray_]
+                                  PlusExpr_(
+                                    Factor1(
+                                      Designator1(
+                                        DesignatorNotArray_(
+                                         jedan
+                                        ) [DesignatorNotArray_]
+                                      ) [Designator1]
+                                    ) [Factor1]
+                                  ) [PlusExpr_]
+                                ) [DesignatorArray1]
+                                AssignExpression_(
+                                  Assignop_(
+                                  ) [Assignop_]
+                                  PlusExpr_(
+                                    Factor1(
+                                      CharConst2(
+                                       b
+                                      ) [CharConst2]
+                                    ) [Factor1]
+                                  ) [PlusExpr_]
+                                ) [AssignExpression_]
+                              ) [DesignatorStatement_]
+                            ) [DesignatorStatement1]
+                          ) [StatementList_]
+                          DesignatorStatement1(
+                            DesignatorStatement_(
+                              DesignatorArray1(
+                                DesignatorArray_(
+                                  DesignatorNotArray_(
+                                   nizch
+                                  ) [DesignatorNotArray_]
+                                ) [DesignatorArray_]
+                                ExprList1(
+                                  PlusExpr_(
+                                    Factor1(
+                                      Designator1(
+                                        DesignatorNotArray_(
+                                         pet
+                                        ) [DesignatorNotArray_]
+                                      ) [Designator1]
+                                    ) [Factor1]
+                                  ) [PlusExpr_]
+                                  Minusop1(
+                                  ) [Minusop1]
+                                  Factor1(
+                                    NumConst2(
+                                     3
+                                    ) [NumConst2]
+                                  ) [Factor1]
+                                ) [ExprList1]
+                              ) [DesignatorArray1]
+                              AssignExpression_(
+                                Assignop_(
+                                ) [Assignop_]
+                                PlusExpr_(
+                                  Factor1(
+                                    CharConst2(
+                                     c
+                                    ) [CharConst2]
+                                  ) [Factor1]
+                                ) [PlusExpr_]
+                              ) [AssignExpression_]
+                            ) [DesignatorStatement_]
+                          ) [DesignatorStatement1]
+                        ) [StatementList_]
+                        PrintStatement_(
+                          NoNumConstPrint_(
+                            PlusExpr_(
+                              Factor1(
+                                Designator1(
+                                  DesignatorArray1(
+                                    DesignatorArray_(
+                                      DesignatorNotArray_(
+                                       nizch
+                                      ) [DesignatorNotArray_]
+                                    ) [DesignatorArray_]
+                                    PlusExpr_(
+                                      Factor1(
+                                        NumConst2(
+                                         1
+                                        ) [NumConst2]
+                                      ) [Factor1]
+                                    ) [PlusExpr_]
+                                  ) [DesignatorArray1]
+                                ) [Designator1]
+                              ) [Factor1]
+                            ) [PlusExpr_]
+                          ) [NoNumConstPrint_]
+                        ) [PrintStatement_]
+                      ) [StatementList_]
+                      PrintStatement_(
+                        NoNumConstPrint_(
+                          PlusExpr_(
+                            Factor1(
+                              Designator1(
+                                DesignatorArray1(
+                                  DesignatorArray_(
+                                    DesignatorNotArray_(
+                                     nizch
+                                    ) [DesignatorNotArray_]
+                                  ) [DesignatorArray_]
+                                  PlusExpr_(
+                                    Term_(
+                                      Factor1(
+                                        Designator1(
+                                          DesignatorNotArray_(
+                                           jedan
+                                          ) [DesignatorNotArray_]
+                                        ) [Designator1]
+                                      ) [Factor1]
+                                      Mulop1(
+                                      ) [Mulop1]
+                                      NumConst2(
+                                       2
+                                      ) [NumConst2]
+                                    ) [Term_]
+                                  ) [PlusExpr_]
+                                ) [DesignatorArray1]
+                              ) [Designator1]
+                            ) [Factor1]
+                          ) [PlusExpr_]
+                        ) [NoNumConstPrint_]
+                      ) [PrintStatement_]
+                    ) [StatementList_]
+                    DesignatorStatement1(
+                      DesignatorStatement_(
+                        DesignatorNotArray_(
+                         bodovi
+                        ) [DesignatorNotArray_]
+                        AssignExpression_(
+                          Assignop_(
+                          ) [Assignop_]
+                          ExprList1(
+                            ExprList1(
+                              PlusExpr_(
+                                Factor1(
+                                  Designator1(
+                                    DesignatorNotArray_(
+                                     bodovi
+                                    ) [DesignatorNotArray_]
+                                  ) [Designator1]
+                                ) [Factor1]
+                              ) [PlusExpr_]
+                              Plusop1(
+                              ) [Plusop1]
+                              Term_(
+                                Factor1(
+                                  NestedExpr1(
+                                    ExprList1(
+                                      PlusExpr_(
+                                        Term_(
+                                          Factor1(
+                                            Designator1(
+                                              DesignatorNotArray_(
+                                               pet
+                                              ) [DesignatorNotArray_]
+                                            ) [Designator1]
+                                          ) [Factor1]
+                                          Mulop1(
+                                          ) [Mulop1]
+                                          Designator1(
+                                            DesignatorNotArray_(
+                                             jedan
+                                            ) [DesignatorNotArray_]
+                                          ) [Designator1]
+                                        ) [Term_]
+                                      ) [PlusExpr_]
+                                      Minusop1(
+                                      ) [Minusop1]
+                                      Factor1(
+                                        NumConst2(
+                                         1
+                                        ) [NumConst2]
+                                      ) [Factor1]
+                                    ) [ExprList1]
+                                  ) [NestedExpr1]
+                                ) [Factor1]
+                                Mulop1(
+                                ) [Mulop1]
+                                Designator1(
+                                  DesignatorNotArray_(
+                                   bodovi
+                                  ) [DesignatorNotArray_]
+                                ) [Designator1]
+                              ) [Term_]
+                            ) [ExprList1]
+                            Minusop1(
+                            ) [Minusop1]
+                            Factor1(
+                              NestedExpr1(
+                                ExprList1(
+                                  ExprList1(
+                                    PlusExpr_(
+                                      Term_(
+                                        Factor1(
+                                          NumConst2(
+                                           3
+                                          ) [NumConst2]
+                                        ) [Factor1]
+                                        Modop1(
+                                        ) [Modop1]
+                                        NumConst2(
+                                         2
+                                        ) [NumConst2]
+                                      ) [Term_]
+                                    ) [PlusExpr_]
+                                    Plusop1(
+                                    ) [Plusop1]
+                                    Term_(
+                                      Factor1(
+                                        NumConst2(
+                                         3
+                                        ) [NumConst2]
+                                      ) [Factor1]
+                                      Mulop1(
+                                      ) [Mulop1]
+                                      NumConst2(
+                                       2
+                                      ) [NumConst2]
+                                    ) [Term_]
+                                  ) [ExprList1]
+                                  Minusop1(
+                                  ) [Minusop1]
+                                  Factor1(
+                                    NumConst2(
+                                     3
+                                    ) [NumConst2]
+                                  ) [Factor1]
+                                ) [ExprList1]
+                              ) [NestedExpr1]
+                            ) [Factor1]
+                          ) [ExprList1]
+                        ) [AssignExpression_]
+                      ) [DesignatorStatement_]
+                    ) [DesignatorStatement1]
+                  ) [StatementList_]
+                  PrintStatement_(
+                    NoNumConstPrint_(
+                      PlusExpr_(
+                        Factor1(
+                          Designator1(
+                            DesignatorNotArray_(
+                             bodovi
+                            ) [DesignatorNotArray_]
+                          ) [Designator1]
+                        ) [Factor1]
+                      ) [PlusExpr_]
+                    ) [NoNumConstPrint_]
+                  ) [PrintStatement_]
+                ) [StatementList_]
+                ReadStatement_(
+                  DesignatorNotArray_(
+                   bodovi
+                  ) [DesignatorNotArray_]
+                ) [ReadStatement_]
+              ) [StatementList_]
+              IfOrElseStatement1(
+                IfStatement_(
+                  CondTerm1(
+                    CondFact1(
+                      CondFactExprs_(
+                        PlusExpr_(
+                          Term_(
+                            Factor1(
+                              Designator1(
+                                DesignatorNotArray_(
+                                 bodovi
+                                ) [DesignatorNotArray_]
+                              ) [Designator1]
+                            ) [Factor1]
+                            Modop1(
+                            ) [Modop1]
+                            NumConst2(
+                             2
+                            ) [NumConst2]
+                          ) [Term_]
+                        ) [PlusExpr_]
+                        Eqop1(
+                        ) [Eqop1]
+                        PlusExpr_(
+                          Factor1(
+                            NumConst2(
+                             0
+                            ) [NumConst2]
+                          ) [Factor1]
+                        ) [PlusExpr_]
+                      ) [CondFactExprs_]
+                    ) [CondFact1]
+                  ) [CondTerm1]
+                  DesignatorStatement1(
+                    DesignatorStatement_(
+                      DesignatorNotArray_(
+                       bodovi
+                      ) [DesignatorNotArray_]
+                      AssignExpression_(
+                        Assignop_(
+                        ) [Assignop_]
+                        ExprList1(
+                          PlusExpr_(
+                            Factor1(
+                              Designator1(
+                                DesignatorNotArray_(
+                                 bodovi
+                                ) [DesignatorNotArray_]
+                              ) [Designator1]
+                            ) [Factor1]
+                          ) [PlusExpr_]
+                          Plusop1(
+                          ) [Plusop1]
+                          Factor1(
+                            NumConst2(
+                             10
+                            ) [NumConst2]
+                          ) [Factor1]
+                        ) [ExprList1]
+                      ) [AssignExpression_]
+                    ) [DesignatorStatement_]
+                  ) [DesignatorStatement1]
+                ) [IfStatement_]
+              ) [IfOrElseStatement1]
+            ) [StatementList_]
+            IfOrElseStatement1(
+              IfStatement_(
+                CondTerm1(
+                  CondFact1(
+                    CondFactExprs_(
+                      PlusExpr_(
+                        Term_(
+                          Factor1(
+                            Designator1(
+                              DesignatorNotArray_(
+                               bodovi
+                              ) [DesignatorNotArray_]
+                            ) [Designator1]
+                          ) [Factor1]
+                          Modop1(
+                          ) [Modop1]
+                          NumConst2(
+                           2
+                          ) [NumConst2]
+                        ) [Term_]
+                      ) [PlusExpr_]
+                      Eqop1(
+                      ) [Eqop1]
+                      PlusExpr_(
+                        Factor1(
+                          NumConst2(
+                           0
+                          ) [NumConst2]
+                        ) [Factor1]
+                      ) [PlusExpr_]
+                    ) [CondFactExprs_]
+                  ) [CondFact1]
+                ) [CondTerm1]
+                DesignatorStatement1(
+                  DesignatorStatement_(
+                    DesignatorNotArray_(
+                     bodovi
+                    ) [DesignatorNotArray_]
+                    AssignExpression_(
+                      Assignop_(
+                      ) [Assignop_]
+                      ExprList1(
+                        PlusExpr_(
+                          Factor1(
+                            Designator1(
+                              DesignatorNotArray_(
+                               bodovi
+                              ) [DesignatorNotArray_]
+                            ) [Designator1]
+                          ) [Factor1]
+                        ) [PlusExpr_]
+                        Plusop1(
+                        ) [Plusop1]
+                        Factor1(
+                          NumConst2(
+                           10
+                          ) [NumConst2]
+                        ) [Factor1]
+                      ) [ExprList1]
+                    ) [AssignExpression_]
+                  ) [DesignatorStatement_]
+                ) [DesignatorStatement1]
+              ) [IfStatement_]
+            ) [IfOrElseStatement1]
+          ) [StatementList_]
+          IfOrElseStatement1(
+            ElseStatement_(
+              CondTerm1(
+                CondFact1(
+                  CondFactExpr_(
+                    PlusExpr_(
+                      Factor1(
+                        BoolConst2(
+                         false
+                        ) [BoolConst2]
+                      ) [Factor1]
+                    ) [PlusExpr_]
+                  ) [CondFactExpr_]
+                ) [CondFact1]
+              ) [CondTerm1]
+              PrintStatement_(
+                NoNumConstPrint_(
+                  ExprList1(
+                    PlusExpr_(
+                      Factor1(
+                        Designator1(
+                          DesignatorNotArray_(
+                           bodovi
+                          ) [DesignatorNotArray_]
+                        ) [Designator1]
+                      ) [Factor1]
+                    ) [PlusExpr_]
+                    Plusop1(
+                    ) [Plusop1]
+                    Factor1(
+                      NumConst2(
+                       20
+                      ) [NumConst2]
+                    ) [Factor1]
+                  ) [ExprList1]
+                ) [NoNumConstPrint_]
+              ) [PrintStatement_]
+              PrintStatement_(
+                NoNumConstPrint_(
+                  PlusExpr_(
+                    Factor1(
+                      Designator1(
+                        DesignatorNotArray_(
+                         bodovi
+                        ) [DesignatorNotArray_]
+                      ) [Designator1]
+                    ) [Factor1]
+                  ) [PlusExpr_]
+                ) [NoNumConstPrint_]
+              ) [PrintStatement_]
+            ) [ElseStatement_]
+          ) [IfOrElseStatement1]
+        ) [StatementList_]
+      ) [MethodDecl_]
+    ) [MethodDeclList_]
+    MethodDecl_(
+      Void1(
+      ) [Void1]
+     main
+      NoFormParamsList(
+      ) [NoFormParamsList]
+      MethodVarDecls_(
+        NoMethodVarDecls_(
+        ) [NoMethodVarDecls_]
+        VarDecl_(
+          Type_(
+           int
+          ) [Type_]
+          VarIdent1(
+            VarIdent_(
+             bodovi
+              NoArray_(
+              ) [NoArray_]
+            ) [VarIdent_]
+          ) [VarIdent1]
+        ) [VarDecl_]
+      ) [MethodVarDecls_]
+      StatementList_(
+        StatementList_(
+          StatementList_(
+            StatementList_(
+              StatementList_(
+                StatementList_(
+                  StatementList_(
+                    StatementList_(
+                      StatementList_(
+                        StatementList_(
+                          StatementList_(
+                            StatementList_(
+                              StatementList_(
+                                StatementList_(
+                                  StatementList_(
+                                    StatementList_(
+                                      StatementList_(
+                                        StatementList_(
+                                          StatementList_(
+                                            StatementList_(
+                                              StatementList_(
+                                                StatementList_(
+                                                  StatementList_(
+                                                    StatementList_(
+                                                      StatementList_(
+                                                        NoStatementList_(
+                                                        ) [NoStatementList_]
+                                                        DesignatorStatement1(
+                                                          DesignatorStatement_(
+                                                            DesignatorNotArray_(
+                                                             bodovi
+                                                            ) [DesignatorNotArray_]
+                                                            AssignExpression_(
+                                                              Assignop_(
+                                                              ) [Assignop_]
+                                                              PlusExpr_(
+                                                                Factor1(
+                                                                  NumConst2(
+                                                                   0
+                                                                  ) [NumConst2]
+                                                                ) [Factor1]
+                                                              ) [PlusExpr_]
+                                                            ) [AssignExpression_]
+                                                          ) [DesignatorStatement_]
+                                                        ) [DesignatorStatement1]
+                                                      ) [StatementList_]
+                                                      DesignatorStatement1(
+                                                        DesignatorStatement_(
+                                                          DesignatorNotArray_(
+                                                           bodovi
+                                                          ) [DesignatorNotArray_]
+                                                          IncExpression_(
+                                                          ) [IncExpression_]
+                                                        ) [DesignatorStatement_]
+                                                      ) [DesignatorStatement1]
+                                                    ) [StatementList_]
+                                                    DesignatorStatement1(
+                                                      DesignatorStatement_(
+                                                        DesignatorNotArray_(
+                                                         bodovi
+                                                        ) [DesignatorNotArray_]
+                                                        AssignExpression_(
+                                                          Assignop_(
+                                                          ) [Assignop_]
+                                                          ExprList1(
+                                                            PlusExpr_(
+                                                              Factor1(
+                                                                Designator1(
+                                                                  DesignatorNotArray_(
+                                                                   bodovi
+                                                                  ) [DesignatorNotArray_]
+                                                                ) [Designator1]
+                                                              ) [Factor1]
+                                                            ) [PlusExpr_]
+                                                            Plusop1(
+                                                            ) [Plusop1]
+                                                            Factor1(
+                                                              Designator1(
+                                                                DesignatorNotArray_(
+                                                                 jedan
+                                                                ) [DesignatorNotArray_]
+                                                              ) [Designator1]
+                                                            ) [Factor1]
+                                                          ) [ExprList1]
+                                                        ) [AssignExpression_]
+                                                      ) [DesignatorStatement_]
+                                                    ) [DesignatorStatement1]
+                                                  ) [StatementList_]
+                                                  DesignatorStatement1(
+                                                    DesignatorStatement_(
+                                                      DesignatorNotArray_(
+                                                       bodovi
+                                                      ) [DesignatorNotArray_]
+                                                      AssignExpression_(
+                                                        Assignop_(
+                                                        ) [Assignop_]
+                                                        PlusExpr_(
+                                                          Term_(
+                                                            Factor1(
+                                                              Designator1(
+                                                                DesignatorNotArray_(
+                                                                 bodovi
+                                                                ) [DesignatorNotArray_]
+                                                              ) [Designator1]
+                                                            ) [Factor1]
+                                                            Mulop1(
+                                                            ) [Mulop1]
+                                                            Designator1(
+                                                              DesignatorNotArray_(
+                                                               pet
+                                                              ) [DesignatorNotArray_]
+                                                            ) [Designator1]
+                                                          ) [Term_]
+                                                        ) [PlusExpr_]
+                                                      ) [AssignExpression_]
+                                                    ) [DesignatorStatement_]
+                                                  ) [DesignatorStatement1]
+                                                ) [StatementList_]
+                                                DesignatorStatement1(
+                                                  DesignatorStatement_(
+                                                    DesignatorNotArray_(
+                                                     bodovi
+                                                    ) [DesignatorNotArray_]
+                                                    DecExpression_(
+                                                    ) [DecExpression_]
+                                                  ) [DesignatorStatement_]
+                                                ) [DesignatorStatement1]
+                                              ) [StatementList_]
+                                              PrintStatement_(
+                                                NoNumConstPrint_(
+                                                  PlusExpr_(
+                                                    Factor1(
+                                                      Designator1(
+                                                        DesignatorNotArray_(
+                                                         bodovi
+                                                        ) [DesignatorNotArray_]
+                                                      ) [Designator1]
+                                                    ) [Factor1]
+                                                  ) [PlusExpr_]
+                                                ) [NoNumConstPrint_]
+                                              ) [PrintStatement_]
+                                            ) [StatementList_]
+                                            DesignatorStatement1(
+                                              DesignatorStatement_(
+                                                DesignatorNotArray_(
+                                                 niz
+                                                ) [DesignatorNotArray_]
+                                                AssignExpression_(
+                                                  Assignop_(
+                                                  ) [Assignop_]
+                                                  PlusExpr_(
+                                                    Factor1(
+                                                      New2(
+                                                        Type_(
+                                                         int
+                                                        ) [Type_]
+                                                        PlusExpr_(
+                                                          Factor1(
+                                                            NumConst2(
+                                                             3
+                                                            ) [NumConst2]
+                                                          ) [Factor1]
+                                                        ) [PlusExpr_]
+                                                      ) [New2]
+                                                    ) [Factor1]
+                                                  ) [PlusExpr_]
+                                                ) [AssignExpression_]
+                                              ) [DesignatorStatement_]
+                                            ) [DesignatorStatement1]
+                                          ) [StatementList_]
+                                          DesignatorStatement1(
+                                            DesignatorStatement_(
+                                              DesignatorArray1(
+                                                DesignatorArray_(
+                                                  DesignatorNotArray_(
+                                                   niz
+                                                  ) [DesignatorNotArray_]
+                                                ) [DesignatorArray_]
+                                                PlusExpr_(
+                                                  Factor1(
+                                                    Designator1(
+                                                      DesignatorNotArray_(
+                                                       nula
+                                                      ) [DesignatorNotArray_]
+                                                    ) [Designator1]
+                                                  ) [Factor1]
+                                                ) [PlusExpr_]
+                                              ) [DesignatorArray1]
+                                              AssignExpression_(
+                                                Assignop_(
+                                                ) [Assignop_]
+                                                PlusExpr_(
+                                                  Factor1(
+                                                    Designator1(
+                                                      DesignatorNotArray_(
+                                                       jedan
+                                                      ) [DesignatorNotArray_]
+                                                    ) [Designator1]
+                                                  ) [Factor1]
+                                                ) [PlusExpr_]
+                                              ) [AssignExpression_]
+                                            ) [DesignatorStatement_]
+                                          ) [DesignatorStatement1]
+                                        ) [StatementList_]
+                                        DesignatorStatement1(
+                                          DesignatorStatement_(
+                                            DesignatorArray1(
+                                              DesignatorArray_(
+                                                DesignatorNotArray_(
+                                                 niz
+                                                ) [DesignatorNotArray_]
+                                              ) [DesignatorArray_]
+                                              PlusExpr_(
+                                                Factor1(
+                                                  NumConst2(
+                                                   1
+                                                  ) [NumConst2]
+                                                ) [Factor1]
+                                              ) [PlusExpr_]
+                                            ) [DesignatorArray1]
+                                            AssignExpression_(
+                                              Assignop_(
+                                              ) [Assignop_]
+                                              PlusExpr_(
+                                                Factor1(
+                                                  NumConst2(
+                                                   2
+                                                  ) [NumConst2]
+                                                ) [Factor1]
+                                              ) [PlusExpr_]
+                                            ) [AssignExpression_]
+                                          ) [DesignatorStatement_]
+                                        ) [DesignatorStatement1]
+                                      ) [StatementList_]
+                                      DesignatorStatement1(
+                                        DesignatorStatement_(
+                                          DesignatorArray1(
+                                            DesignatorArray_(
+                                              DesignatorNotArray_(
+                                               niz
+                                              ) [DesignatorNotArray_]
+                                            ) [DesignatorArray_]
+                                            PlusExpr_(
+                                              Factor1(
+                                                Designator1(
+                                                  DesignatorArray1(
+                                                    DesignatorArray_(
+                                                      DesignatorNotArray_(
+                                                       niz
+                                                      ) [DesignatorNotArray_]
+                                                    ) [DesignatorArray_]
+                                                    PlusExpr_(
+                                                      Factor1(
+                                                        Designator1(
+                                                          DesignatorNotArray_(
+                                                           jedan
+                                                          ) [DesignatorNotArray_]
+                                                        ) [Designator1]
+                                                      ) [Factor1]
+                                                    ) [PlusExpr_]
+                                                  ) [DesignatorArray1]
+                                                ) [Designator1]
+                                              ) [Factor1]
+                                            ) [PlusExpr_]
+                                          ) [DesignatorArray1]
+                                          AssignExpression_(
+                                            Assignop_(
+                                            ) [Assignop_]
+                                            PlusExpr_(
+                                              Term_(
+                                                Factor1(
+                                                  Designator1(
+                                                    DesignatorArray1(
+                                                      DesignatorArray_(
+                                                        DesignatorNotArray_(
+                                                         niz
+                                                        ) [DesignatorNotArray_]
+                                                      ) [DesignatorArray_]
+                                                      PlusExpr_(
+                                                        Factor1(
+                                                          Designator1(
+                                                            DesignatorArray1(
+                                                              DesignatorArray_(
+                                                                DesignatorNotArray_(
+                                                                 niz
+                                                                ) [DesignatorNotArray_]
+                                                              ) [DesignatorArray_]
+                                                              PlusExpr_(
+                                                                Factor1(
+                                                                  NumConst2(
+                                                                   0
+                                                                  ) [NumConst2]
+                                                                ) [Factor1]
+                                                              ) [PlusExpr_]
+                                                            ) [DesignatorArray1]
+                                                          ) [Designator1]
+                                                        ) [Factor1]
+                                                      ) [PlusExpr_]
+                                                    ) [DesignatorArray1]
+                                                  ) [Designator1]
+                                                ) [Factor1]
+                                                Mulop1(
+                                                ) [Mulop1]
+                                                NumConst2(
+                                                 3
+                                                ) [NumConst2]
+                                              ) [Term_]
+                                            ) [PlusExpr_]
+                                          ) [AssignExpression_]
+                                        ) [DesignatorStatement_]
+                                      ) [DesignatorStatement1]
+                                    ) [StatementList_]
+                                    DesignatorStatement1(
+                                      DesignatorStatement_(
+                                        DesignatorNotArray_(
+                                         bodovi
+                                        ) [DesignatorNotArray_]
+                                        AssignExpression_(
+                                          Assignop_(
+                                          ) [Assignop_]
+                                          PlusExpr_(
+                                            Term_(
+                                              Factor1(
+                                                Designator1(
+                                                  DesignatorArray1(
+                                                    DesignatorArray_(
+                                                      DesignatorNotArray_(
+                                                       niz
+                                                      ) [DesignatorNotArray_]
+                                                    ) [DesignatorArray_]
+                                                    PlusExpr_(
+                                                      Factor1(
+                                                        NumConst2(
+                                                         2
+                                                        ) [NumConst2]
+                                                      ) [Factor1]
+                                                    ) [PlusExpr_]
+                                                  ) [DesignatorArray1]
+                                                ) [Designator1]
+                                              ) [Factor1]
+                                              Divop1(
+                                              ) [Divop1]
+                                              Designator1(
+                                                DesignatorArray1(
+                                                  DesignatorArray_(
+                                                    DesignatorNotArray_(
+                                                     niz
+                                                    ) [DesignatorNotArray_]
+                                                  ) [DesignatorArray_]
+                                                  PlusExpr_(
+                                                    Factor1(
+                                                      NumConst2(
+                                                       0
+                                                      ) [NumConst2]
+                                                    ) [Factor1]
+                                                  ) [PlusExpr_]
+                                                ) [DesignatorArray1]
+                                              ) [Designator1]
+                                            ) [Term_]
+                                          ) [PlusExpr_]
+                                        ) [AssignExpression_]
+                                      ) [DesignatorStatement_]
+                                    ) [DesignatorStatement1]
+                                  ) [StatementList_]
+                                  PrintStatement_(
+                                    NoNumConstPrint_(
+                                      PlusExpr_(
+                                        Factor1(
+                                          Designator1(
+                                            DesignatorNotArray_(
+                                             bodovi
+                                            ) [DesignatorNotArray_]
+                                          ) [Designator1]
+                                        ) [Factor1]
+                                      ) [PlusExpr_]
+                                    ) [NoNumConstPrint_]
+                                  ) [PrintStatement_]
+                                ) [StatementList_]
+                                PrintStatement_(
+                                  NoNumConstPrint_(
+                                    PlusExpr_(
+                                      Factor1(
+                                        Designator1(
+                                          DesignatorArray1(
+                                            DesignatorArray_(
+                                              DesignatorNotArray_(
+                                               niz
+                                              ) [DesignatorNotArray_]
+                                            ) [DesignatorArray_]
+                                            PlusExpr_(
+                                              Factor1(
+                                                NumConst2(
+                                                 2
+                                                ) [NumConst2]
+                                              ) [Factor1]
+                                            ) [PlusExpr_]
+                                          ) [DesignatorArray1]
+                                        ) [Designator1]
+                                      ) [Factor1]
+                                    ) [PlusExpr_]
+                                  ) [NoNumConstPrint_]
+                                ) [PrintStatement_]
+                              ) [StatementList_]
+                              DesignatorStatement1(
+                                DesignatorStatement_(
+                                  DesignatorNotArray_(
+                                   nizch
+                                  ) [DesignatorNotArray_]
+                                  AssignExpression_(
+                                    Assignop_(
+                                    ) [Assignop_]
+                                    PlusExpr_(
+                                      Factor1(
+                                        New2(
+                                          Type_(
+                                           char
+                                          ) [Type_]
+                                          PlusExpr_(
+                                            Factor1(
+                                              NumConst2(
+                                               3
+                                              ) [NumConst2]
+                                            ) [Factor1]
+                                          ) [PlusExpr_]
+                                        ) [New2]
+                                      ) [Factor1]
+                                    ) [PlusExpr_]
+                                  ) [AssignExpression_]
+                                ) [DesignatorStatement_]
+                              ) [DesignatorStatement1]
+                            ) [StatementList_]
+                            DesignatorStatement1(
+                              DesignatorStatement_(
+                                DesignatorArray1(
+                                  DesignatorArray_(
+                                    DesignatorNotArray_(
+                                     nizch
+                                    ) [DesignatorNotArray_]
+                                  ) [DesignatorArray_]
+                                  PlusExpr_(
+                                    Factor1(
+                                      NumConst2(
+                                       0
+                                      ) [NumConst2]
+                                    ) [Factor1]
+                                  ) [PlusExpr_]
+                                ) [DesignatorArray1]
+                                AssignExpression_(
+                                  Assignop_(
+                                  ) [Assignop_]
+                                  PlusExpr_(
+                                    Factor1(
+                                      CharConst2(
+                                       a
+                                      ) [CharConst2]
+                                    ) [Factor1]
+                                  ) [PlusExpr_]
+                                ) [AssignExpression_]
+                              ) [DesignatorStatement_]
+                            ) [DesignatorStatement1]
+                          ) [StatementList_]
+                          DesignatorStatement1(
+                            DesignatorStatement_(
+                              DesignatorArray1(
+                                DesignatorArray_(
+                                  DesignatorNotArray_(
+                                   nizch
+                                  ) [DesignatorNotArray_]
+                                ) [DesignatorArray_]
+                                PlusExpr_(
+                                  Factor1(
+                                    Designator1(
+                                      DesignatorNotArray_(
+                                       jedan
+                                      ) [DesignatorNotArray_]
+                                    ) [Designator1]
+                                  ) [Factor1]
+                                ) [PlusExpr_]
+                              ) [DesignatorArray1]
+                              AssignExpression_(
+                                Assignop_(
+                                ) [Assignop_]
+                                PlusExpr_(
+                                  Factor1(
+                                    CharConst2(
+                                     b
+                                    ) [CharConst2]
+                                  ) [Factor1]
+                                ) [PlusExpr_]
+                              ) [AssignExpression_]
+                            ) [DesignatorStatement_]
+                          ) [DesignatorStatement1]
+                        ) [StatementList_]
+                        DesignatorStatement1(
+                          DesignatorStatement_(
+                            DesignatorArray1(
+                              DesignatorArray_(
+                                DesignatorNotArray_(
+                                 nizch
+                                ) [DesignatorNotArray_]
+                              ) [DesignatorArray_]
+                              ExprList1(
+                                PlusExpr_(
+                                  Factor1(
+                                    Designator1(
+                                      DesignatorNotArray_(
+                                       pet
+                                      ) [DesignatorNotArray_]
+                                    ) [Designator1]
+                                  ) [Factor1]
+                                ) [PlusExpr_]
+                                Minusop1(
+                                ) [Minusop1]
+                                Factor1(
+                                  NumConst2(
+                                   3
+                                  ) [NumConst2]
+                                ) [Factor1]
+                              ) [ExprList1]
+                            ) [DesignatorArray1]
+                            AssignExpression_(
+                              Assignop_(
+                              ) [Assignop_]
+                              PlusExpr_(
+                                Factor1(
+                                  CharConst2(
+                                   c
+                                  ) [CharConst2]
+                                ) [Factor1]
+                              ) [PlusExpr_]
+                            ) [AssignExpression_]
+                          ) [DesignatorStatement_]
+                        ) [DesignatorStatement1]
+                      ) [StatementList_]
+                      PrintStatement_(
+                        NoNumConstPrint_(
+                          PlusExpr_(
+                            Factor1(
+                              Designator1(
+                                DesignatorArray1(
+                                  DesignatorArray_(
+                                    DesignatorNotArray_(
+                                     nizch
+                                    ) [DesignatorNotArray_]
+                                  ) [DesignatorArray_]
+                                  PlusExpr_(
+                                    Factor1(
+                                      NumConst2(
+                                       1
+                                      ) [NumConst2]
+                                    ) [Factor1]
+                                  ) [PlusExpr_]
+                                ) [DesignatorArray1]
+                              ) [Designator1]
+                            ) [Factor1]
+                          ) [PlusExpr_]
+                        ) [NoNumConstPrint_]
+                      ) [PrintStatement_]
+                    ) [StatementList_]
+                    PrintStatement_(
+                      NoNumConstPrint_(
+                        PlusExpr_(
+                          Factor1(
+                            Designator1(
+                              DesignatorArray1(
+                                DesignatorArray_(
+                                  DesignatorNotArray_(
+                                   nizch
+                                  ) [DesignatorNotArray_]
+                                ) [DesignatorArray_]
+                                PlusExpr_(
+                                  Term_(
+                                    Factor1(
+                                      Designator1(
+                                        DesignatorNotArray_(
+                                         jedan
+                                        ) [DesignatorNotArray_]
+                                      ) [Designator1]
+                                    ) [Factor1]
+                                    Mulop1(
+                                    ) [Mulop1]
+                                    NumConst2(
+                                     2
+                                    ) [NumConst2]
+                                  ) [Term_]
+                                ) [PlusExpr_]
+                              ) [DesignatorArray1]
+                            ) [Designator1]
+                          ) [Factor1]
+                        ) [PlusExpr_]
+                      ) [NoNumConstPrint_]
+                    ) [PrintStatement_]
+                  ) [StatementList_]
+                  DesignatorStatement1(
+                    DesignatorStatement_(
+                      DesignatorNotArray_(
+                       bodovi
+                      ) [DesignatorNotArray_]
+                      AssignExpression_(
+                        Assignop_(
+                        ) [Assignop_]
+                        ExprList1(
+                          ExprList1(
+                            PlusExpr_(
+                              Factor1(
+                                Designator1(
+                                  DesignatorNotArray_(
+                                   bodovi
+                                  ) [DesignatorNotArray_]
+                                ) [Designator1]
+                              ) [Factor1]
+                            ) [PlusExpr_]
+                            Plusop1(
+                            ) [Plusop1]
+                            Term_(
+                              Factor1(
+                                NestedExpr1(
+                                  ExprList1(
+                                    PlusExpr_(
+                                      Term_(
+                                        Factor1(
+                                          Designator1(
+                                            DesignatorNotArray_(
+                                             pet
+                                            ) [DesignatorNotArray_]
+                                          ) [Designator1]
+                                        ) [Factor1]
+                                        Mulop1(
+                                        ) [Mulop1]
+                                        Designator1(
+                                          DesignatorNotArray_(
+                                           jedan
+                                          ) [DesignatorNotArray_]
+                                        ) [Designator1]
+                                      ) [Term_]
+                                    ) [PlusExpr_]
+                                    Minusop1(
+                                    ) [Minusop1]
+                                    Factor1(
+                                      NumConst2(
+                                       1
+                                      ) [NumConst2]
+                                    ) [Factor1]
+                                  ) [ExprList1]
+                                ) [NestedExpr1]
+                              ) [Factor1]
+                              Mulop1(
+                              ) [Mulop1]
+                              Designator1(
+                                DesignatorNotArray_(
+                                 bodovi
+                                ) [DesignatorNotArray_]
+                              ) [Designator1]
+                            ) [Term_]
+                          ) [ExprList1]
+                          Minusop1(
+                          ) [Minusop1]
+                          Factor1(
+                            NestedExpr1(
+                              ExprList1(
+                                ExprList1(
+                                  PlusExpr_(
+                                    Term_(
+                                      Factor1(
+                                        NumConst2(
+                                         3
+                                        ) [NumConst2]
+                                      ) [Factor1]
+                                      Modop1(
+                                      ) [Modop1]
+                                      NumConst2(
+                                       2
+                                      ) [NumConst2]
+                                    ) [Term_]
+                                  ) [PlusExpr_]
+                                  Plusop1(
+                                  ) [Plusop1]
+                                  Term_(
+                                    Factor1(
+                                      NumConst2(
+                                       3
+                                      ) [NumConst2]
+                                    ) [Factor1]
+                                    Mulop1(
+                                    ) [Mulop1]
+                                    NumConst2(
+                                     2
+                                    ) [NumConst2]
+                                  ) [Term_]
+                                ) [ExprList1]
+                                Minusop1(
+                                ) [Minusop1]
+                                Factor1(
+                                  NumConst2(
+                                   3
+                                  ) [NumConst2]
+                                ) [Factor1]
+                              ) [ExprList1]
+                            ) [NestedExpr1]
+                          ) [Factor1]
+                        ) [ExprList1]
+                      ) [AssignExpression_]
+                    ) [DesignatorStatement_]
+                  ) [DesignatorStatement1]
+                ) [StatementList_]
+                PrintStatement_(
+                  NoNumConstPrint_(
+                    PlusExpr_(
+                      Factor1(
+                        Designator1(
+                          DesignatorNotArray_(
+                           bodovi
+                          ) [DesignatorNotArray_]
+                        ) [Designator1]
+                      ) [Factor1]
+                    ) [PlusExpr_]
+                  ) [NoNumConstPrint_]
+                ) [PrintStatement_]
+              ) [StatementList_]
+              ReadStatement_(
+                DesignatorNotArray_(
+                 bodovi
+                ) [DesignatorNotArray_]
+              ) [ReadStatement_]
+            ) [StatementList_]
+            IfOrElseStatement1(
+              IfStatement_(
+                CondTerm1(
+                  CondFact1(
+                    CondFactExprs_(
+                      PlusExpr_(
+                        Term_(
+                          Factor1(
+                            Designator1(
+                              DesignatorNotArray_(
+                               bodovi
+                              ) [DesignatorNotArray_]
+                            ) [Designator1]
+                          ) [Factor1]
+                          Modop1(
+                          ) [Modop1]
+                          NumConst2(
+                           2
+                          ) [NumConst2]
+                        ) [Term_]
+                      ) [PlusExpr_]
+                      Eqop1(
+                      ) [Eqop1]
+                      PlusExpr_(
+                        Factor1(
+                          NumConst2(
+                           0
+                          ) [NumConst2]
+                        ) [Factor1]
+                      ) [PlusExpr_]
+                    ) [CondFactExprs_]
+                  ) [CondFact1]
+                ) [CondTerm1]
+                DesignatorStatement1(
+                  DesignatorStatement_(
+                    DesignatorNotArray_(
+                     bodovi
+                    ) [DesignatorNotArray_]
+                    AssignExpression_(
+                      Assignop_(
+                      ) [Assignop_]
+                      ExprList1(
+                        PlusExpr_(
+                          Factor1(
+                            Designator1(
+                              DesignatorNotArray_(
+                               bodovi
+                              ) [DesignatorNotArray_]
+                            ) [Designator1]
+                          ) [Factor1]
+                        ) [PlusExpr_]
+                        Plusop1(
+                        ) [Plusop1]
+                        Factor1(
+                          NumConst2(
+                           10
+                          ) [NumConst2]
+                        ) [Factor1]
+                      ) [ExprList1]
+                    ) [AssignExpression_]
+                  ) [DesignatorStatement_]
+                ) [DesignatorStatement1]
+              ) [IfStatement_]
+            ) [IfOrElseStatement1]
+          ) [StatementList_]
+          IfOrElseStatement1(
+            IfStatement_(
+              CondTerm1(
+                CondFact1(
+                  CondFactExprs_(
+                    PlusExpr_(
+                      Term_(
+                        Factor1(
+                          Designator1(
+                            DesignatorNotArray_(
+                             bodovi
+                            ) [DesignatorNotArray_]
+                          ) [Designator1]
+                        ) [Factor1]
+                        Modop1(
+                        ) [Modop1]
+                        NumConst2(
+                         2
+                        ) [NumConst2]
+                      ) [Term_]
+                    ) [PlusExpr_]
+                    Eqop1(
+                    ) [Eqop1]
+                    PlusExpr_(
+                      Factor1(
+                        NumConst2(
+                         0
+                        ) [NumConst2]
+                      ) [Factor1]
+                    ) [PlusExpr_]
+                  ) [CondFactExprs_]
+                ) [CondFact1]
+              ) [CondTerm1]
+              DesignatorStatement1(
+                DesignatorStatement_(
+                  DesignatorNotArray_(
+                   bodovi
+                  ) [DesignatorNotArray_]
+                  AssignExpression_(
+                    Assignop_(
+                    ) [Assignop_]
+                    ExprList1(
+                      PlusExpr_(
+                        Factor1(
+                          Designator1(
+                            DesignatorNotArray_(
+                             bodovi
+                            ) [DesignatorNotArray_]
+                          ) [Designator1]
+                        ) [Factor1]
+                      ) [PlusExpr_]
+                      Plusop1(
+                      ) [Plusop1]
+                      Factor1(
+                        NumConst2(
+                         10
+                        ) [NumConst2]
+                      ) [Factor1]
+                    ) [ExprList1]
+                  ) [AssignExpression_]
+                ) [DesignatorStatement_]
+              ) [DesignatorStatement1]
+            ) [IfStatement_]
+          ) [IfOrElseStatement1]
+        ) [StatementList_]
+        IfOrElseStatement1(
+          ElseStatement_(
+            CondTerm1(
+              CondFact1(
+                CondFactExpr_(
+                  PlusExpr_(
+                    Factor1(
+                      BoolConst2(
+                       false
+                      ) [BoolConst2]
+                    ) [Factor1]
+                  ) [PlusExpr_]
+                ) [CondFactExpr_]
+              ) [CondFact1]
+            ) [CondTerm1]
+            PrintStatement_(
+              NoNumConstPrint_(
+                ExprList1(
+                  PlusExpr_(
+                    Factor1(
+                      Designator1(
+                        DesignatorNotArray_(
+                         bodovi
+                        ) [DesignatorNotArray_]
+                      ) [Designator1]
+                    ) [Factor1]
+                  ) [PlusExpr_]
+                  Plusop1(
+                  ) [Plusop1]
+                  Factor1(
+                    NumConst2(
+                     20
+                    ) [NumConst2]
+                  ) [Factor1]
+                ) [ExprList1]
+              ) [NoNumConstPrint_]
+            ) [PrintStatement_]
+            PrintStatement_(
+              NoNumConstPrint_(
+                PlusExpr_(
+                  Factor1(
+                    Designator1(
+                      DesignatorNotArray_(
+                       bodovi
+                      ) [DesignatorNotArray_]
+                    ) [Designator1]
+                  ) [Factor1]
+                ) [PlusExpr_]
+              ) [NoNumConstPrint_]
+            ) [PrintStatement_]
+          ) [ElseStatement_]
+        ) [IfOrElseStatement1]
+      ) [StatementList_]
+    ) [MethodDecl_]
+  ) [MethodDeclList_]
+) [Program_]
+INFO  02:26:49,777 - ===================================
+INFO  02:26:49,787 - Print count calls = 0
+INFO  02:26:49,787 - Deklarisanih promenljivih ima 0
