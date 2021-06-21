@@ -1,34 +1,34 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/5/2021 2:33:58
+// 21/5/2021 21:52:24
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class BoolConst1 extends ConstIdent {
 
-    private String I1;
-    private String B2;
+    private String vName;
+    private String vValue;
 
-    public BoolConst1 (String I1, String B2) {
-        this.I1=I1;
-        this.B2=B2;
+    public BoolConst1 (String vName, String vValue) {
+        this.vName=vName;
+        this.vValue=vValue;
     }
 
-    public String getI1() {
-        return I1;
+    public String getVName() {
+        return vName;
     }
 
-    public void setI1(String I1) {
-        this.I1=I1;
+    public void setVName(String vName) {
+        this.vName=vName;
     }
 
-    public String getB2() {
-        return B2;
+    public String getVValue() {
+        return vValue;
     }
 
-    public void setB2(String B2) {
-        this.B2=B2;
+    public void setVValue(String vValue) {
+        this.vValue=vValue;
     }
 
     public void accept(Visitor visitor) {
@@ -51,10 +51,10 @@ public class BoolConst1 extends ConstIdent {
         buffer.append(tab);
         buffer.append("BoolConst1(\n");
 
-        buffer.append(" "+tab+I1);
+        buffer.append(" "+tab+vName);
         buffer.append("\n");
 
-        buffer.append(" "+tab+B2);
+        buffer.append(" "+tab+vValue);
         buffer.append("\n");
 
         buffer.append(tab);

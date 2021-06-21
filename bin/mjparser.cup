@@ -50,13 +50,18 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
-nonterminal Program, MethodDeclList, NonMethodDeclList, NonMethodDecl, MethodDecl, ConstDecl, Type, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
-nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, Expr, ReturnStatement, Designator, ToPrint, StatementList, ReturnStmt;
-nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Term, Mulop, Factor, SwitchBodyWithoutDefault, StatementListWithYield;
+nonterminal MethodDeclList, NonMethodDeclList, NonMethodDecl, MethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
+nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, ReturnStatement, ToPrint, StatementList, ReturnStmt;
+nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr;
 
 precedence left ELSE;
 
-Program ::= (Program_) PROG IDENT NonMethodDeclList LBRACE MethodDeclList RBRACE;
+Program ::= (Program) PROG ProgName:p NonMethodDeclList LBRACE MethodDeclList RBRACE;
+
+ProgName ::= (ProgName) IDENT:progName;
 
 NonMethodDeclList ::= (NonMethodDeclList_) NonMethodDeclList NonMethodDecl
 					| (NoNonMethodDeclList_) /* epsilon */
@@ -65,7 +70,7 @@ NonMethodDecl ::= (ConstDecl1) ConstDecl
 					| (VarDecl1) VarDecl
 					;
 
-ConstDecl ::= (ConstDecl_) CONST Type ConstIdents SEMI;
+ConstDecl ::= (ConstDecl) CONST Type ConstIdents SEMI;
 
 ConstIdents ::= (ConstIdents_) ConstIdents COMMA ConstIdent
 			| (ConstIdent1) ConstIdent
@@ -73,28 +78,28 @@ ConstIdents ::= (ConstIdents_) ConstIdents COMMA ConstIdent
 			
 ConstIdent ::= (NumConst1) IDENT:vName ASSIGN NUMCONST:vValue
 				| (CharConst1) IDENT:vName ASSIGN CHARCONST:vValue
-				| (BoolConst1) IDENT ASSIGN BOOLCONST
+				| (BoolConst1) IDENT:vName ASSIGN BOOLCONST:vValue
 				;
 
-VarDecl ::= (VarDecl_) Type VarIdents SEMI;
+VarDecl ::= (VarDecl) Type VarIdents SEMI;
 
 VarIdents ::= (VarIdents_) VarIdents COMMA VarIdent
 			| (VarIdent1) VarIdent
 			;
 			
-VarIdent ::= (VarIdent_) IDENT IsArray;
+VarIdent ::= (VarIdent) IDENT IsArray;
 
 IsArray ::= (IsArray_) LBRACKET RBRACKET
 			| (NoArray_) /* epsilon */
 			;
 
-Type ::= (Type_) IDENT:vType;
+Type ::= (Type) IDENT:vType;
 
 MethodDeclList ::= (MethodDeclList_) MethodDeclList MethodDecl
 				| (NoMethods_) /* epsilon */
 				;
 				
-MethodDecl ::= (MethodDecl_) ReturnStmt IDENT LPAREN FormParsList RPAREN MethodVarDecls LBRACE StatementList RBRACE;
+MethodDecl ::= (MethodDecl) ReturnStmt IDENT LPAREN FormParsList RPAREN MethodVarDecls LBRACE StatementList RBRACE;
 
 MethodVarDecls ::= (MethodVarDecls_) MethodVarDecls VarDecl
 				| (NoMethodVarDecls_) /* epsilon */
@@ -112,7 +117,7 @@ FormPars ::= (FormPars_) FormPar COMMA FormPars
 			| (FormPar1) FormPar
 			;
 
-FormPar ::= (FormPar_) Type IDENT IsArray;
+FormPar ::= (FormPar) Type IDENT IsArray;
 
 Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (IfOrElseStatement1) IfOrElseStatement
@@ -142,7 +147,7 @@ StatementList ::= (StatementList_) StatementList Statement
 				| (NoStatementList_) /* epsilon */
 				;
 
-DesignatorStatement ::= (DesignatorStatement_) Designator OperationsWithDesignator;
+DesignatorStatement ::= (DesignatorStatement) Designator OperationsWithDesignator;
 
 OperationsWithDesignator ::= (AssignExpression_) Assignop Expr
 							| (ActParsListExpression_) LPAREN ActParsList RPAREN 
@@ -182,11 +187,11 @@ Term ::= (Term_) Term Mulop Factor
 			| (Factor1) Factor
 			;
 			
-Factor ::=  (Designator1) Designator
-			| (Designator2) Designator LPAREN ActParsList RPAREN
-			| (NumConst2) NUMCONST
-			| (CharConst2) CHARCONST
-			| (BoolConst2) BOOLCONST
+Factor ::=  (Designator1) Designator:dName
+			| (Designator2) Designator:dName LPAREN ActParsList RPAREN
+			| (NumConst2) NUMCONST:cValue
+			| (CharConst2) CHARCONST:cValue
+			| (BoolConst2) BOOLCONST:cValue
 			| (New1) NEW Type
 			| (New2) NEW Type LBRACKET Expr RBRACKET
 			| (NestedExpr1) LPAREN Expr RPAREN
@@ -196,9 +201,9 @@ Designator ::= (DesignatorNotArray_) IDENT
 			| (DesignatorArray1) DesignatorArray LBRACKET Expr RBRACKET
 			;
 			
-DesignatorArray ::= (DesignatorArray_) Designator;
+DesignatorArray ::= (DesignatorArray) IDENT;
 			
-SwitchBody ::= (SwitchBody_) SwitchBodyWithoutDefault DEFAULT COLON StatementListWithYield;
+SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault DEFAULT COLON StatementListWithYield;
 
 SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault CASE NUMCONST COLON StatementList
 							| (NoSwitchBodyWithoutDefault_) /* epsilon */
@@ -206,7 +211,7 @@ SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefaul
 							
 StatementListWithYield ::= (StatementListWithYield) StatementList YIELD Expr SEMI;
 
-Assignop ::= (Assignop_) ASSIGN;
+Assignop ::= (Assignop) ASSIGN;
 
 
 Relop ::= (Eqop1) EQUAL 

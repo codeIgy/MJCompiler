@@ -1,15 +1,29 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/5/2021 2:33:58
+// 21/5/2021 21:52:24
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public abstract class Type implements SyntaxNode {
+public class Type implements SyntaxNode {
 
     private SyntaxNode parent;
-
     private int line;
+    public rs.etf.pp1.symboltable.concepts.Struct struct = null;
+
+    private String vType;
+
+    public Type (String vType) {
+        this.vType=vType;
+    }
+
+    public String getVType() {
+        return vType;
+    }
+
+    public void setVType(String vType) {
+        this.vType=vType;
+    }
 
     public SyntaxNode getParent() {
         return parent;
@@ -27,11 +41,31 @@ public abstract class Type implements SyntaxNode {
         this.line=line;
     }
 
-    public abstract void accept(Visitor visitor);
-    public abstract void childrenAccept(Visitor visitor);
-    public abstract void traverseTopDown(Visitor visitor);
-    public abstract void traverseBottomUp(Visitor visitor);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 
-    public String toString() { return toString(""); }
-    public abstract String toString(String tab);
+    public void childrenAccept(Visitor visitor) {
+    }
+
+    public void traverseTopDown(Visitor visitor) {
+        accept(visitor);
+    }
+
+    public void traverseBottomUp(Visitor visitor) {
+        accept(visitor);
+    }
+
+    public String toString(String tab) {
+        StringBuffer buffer=new StringBuffer();
+        buffer.append(tab);
+        buffer.append("Type(\n");
+
+        buffer.append(" "+tab+vType);
+        buffer.append("\n");
+
+        buffer.append(tab);
+        buffer.append(") [Type]");
+        return buffer.toString();
+    }
 }

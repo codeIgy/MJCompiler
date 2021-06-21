@@ -1,15 +1,27 @@
 // generated with ast extension for cup
 // version 0.8
-// 7/5/2021 2:33:58
+// 21/5/2021 21:52:24
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public abstract class DesignatorArray implements SyntaxNode {
+public class DesignatorArray implements SyntaxNode {
 
     private SyntaxNode parent;
-
     private int line;
+    private String I1;
+
+    public DesignatorArray (String I1) {
+        this.I1=I1;
+    }
+
+    public String getI1() {
+        return I1;
+    }
+
+    public void setI1(String I1) {
+        this.I1=I1;
+    }
 
     public SyntaxNode getParent() {
         return parent;
@@ -27,11 +39,31 @@ public abstract class DesignatorArray implements SyntaxNode {
         this.line=line;
     }
 
-    public abstract void accept(Visitor visitor);
-    public abstract void childrenAccept(Visitor visitor);
-    public abstract void traverseTopDown(Visitor visitor);
-    public abstract void traverseBottomUp(Visitor visitor);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 
-    public String toString() { return toString(""); }
-    public abstract String toString(String tab);
+    public void childrenAccept(Visitor visitor) {
+    }
+
+    public void traverseTopDown(Visitor visitor) {
+        accept(visitor);
+    }
+
+    public void traverseBottomUp(Visitor visitor) {
+        accept(visitor);
+    }
+
+    public String toString(String tab) {
+        StringBuffer buffer=new StringBuffer();
+        buffer.append(tab);
+        buffer.append("DesignatorArray(\n");
+
+        buffer.append(" "+tab+I1);
+        buffer.append("\n");
+
+        buffer.append(tab);
+        buffer.append(") [DesignatorArray]");
+        return buffer.toString();
+    }
 }
