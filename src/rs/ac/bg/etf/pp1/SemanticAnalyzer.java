@@ -267,15 +267,21 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		if(designator.obj == Tab.noObj) return; //exit if there was a previous error in designator side
 		
 		if(designator.obj.getType() == Tab.nullType) {
-			report_error("null ne moze da bude sa lijeve strane znaka jedankosti!", designatorStatement);
+			report_error("null ne moze da bude designator!", designatorStatement);
 			return;
 		}
+		
 		
 		if(operationsWithDesig instanceof AssignExpression_) {
 			
 			AssignExpression_ assignExpr = (AssignExpression_) operationsWithDesig;
 			
 			if(assignExpr.getExpr().struct == Tab.noType) return; //exit in case there was a previous error in expression side
+			
+			if(designator.obj.getKind() != Obj.Var) {
+				report_error("Sa lijeve strane znaka jedankosti mora biti promjenljiva!", designatorStatement);
+				return;
+			}
 			
 			if(designator instanceof DesignatorNotArray_) {
 				/*if(assignExpr.getExpr().struct == Tab.nullType && !designator.obj.getType().isRefType()) {
@@ -309,8 +315,29 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		/*else if(designatorStatement.getOperationsWithDesignator() instanceof AssignExpression_) {
 			
 		}*/
-		else if(designatorStatement.getOperationsWithDesignator() instanceof AssignExpression_) {
+		else if(designatorStatement.getOperationsWithDesignator() instanceof IncExpression_) {
+			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
+				report_error("Operator ++ mora da bude izvrsen nad promjenljivom ili clanom niza!", designatorStatement);
+				return;
+			}
 			
+			Struct designatorStruct = designator.obj.getType().getKind() == Struct.Array ? designator.obj.getType().getElemType() : designator.obj.getType() ; //check if designator of type int
+			
+			if(designatorStruct.getKind() != Struct.Int) {
+				report_error("Operator ++ mora da bude izvrsen nad tipom int!", designatorStatement);
+			}
+		}
+		else if(designatorStatement.getOperationsWithDesignator() instanceof DecExpression_) {
+			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
+				report_error("Operator -- mora da bude izvrsen nad promjenljivom ili clanom niza!", designatorStatement);
+				return;
+			}
+			
+			Struct designatorStruct = designator.obj.getType().getKind() == Struct.Array ? designator.obj.getType().getElemType() : designator.obj.getType() ; //check if designator of type int
+			
+			if(designatorStruct.getKind() != Struct.Int) {
+				report_error("Operator -- mora da bude izvrsen nad tipom int!", designatorStatement);
+			}
 		}
 	}
 	
