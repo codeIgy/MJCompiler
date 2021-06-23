@@ -5,80 +5,17 @@ int a[],b[];
 char f, c[];
 bool boo;
 {
+	int fja(jabuka g, bool b, char f [])
+	int l; int t;
+	{
+			fja(a, jabuka, null);
+	}
+	
 	void main()	
 	int g;
-	{
-		if(true){
-			f = 'C';
-		}
-		
-		if(a == null){
-			f = 'C';
-		}
-		
-		if(null == a){
-			f = 'C';
-		}
-		
-		if(a[2] == 3){
-			f = 'C';
-		}
-		
-		if(a == b){
-		
-		}
-		
-		if(a[0] != b[2]){
-		
-		}
-		
-		
-		if(a[2] > 3){
-			f = 'C';
-		}
-		
-		if(f > 'f'){
-			f = 'D';
-			f = 'x';
-			a[3] = a[2];
-		}
-		
-		if(f == null){
-		}
-		
-		if(f < a[3]){
-		}
-		
-		if(a != c){
-		}
-		
-		if(a[1] < c[2]){
-		}
-		
-		if(false > true){
-		}
-		
-		if(false == true && a[2] == c[2] || f == 3 && b > null && b[0] > 3 || true == false && false){
-		}
-		
-		if(a){
-		}
-		
-		do{
-			continue;
-		}while(true);
-		
-		do{
-			break;
-		}while(true);
-		
-		//break;
-		
-		//continue;
-		
-		a[3] = 5;
-		
-		
+	{		
+		fja(a[0], true, c);
+		b[0] = fjag(a, dasd, a, a);
 	}
 }
 

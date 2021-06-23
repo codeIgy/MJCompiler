@@ -1,6 +1,8 @@
 package rs.ac.bg.etf.pp1;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -16,6 +18,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	Struct lastType = null;
 	List<BreakStatement_> breaks = new ArrayList<>();
 	List<ContinueStatement_> continues = new ArrayList<>();
+	List<Struct> actParsList = new ArrayList<>();
 	int numOfFormPars = 0;
 	int nVars;
 	
@@ -140,7 +143,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			designator.obj = TabWithBool.noObj;
 		}
 		else {
-			//rep_info
+			//rep_info}
 			designator.obj = ident;
 		}
 	}
@@ -321,7 +324,52 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			}
 		}
 		else if(designatorStatement.getOperationsWithDesignator() instanceof ActParsListExpression_) {
+			if(designator.obj.getKind() != Obj.Meth) {
+				report_error("Poziv funkcije se moze vrsiti samo nad funkcijom!",designator);
+				return;
+			}
 			
+			Obj methodBeingAccesed = designator.obj;
+			Collection<Obj> col = null;
+			
+			if (methodBeingAccesed == currentMethod) {
+				col = TabWithBool.currentScope().getLocals().symbols();
+			}
+			else {
+				col = methodBeingAccesed.getLocalSymbols();
+			}
+			
+			Iterator<Obj> formParsIterator= col.iterator();
+			
+			if(methodBeingAccesed.getLevel() < actParsList.size()) {
+				report_error("Previse argumenata pri pozivu funkcije!", designatorStatement);
+			}
+			else if (methodBeingAccesed.getLevel() > actParsList.size()){
+				report_error("Premalo argumenata pri pozivu funkcije!", designatorStatement);
+			}
+			else{
+				for(int i = methodBeingAccesed.getLevel() - 1; i >= 0; i--) {
+					Struct formal = formParsIterator.next().getType();
+					Struct actual = actParsList.get(i);
+					if(formal == TabWithBool.noType || actual == TabWithBool.noType) continue; //there was an error with formal type
+					
+					if(formal.isRefType() != actual.isRefType()) {
+						report_error("Argument funkcije na poziciji " + (methodBeingAccesed.getLevel() - i) + " nije odgovarajuceg tipa!", designatorStatement);
+					}
+					else if(formal.isRefType()) { //in case they are both arrays or act is null
+						if(actual != TabWithBool.nullType && (formal.getElemType().getKind() != actual.getElemType().getKind()) ) {
+							report_error("Argument funkcije na poziciji " + (methodBeingAccesed.getLevel() - i) + " nije odgovarajuceg tipa!", designatorStatement);
+						}
+					}
+					else {
+						if(formal.getKind() != actual.getKind()) {
+							report_error("Argument funkcije na poziciji " + (i + 1) + " nije odgovarajuceg tipa!", designatorStatement);
+						}
+					}
+				}
+			}
+			
+			actParsList.clear();
 		}
 		else if(designatorStatement.getOperationsWithDesignator() instanceof IncExpression_) {
 			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
@@ -350,18 +398,68 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(Designator2 designatorMeth) {
-		Designator desig = designatorMeth.getDesignator();
+		Designator designator = designatorMeth.getDesignator();
 		
-		if(desig.obj == TabWithBool.noObj) { //in case of previous error
+		if(designator.obj == TabWithBool.noObj) { //in case of previous error
 			designatorMeth.struct = TabWithBool.noType; 
 			return;
 		}
 		
-		if(desig.obj.getKind() != Obj.Meth) {
-			report_error("Pri pozivu funkcije designator mora da bude metod!", designatorMeth);
+		if(designator.obj.getKind() != Obj.Meth) {
+			report_error("Pri pozivu funkcije designator mora da bude funkcija!", designatorMeth);
 			designatorMeth.struct = TabWithBool.noType;
+			return;
 		}
-		else designatorMeth.struct = desig.obj.getType();
+		
+		Obj methodBeingAccesed = designator.obj;
+		Collection<Obj> col = null;
+		boolean errorOccurred = false;
+		
+		if (methodBeingAccesed == currentMethod) {
+			col = TabWithBool.currentScope().getLocals().symbols();
+		}
+		else {
+			col = methodBeingAccesed.getLocalSymbols();
+		}
+		
+		Iterator<Obj> formParsIterator= col.iterator();
+		
+		if(methodBeingAccesed.getLevel() < actParsList.size()) {
+			report_error("Previse argumenata pri pozivu funkcije!", designatorMeth);
+			errorOccurred = true;
+		}
+		else if (methodBeingAccesed.getLevel() > actParsList.size()){
+			report_error("Premalo argumenata pri pozivu funkcije!", designatorMeth);
+			errorOccurred = true;
+		}
+		else{
+			for(int i = methodBeingAccesed.getLevel() - 1; i >= 0; i--) {
+				Struct formal = formParsIterator.next().getType();
+				Struct actual = actParsList.get(i);
+				if(formal == TabWithBool.noType || actual == TabWithBool.noType) continue; //there was an error with formal type
+				
+				if(formal.isRefType() != actual.isRefType()) {
+					report_error("Argument funkcije na poziciji " + (methodBeingAccesed.getLevel() - i) + " nije odgovarajuceg tipa!", designatorMeth);
+					errorOccurred = true;
+				}
+				else if(formal.isRefType()) { //in case they are both arrays or act is null
+					if(actual != TabWithBool.nullType && (formal.getElemType().getKind() != actual.getElemType().getKind()) ) {
+						report_error("Argument funkcije na poziciji " + (methodBeingAccesed.getLevel() - i) + " nije odgovarajuceg tipa!", designatorMeth);
+						errorOccurred = true;
+					}
+				}
+				else {
+					if(formal.getKind() != actual.getKind()) {
+						report_error("Argument funkcije na poziciji " + (i + 1) + " nije odgovarajuceg tipa!", designatorMeth);
+						errorOccurred = true;
+					}
+				}
+			}
+		}
+		
+		actParsList.clear();
+		
+		designatorMeth.struct = errorOccurred ? TabWithBool.noType : designator.obj.getType();
 		//rep_info
 		
 	}
@@ -428,12 +526,56 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(TypeReturn methNameAndReturnType) {
-		currentMethod = TabWithBool.insert(Obj.Meth, methNameAndReturnType.getMName(), methNameAndReturnType.getType().struct);
+		methNameAndReturnType.obj = currentMethod = TabWithBool.insert(Obj.Meth, methNameAndReturnType.getMName(), methNameAndReturnType.getType().struct);
 		TabWithBool.openScope();
 	}
 	
 	public void visit(Void1 voidMethName) {
-		currentMethod = TabWithBool.insert(Obj.Meth, voidMethName.getMName(), TabWithBool.noType);
+		voidMethName.obj = currentMethod = TabWithBool.insert(Obj.Meth, voidMethName.getMName(), TabWithBool.noType);
+		numOfFormPars = 0;
 		TabWithBool.openScope();
+	}
+	
+	public void visit(FormParsList_ formParamList) {
+		currentMethod.setLevel(numOfFormPars);
+	}
+	
+	public void visit(NoFormParamsList noFormParamsList) {
+		currentMethod.setLevel(numOfFormPars);
+	}
+	
+	public void visit(FormPar formPar) {
+		numOfFormPars++;
+		Struct type = null;
+		if(formPar.getIsArray() instanceof IsArray_) {
+			type = new Struct(Struct.Array, formPar.getType().struct);
+		}
+		else {
+			type = formPar.getType().struct;
+		}
+		TabWithBool.insert(Obj.Var, formPar.getI2(), type);
+	}
+	
+	public void visit(ActPar_ actPar) {
+		/*if(numOfActPars > currentMethod.getLevel()) 
+			return;
+		else if(numOfActPars == currentMethod.getLevel()) {
+			report_error("Broj argumenata pri pozivu funkcije je veci od broja parametara!", actPar);
+		}
+		else {
+			if(method)
+			else if(methodBeingAccesed == currentMethod) { // in case we have a recursive call formal parameters have not yet been added to the locals field of a method, so we take them from the scope
+				
+			}
+			else {
+				
+			}
+		}*/
+		//numOfActPars++;
+		actParsList.add(actPar.getExpr().struct);
+	}
+	
+	public void visit(ActPars_ actPars) {
+		actParsList.add(actPars.getExpr().struct);
 	}
 }

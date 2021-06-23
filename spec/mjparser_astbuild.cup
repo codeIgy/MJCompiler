@@ -55,7 +55,6 @@ nonterminal Continue Continue;
 nonterminal MethodDeclList MethodDeclList;
 nonterminal NonMethodDeclList NonMethodDeclList;
 nonterminal NonMethodDecl NonMethodDecl;
-nonterminal MethodDecl MethodDecl;
 nonterminal ConstDecl ConstDecl;
 nonterminal VarDecl VarDecl;
 nonterminal ConstIdents ConstIdents;
@@ -77,7 +76,6 @@ nonterminal SwitchBody SwitchBody;
 nonterminal ReturnStatement ReturnStatement;
 nonterminal ToPrint ToPrint;
 nonterminal StatementList StatementList;
-nonterminal MethodNameAndReturnType MethodNameAndReturnType;
 nonterminal OperationsWithDesignator OperationsWithDesignator;
 nonterminal Assignop Assignop;
 nonterminal ActParsList ActParsList;
@@ -91,7 +89,7 @@ nonterminal Mulop Mulop;
 nonterminal SwitchBodyWithoutDefault SwitchBodyWithoutDefault;
 nonterminal StatementListWithYield StatementListWithYield;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr;
 
 precedence left ELSE;

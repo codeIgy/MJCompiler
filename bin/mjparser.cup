@@ -50,11 +50,11 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
-nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, MethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
-nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, ReturnStatement, ToPrint, StatementList, MethodNameAndReturnType;
+nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
+nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, ReturnStatement, ToPrint, StatementList;
 nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr;
 
 precedence left ELSE;
