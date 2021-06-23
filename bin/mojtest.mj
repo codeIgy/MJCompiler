@@ -5,7 +5,7 @@ int a[],b[];
 char f, c[];
 bool boo;
 {
-	int fja(jabuka g, bool b, char f [])
+	int fja(int g, bool b, char f [])
 	int l; int t;
 	{
 			fja(a, jabuka, null);
@@ -16,6 +16,8 @@ bool boo;
 	{		
 		fja(a[0], true, c);
 		b[0] = fjag(a, dasd, a, a);
+		fja(fja(fja(a[0], true, c), true, c), fja(a[0], true, c), c);
+		fja(a[0], boo, c);
 	}
 }
 

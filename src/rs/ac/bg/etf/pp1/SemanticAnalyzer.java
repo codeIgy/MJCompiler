@@ -1,20 +1,17 @@
 package rs.ac.bg.etf.pp1;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.apache.log4j.Logger;
 
 import rs.ac.bg.etf.pp1.ast.*;
-import rs.etf.pp1.symboltable.*;
 import rs.etf.pp1.symboltable.concepts.*;
 
 public class SemanticAnalyzer extends VisitorAdaptor {
 	boolean errorDetected = false;
 	Obj currentMethod = null;
 	boolean returnFound = false;
+	boolean mainDeclared = false;
 	Struct lastType = null;
 	List<BreakStatement_> breaks = new ArrayList<>();
 	List<ContinueStatement_> continues = new ArrayList<>();
@@ -49,10 +46,18 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		TabWithBool.closeScope();
 
 		for(int i = 0; i < breaks.size(); i++) 
-			report_error("\"break\" mora da bude unutar do while petlje!", breaks.remove(i));
+			report_error("\"break\" mora da bude unutar do while petlje!", breaks.get(i));
+		
+		breaks.clear();
 		
 		for(int i = 0; i < continues.size(); i++) 
-			report_error("\"continue\" mora da bude unutar do while petlje!", continues.remove(i));
+			report_error("\"continue\" mora da bude unutar do while petlje!", continues.get(i));
+		
+		continues.clear();
+		
+		if(!mainDeclared) {
+			report_error("Ne postoji void main() metod!", null);
+		}
 		
 	}
 	
@@ -275,15 +280,19 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Designator designator = designatorStatement.getDesignator();
 		OperationsWithDesignator operationsWithDesig = designatorStatement.getOperationsWithDesignator();
 		
-		if(designator.obj == TabWithBool.noObj) return; //exit if there was a previous error in designator side
 		
-		if(designator.obj.getType() == TabWithBool.nullType) {
-			report_error("null ne moze da bude designator!", designatorStatement);
-			return;
-		}
 		
 		
 		if(operationsWithDesig instanceof AssignExpression_) {
+			
+			if(designator.obj == TabWithBool.noObj) {
+				return; //exit if there was a previous error in designator side
+			}
+			
+			if(designator.obj.getType() == TabWithBool.nullType) {
+				report_error("null ne moze da bude designator!", designatorStatement);
+				return;
+			}
 			
 			AssignExpression_ assignExpr = (AssignExpression_) operationsWithDesig;
 			
@@ -324,8 +333,21 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			}
 		}
 		else if(designatorStatement.getOperationsWithDesignator() instanceof ActParsListExpression_) {
+			
+			if(designator.obj == TabWithBool.noObj) {
+				actParsList.clear();
+				return; //exit if there was a previous error in designator side
+			}
+			
+			if(designator.obj.getType() == TabWithBool.nullType) {
+				actParsList.clear();
+				report_error("null ne moze da bude designator!", designatorStatement);
+				return;
+			}
+			
 			if(designator.obj.getKind() != Obj.Meth) {
 				report_error("Poziv funkcije se moze vrsiti samo nad funkcijom!",designator);
+				actParsList.clear();
 				return;
 			}
 			
@@ -372,6 +394,16 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			actParsList.clear();
 		}
 		else if(designatorStatement.getOperationsWithDesignator() instanceof IncExpression_) {
+			
+			if(designator.obj == TabWithBool.noObj) {
+				return; //exit if there was a previous error in designator side
+			}
+			
+			if(designator.obj.getType() == TabWithBool.nullType) {
+				report_error("null ne moze da bude designator!", designatorStatement);
+				return;
+			}
+			
 			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
 				report_error("Operator ++ mora da bude izvrsen nad promjenljivom ili clanom niza!", designatorStatement);
 				return;
@@ -384,6 +416,16 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			}
 		}
 		else if(designatorStatement.getOperationsWithDesignator() instanceof DecExpression_) {
+			
+			if(designator.obj == TabWithBool.noObj) {
+				return; //exit if there was a previous error in designator side
+			}
+			
+			if(designator.obj.getType() == TabWithBool.nullType) {
+				report_error("null ne moze da bude designator!", designatorStatement);
+				return;
+			}
+			
 			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
 				report_error("Operator -- mora da bude izvrsen nad promjenljivom ili clanom niza!", designatorStatement);
 				return;
@@ -402,12 +444,14 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		if(designator.obj == TabWithBool.noObj) { //in case of previous error
 			designatorMeth.struct = TabWithBool.noType; 
+			actParsList.clear();
 			return;
 		}
 		
 		if(designator.obj.getKind() != Obj.Meth) {
 			report_error("Pri pozivu funkcije designator mora da bude funkcija!", designatorMeth);
 			designatorMeth.struct = TabWithBool.noType;
+			actParsList.clear();
 			return;
 		}
 		
@@ -520,7 +564,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(MethodDecl method) {
-		//check if main
+		if(currentMethod.getName().equals("main") && currentMethod.getLevel() == 0 && currentMethod.getType() == TabWithBool.noType)
+			mainDeclared = true;
 		TabWithBool.chainLocalSymbols(currentMethod);
 		TabWithBool.closeScope();
 	}
@@ -557,25 +602,36 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(ActPar_ actPar) {
-		/*if(numOfActPars > currentMethod.getLevel()) 
-			return;
-		else if(numOfActPars == currentMethod.getLevel()) {
-			report_error("Broj argumenata pri pozivu funkcije je veci od broja parametara!", actPar);
-		}
-		else {
-			if(method)
-			else if(methodBeingAccesed == currentMethod) { // in case we have a recursive call formal parameters have not yet been added to the locals field of a method, so we take them from the scope
-				
-			}
-			else {
-				
-			}
-		}*/
-		//numOfActPars++;
 		actParsList.add(actPar.getExpr().struct);
 	}
 	
 	public void visit(ActPars_ actPars) {
 		actParsList.add(actPars.getExpr().struct);
+	}
+	
+	public void visit(NoNumConstPrint_ print) {
+		Struct type = print.getExpr().struct;
+		if(type.getKind() != TabWithBool.boolType.getKind() && type.getKind() != TabWithBool.intType.getKind() && type.getKind() != TabWithBool.charType.getKind()) {
+			report_error("Izraz unutar print mora da bude tipa int, char ili bool", print);
+		}
+	}
+	
+	public void visit(NumConstPrint_ print) {
+		Struct type = print.getExpr().struct;
+		if(type.getKind() != TabWithBool.boolType.getKind() && type.getKind() != TabWithBool.intType.getKind() && type.getKind() != TabWithBool.charType.getKind()) {
+			report_error("Izraz unutar print mora da bude tipa int, char ili bool", print);
+		}
+	}
+	
+	public void visit(ReturnVoidStatement_ returnVoid) {
+		if(currentMethod.getType().getKind() != TabWithBool.noType.getKind()) {
+			report_error("Void metod ne smije da vraca izraz", returnVoid.getParent());
+		}
+	}
+	
+	public void visit(ReturnExprStatement_ returnExpr) {
+		if(currentMethod.getType().getKind() != returnExpr.getExpr().struct.getKind()) {
+			report_error("Povratni tip funkcije i tip return izraza se ne poklapaju!", returnExpr);
+		}
 	}
 }
