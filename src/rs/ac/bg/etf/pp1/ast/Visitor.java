@@ -1,19 +1,19 @@
 // generated with ast extension for cup
 // version 0.8
-// 21/5/2021 21:52:24
+// 23/5/2021 1:37:7
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public interface Visitor { 
 
-    public void visit(ReturnStmt ReturnStmt);
     public void visit(Mulop Mulop);
     public void visit(Relop Relop);
     public void visit(ToPrint ToPrint);
     public void visit(ConstIdent ConstIdent);
     public void visit(SwitchBodyWithoutDefault SwitchBodyWithoutDefault);
     public void visit(StatementList StatementList);
+    public void visit(Break Break);
     public void visit(Addop Addop);
     public void visit(MethodVarDecls MethodVarDecls);
     public void visit(OperationsWithDesignator OperationsWithDesignator);
@@ -22,8 +22,8 @@ public interface Visitor {
     public void visit(CondTerm CondTerm);
     public void visit(IsArray IsArray);
     public void visit(Designator Designator);
-    public void visit(ConstIdents ConstIdents);
     public void visit(IsMinus IsMinus);
+    public void visit(ConstIdents ConstIdents);
     public void visit(Term Term);
     public void visit(FormParsList FormParsList);
     public void visit(Condition Condition);
@@ -33,8 +33,10 @@ public interface Visitor {
     public void visit(ExprList ExprList);
     public void visit(IfOrElseStatement IfOrElseStatement);
     public void visit(ReturnStatement ReturnStatement);
+    public void visit(Continue Continue);
     public void visit(Expr Expr);
     public void visit(ActPars ActPars);
+    public void visit(MethodNameAndReturnType MethodNameAndReturnType);
     public void visit(Statement Statement);
     public void visit(CondFact CondFact);
     public void visit(MethodDeclList MethodDeclList);
@@ -95,6 +97,8 @@ public interface Visitor {
     public void visit(ReturnVoidStatement_ ReturnVoidStatement_);
     public void visit(ElseStatement_ ElseStatement_);
     public void visit(IfStatement_ IfStatement_);
+    public void visit(Continue1 Continue1);
+    public void visit(Break1 Break1);
     public void visit(StatementList1 StatementList1);
     public void visit(PrintStatement_ PrintStatement_);
     public void visit(ReadStatement_ ReadStatement_);

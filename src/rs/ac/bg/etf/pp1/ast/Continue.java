@@ -1,11 +1,11 @@
 // generated with ast extension for cup
 // version 0.8
-// 21/5/2021 21:52:24
+// 23/5/2021 1:37:7
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public abstract class ReturnStmt implements SyntaxNode {
+public abstract class Continue implements SyntaxNode {
 
     private SyntaxNode parent;
 

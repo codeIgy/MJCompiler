@@ -1,18 +1,82 @@
 // mojtest
 
 program mojtest
-int a[],b;
-char f;
+int a[],b[];
+char f, c[];
+bool boo;
 {
 	void main()	
+	int g;
 	{
-		a[0]++;
-		a[1]--;
-		a--;
-		b++;
-		f++;
-		d++;
-		a = a[5];
+		if(true){
+			f = 'C';
+		}
+		
+		if(a == null){
+			f = 'C';
+		}
+		
+		if(null == a){
+			f = 'C';
+		}
+		
+		if(a[2] == 3){
+			f = 'C';
+		}
+		
+		if(a == b){
+		
+		}
+		
+		if(a[0] != b[2]){
+		
+		}
+		
+		
+		if(a[2] > 3){
+			f = 'C';
+		}
+		
+		if(f > 'f'){
+			f = 'D';
+			f = 'x';
+			a[3] = a[2];
+		}
+		
+		if(f == null){
+		}
+		
+		if(f < a[3]){
+		}
+		
+		if(a != c){
+		}
+		
+		if(a[1] < c[2]){
+		}
+		
+		if(false > true){
+		}
+		
+		if(false == true && a[2] == c[2] || f == 3 && b > null && b[0] > 3 || true == false && false){
+		}
+		
+		if(a){
+		}
+		
+		do{
+			continue;
+		}while(true);
+		
+		do{
+			break;
+		}while(true);
+		
+		//break;
+		
+		//continue;
+		
+		a[3] = 5;
 		
 		
 	}

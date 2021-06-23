@@ -47,11 +47,11 @@ public class MJParserTest {
 
 			// ispis prepoznatih programskih konstrukcija
 			SemanticAnalyzer v = new SemanticAnalyzer();
-			Tab.init();
+			TabWithBool.init();
 			prog.traverseBottomUp(v); 
 			
 			
-			Tab.dump();
+			TabWithBool.dump();
 		} 
 		finally {
 			if (br != null) try { br.close(); } catch (IOException e1) { log.error(e1.getMessage(), e1); }

@@ -50,8 +50,8 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
-nonterminal MethodDeclList, NonMethodDeclList, NonMethodDecl, MethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
-nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, ReturnStatement, ToPrint, StatementList, ReturnStmt;
+nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, MethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
+nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, ReturnStatement, ToPrint, StatementList, MethodNameAndReturnType;
 nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator;
@@ -99,15 +99,15 @@ MethodDeclList ::= (MethodDeclList_) MethodDeclList MethodDecl
 				| (NoMethods_) /* epsilon */
 				;
 				
-MethodDecl ::= (MethodDecl) ReturnStmt IDENT LPAREN FormParsList RPAREN MethodVarDecls LBRACE StatementList RBRACE;
+MethodDecl ::= (MethodDecl) MethodNameAndReturnType LPAREN FormParsList RPAREN MethodVarDecls LBRACE StatementList RBRACE;
 
 MethodVarDecls ::= (MethodVarDecls_) MethodVarDecls VarDecl
 				| (NoMethodVarDecls_) /* epsilon */
 				;
 
-ReturnStmt ::= (TypeReturn) Type
-			| (Void1) VOID
-			;
+MethodNameAndReturnType ::= (TypeReturn) Type:mType IDENT:mName
+						| (Void1) VOID IDENT:mName
+						;
 
 FormParsList ::= (FormParsList_)  FormPars  
 			| (NoFormParamsList) /* epsilon */
@@ -123,13 +123,17 @@ Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (IfOrElseStatement1) IfOrElseStatement
 			| (DoWhileStatement_) DO Statement WHILE LPAREN Condition RPAREN SEMI
 			| (YieldStatement_) YIELD Expr SEMI
-			| (BreakStatement_) BREAK SEMI
-			| (ContinueStatement_) CONTINUE SEMI
+			| (BreakStatement_) Break SEMI
+			| (ContinueStatement_) Continue SEMI
 			| (ReturnStatement1) ReturnStatement SEMI
 			| (ReadStatement_) READ LPAREN Designator RPAREN SEMI
 			| (PrintStatement_) PRINT LPAREN ToPrint RPAREN SEMI
 			| (StatementList1) LBRACE StatementList RBRACE 
 			; 
+
+Break ::= (Break1) BREAK;
+
+Continue ::= (Continue1) CONTINUE;
 
 IfOrElseStatement ::= (IfStatement_) IF LPAREN Condition RPAREN Statement
 					| (ElseStatement_) IF LPAREN Condition RPAREN Statement ELSE Statement

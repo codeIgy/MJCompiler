@@ -8,6 +8,8 @@
 				<exclude name="util/Log4JUtils.java"/>
 				<exclude name="Yylex.java"/>
 				<exclude name="SemanticAnalyzer.java"/>
+				<exclude name="DumpSymbolTableVisitorBool.java"/>
+				<exclude name="TabWithBool.java"/>
 			</fileset>
 		</delete>
 	</target>

@@ -1,13 +1,24 @@
 // generated with ast extension for cup
 // version 0.8
-// 21/5/2021 21:52:24
+// 23/5/2021 1:37:7
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class Void1 extends ReturnStmt {
+public class Void1 extends MethodNameAndReturnType {
 
-    public Void1 () {
+    private String mName;
+
+    public Void1 (String mName) {
+        this.mName=mName;
+    }
+
+    public String getMName() {
+        return mName;
+    }
+
+    public void setMName(String mName) {
+        this.mName=mName;
     }
 
     public void accept(Visitor visitor) {
@@ -29,6 +40,9 @@ public class Void1 extends ReturnStmt {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("Void1(\n");
+
+        buffer.append(" "+tab+mName);
+        buffer.append("\n");
 
         buffer.append(tab);
         buffer.append(") [Void1]");
