@@ -13,13 +13,22 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	boolean returnFound = false;
 	boolean mainDeclared = false;
 	Struct lastType = null;
-	List<BreakStatement_> breaks = new ArrayList<>();
-	List<ContinueStatement_> continues = new ArrayList<>();
+	List<List<BreakStatement_>> breaks = new ArrayList<>();
+	List<List<ContinueStatement_>> continues = new ArrayList<>();
 	List<Struct> actParsList = new ArrayList<>();
+	Set<Integer> caseConsts = new HashSet<>();
+	List<List<YieldStatement_>> yieldReturnTypes = new ArrayList<>();
+	List<Boolean> inDefault = new ArrayList<>();
+	List<Boolean> yieldFoundInDefault = new ArrayList<>();
 	int numOfFormPars = 0;
 	int nVars;
 	
 	Logger log = Logger.getLogger(getClass());
+	
+	public SemanticAnalyzer() {
+		breaks.add(new ArrayList<BreakStatement_>());
+		continues.add(new ArrayList<ContinueStatement_>());
+	}
 	
 	public void report_error(String message, SyntaxNode info) {
 		errorDetected = true;
@@ -44,14 +53,16 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		nVars = TabWithBool.currentScope.getnVars();
 		TabWithBool.chainLocalSymbols(program.getProgName().obj);
 		TabWithBool.closeScope();
-
-		for(int i = 0; i < breaks.size(); i++) 
-			report_error("\"break\" mora da bude unutar do while petlje!", breaks.get(i));
+		
+		for(List<BreakStatement_> b : breaks)
+			for(int i = 0; i < b.size(); i++) 
+				report_error("\"break\" mora da bude unutar do while petlje!", b.get(i));
 		
 		breaks.clear();
 		
-		for(int i = 0; i < continues.size(); i++) 
-			report_error("\"continue\" mora da bude unutar do while petlje!", continues.get(i));
+		for(List<ContinueStatement_> c : continues)
+			for(int i = 0; i < c.size(); i++) 
+				report_error("\"continue\" mora da bude unutar do while petlje!", c.get(i));
 		
 		continues.clear();
 		
@@ -546,21 +557,21 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(BreakStatement_ breakStatement) {
-		breaks.add(breakStatement);
+		breaks.get(breaks.size() - 1).add(breakStatement);
 	}
 	
 	@Override
 	public void visit(ContinueStatement_ continueStatement) {
-		continues.add(continueStatement);
+		continues.get(continues.size() - 1).add(continueStatement);
 	}
-	
 	public void visit(DoWhileStatement_ doWhileStatement) {
-		continues.clear();
-		breaks.clear();
+		continues.remove(continues.size() - 1);
+		breaks.remove(breaks.size() - 1);
 	}
 	
-	public void visit(SwitchStatement_ switchStatement) {
-		
+	public void visit(DoDummy doDummy) {
+		breaks.add(new ArrayList<BreakStatement_>());
+		continues.add(new ArrayList<ContinueStatement_>());
 	}
 	
 	public void visit(MethodDecl method) {
@@ -625,13 +636,112 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(ReturnVoidStatement_ returnVoid) {
 		if(currentMethod.getType().getKind() != TabWithBool.noType.getKind()) {
-			report_error("Void metod ne smije da vraca izraz", returnVoid.getParent());
+			report_error("Metod mora d avrati izraz!", returnVoid.getParent());
 		}
 	}
 	
 	public void visit(ReturnExprStatement_ returnExpr) {
-		if(currentMethod.getType().getKind() != returnExpr.getExpr().struct.getKind()) {
+		if(currentMethod.getType().getKind() == TabWithBool.noType.getKind()) {
+			report_error("Void metod ne smije da vraca izraz!", returnExpr.getParent());
+		}
+		else if(currentMethod.getType().getKind() != returnExpr.getExpr().struct.getKind()) {
 			report_error("Povratni tip funkcije i tip return izraza se ne poklapaju!", returnExpr);
 		}
+	}
+	
+	public void visit(ReadStatement_ readStatement) {
+		Designator designator = readStatement.getDesignator();
+		
+		if(designator.obj == TabWithBool.noObj) //if there were previous errors 
+			return;
+		
+		if(designator instanceof DesignatorNotArray_) {
+			if(designator.obj.getKind() == Obj.Meth || designator.obj.getType().getKind() != Struct.Bool && designator.obj.getType().getKind() != Struct.Int && designator.obj.getType().getKind() != Struct.Char) {
+				report_error("Designator unutar read iskaza mora da bude tipa int, char ili bool!", readStatement);
+			}
+		}
+		else {
+			Struct type = designator.obj.getType();
+			if(type.getElemType().getKind() != Struct.Bool && type.getElemType().getKind() != Struct.Int && type.getElemType().getKind() != Struct.Char) {
+				report_error("Designator unutar read iskaza mora da bude tipa int, char ili bool!", readStatement);
+			}
+		}
+	}
+	
+	public void visit(SwitchStatement_ switchStatement) {
+		if(switchStatement.getExpr().struct.getKind() != Struct.Int && switchStatement.getExpr().struct.getKind() != Struct.None) {
+			report_error("Izraz unutar zagrada mora da bude tipa int!", switchStatement);
+			switchStatement.struct = TabWithBool.noType;
+		}
+		else switchStatement.struct = switchStatement.getSwitchBody().struct;
+	}
+	
+	public void visit(SwitchBodyWithoutDefault_ switchBody) {
+		Integer numConst = switchBody.getN2(); //get NUMCONST
+		if(caseConsts.contains(numConst))
+			report_error("Konstanta " + numConst + " je vec stavljena u case i ne moze da se ponovi!", switchBody);
+		else
+			caseConsts.add(numConst);
+	}
+	
+	public void visit(NoSwitchBodyWithoutDefault_ switchBody) {
+		caseConsts.clear();//reset the set
+		yieldReturnTypes.add(new ArrayList<YieldStatement_>());
+		inDefault.add(false);
+		yieldFoundInDefault.add(false);
+	}
+	
+	public void visit(YieldStatement_ yield) {
+		if(yieldReturnTypes.size() == 0) {
+			report_error("Yield se moze koristiti samo unutar switch-a!", yield);
+			return;
+		}
+		yieldReturnTypes.get(yieldReturnTypes.size() - 1).add(yield);
+		if(inDefault.get(inDefault.size() - 1)) yieldFoundInDefault.set(yieldFoundInDefault.size() - 1, true);
+	}
+	
+	public void visit(DummyColon col) {
+		inDefault.set(inDefault.size() - 1, true);
+	}
+	
+	public void visit(SwitchBody switchBody) {
+		if(!yieldFoundInDefault.remove(yieldFoundInDefault.size() - 1)) {
+			report_error("Default ne posjeduje yield naredbu!", switchBody);
+			switchBody.struct = TabWithBool.noType;
+		}
+		
+		switchBody.struct = null;
+		
+		inDefault.remove(inDefault.size() - 1);
+		
+		List<YieldStatement_> list = yieldReturnTypes.remove(yieldReturnTypes.size() - 1);
+		Struct previous = list.size() > 0 ? list.get(0).getExpr().struct : null;
+		
+		for(int i = 1; i < list.size(); i++) {
+			YieldStatement_ y = list.get(i);
+			Struct s = list.get(i).getExpr().struct;
+			
+			if(previous.isRefType() != s.isRefType()) {
+				report_error("Sve yield naredbe moraju da vracaju isti tip podatka!", y);
+				switchBody.struct = TabWithBool.noType;
+				break;
+			}
+			else if(s.isRefType()) { //in case they are both arrays or act is null
+				if(s != TabWithBool.nullType && previous != TabWithBool.nullType && previous.getElemType().getKind() != s.getElemType().getKind() ) {
+					report_error("Sve yield naredbe moraju da vracaju isti tip podatka!", y);
+					switchBody.struct = TabWithBool.noType;
+					break;
+				}
+			}
+			else {
+				if(s.getKind() != previous.getKind()) {
+					report_error("Sve yield naredbe moraju da vracaju isti tip podatka!", y);
+					switchBody.struct = TabWithBool.noType;
+					break;
+				}
+			}
+		}
+		
+		if(switchBody.struct == null) switchBody.struct = previous == null ? TabWithBool.noType : previous;
 	}
 }

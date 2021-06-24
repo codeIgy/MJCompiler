@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 23/5/2021 14:7:45
+// 24/5/2021 17:17:6
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -9,14 +9,19 @@ public class SwitchBody implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
-    private SwitchBodyWithoutDefault SwitchBodyWithoutDefault;
-    private StatementListWithYield StatementListWithYield;
+    public rs.etf.pp1.symboltable.concepts.Struct struct = null;
 
-    public SwitchBody (SwitchBodyWithoutDefault SwitchBodyWithoutDefault, StatementListWithYield StatementListWithYield) {
+    private SwitchBodyWithoutDefault SwitchBodyWithoutDefault;
+    private DummyColon DummyColon;
+    private StatementList StatementList;
+
+    public SwitchBody (SwitchBodyWithoutDefault SwitchBodyWithoutDefault, DummyColon DummyColon, StatementList StatementList) {
         this.SwitchBodyWithoutDefault=SwitchBodyWithoutDefault;
         if(SwitchBodyWithoutDefault!=null) SwitchBodyWithoutDefault.setParent(this);
-        this.StatementListWithYield=StatementListWithYield;
-        if(StatementListWithYield!=null) StatementListWithYield.setParent(this);
+        this.DummyColon=DummyColon;
+        if(DummyColon!=null) DummyColon.setParent(this);
+        this.StatementList=StatementList;
+        if(StatementList!=null) StatementList.setParent(this);
     }
 
     public SwitchBodyWithoutDefault getSwitchBodyWithoutDefault() {
@@ -27,12 +32,20 @@ public class SwitchBody implements SyntaxNode {
         this.SwitchBodyWithoutDefault=SwitchBodyWithoutDefault;
     }
 
-    public StatementListWithYield getStatementListWithYield() {
-        return StatementListWithYield;
+    public DummyColon getDummyColon() {
+        return DummyColon;
     }
 
-    public void setStatementListWithYield(StatementListWithYield StatementListWithYield) {
-        this.StatementListWithYield=StatementListWithYield;
+    public void setDummyColon(DummyColon DummyColon) {
+        this.DummyColon=DummyColon;
+    }
+
+    public StatementList getStatementList() {
+        return StatementList;
+    }
+
+    public void setStatementList(StatementList StatementList) {
+        this.StatementList=StatementList;
     }
 
     public SyntaxNode getParent() {
@@ -57,18 +70,21 @@ public class SwitchBody implements SyntaxNode {
 
     public void childrenAccept(Visitor visitor) {
         if(SwitchBodyWithoutDefault!=null) SwitchBodyWithoutDefault.accept(visitor);
-        if(StatementListWithYield!=null) StatementListWithYield.accept(visitor);
+        if(DummyColon!=null) DummyColon.accept(visitor);
+        if(StatementList!=null) StatementList.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(SwitchBodyWithoutDefault!=null) SwitchBodyWithoutDefault.traverseTopDown(visitor);
-        if(StatementListWithYield!=null) StatementListWithYield.traverseTopDown(visitor);
+        if(DummyColon!=null) DummyColon.traverseTopDown(visitor);
+        if(StatementList!=null) StatementList.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(SwitchBodyWithoutDefault!=null) SwitchBodyWithoutDefault.traverseBottomUp(visitor);
-        if(StatementListWithYield!=null) StatementListWithYield.traverseBottomUp(visitor);
+        if(DummyColon!=null) DummyColon.traverseBottomUp(visitor);
+        if(StatementList!=null) StatementList.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -83,8 +99,14 @@ public class SwitchBody implements SyntaxNode {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(StatementListWithYield!=null)
-            buffer.append(StatementListWithYield.toString("  "+tab));
+        if(DummyColon!=null)
+            buffer.append(DummyColon.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        if(StatementList!=null)
+            buffer.append(StatementList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

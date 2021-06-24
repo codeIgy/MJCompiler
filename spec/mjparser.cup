@@ -51,11 +51,11 @@ terminal String BOOLCONST;
 terminal String IDENT;
 
 nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
-nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, SwitchBody, ReturnStatement, ToPrint, StatementList;
-nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield;
+nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
+nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr, SwitchBody;
 
 precedence left ELSE;
 
@@ -121,7 +121,7 @@ FormPar ::= (FormPar) Type IDENT IsArray;
 
 Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (IfOrElseStatement1) IfOrElseStatement
-			| (DoWhileStatement_) DO Statement WHILE LPAREN Condition RPAREN SEMI
+			| (DoWhileStatement_) DoDummy Statement WHILE LPAREN Condition RPAREN SEMI
 			| (YieldStatement_) YIELD Expr SEMI
 			| (BreakStatement_) Break SEMI
 			| (ContinueStatement_) Continue SEMI
@@ -130,6 +130,8 @@ Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (PrintStatement_) PRINT LPAREN ToPrint RPAREN SEMI
 			| (StatementList1) LBRACE StatementList RBRACE 
 			; 
+
+DoDummy ::= (DoDummy) DO;
 
 Break ::= (Break1) BREAK;
 
@@ -182,10 +184,10 @@ CondFact ::= (CondFactExpr_) Expr
 Expr ::= (MinusExpr_) MINUS Term
 			| (PlusExpr_) Term
 			| (ExprList1) Expr Addop Term
-			| (SwitchStatement_) SWITCH LPAREN Expr RPAREN LBRACE SwitchBody RBRACE
+			| (SwitchStatement_) SwitchDummy LPAREN Expr RPAREN LBRACE SwitchBody RBRACE
 			;
 
-
+SwitchDummy ::= (SwitchDummy) SWITCH;
 
 Term ::= (Term_) Term Mulop Factor
 			| (Factor1) Factor
@@ -207,13 +209,13 @@ Designator ::= (DesignatorNotArray_) IDENT
 			
 DesignatorArray ::= (DesignatorArray) IDENT;
 			
-SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault DEFAULT COLON StatementListWithYield;
+SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault DEFAULT DummyColon StatementList;
+
+DummyColon ::= (DummyColon) COLON;
 
 SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault CASE NUMCONST COLON StatementList
 							| (NoSwitchBodyWithoutDefault_) /* epsilon */
 							;
-							
-StatementListWithYield ::= (StatementListWithYield) StatementList YIELD Expr SEMI;
 
 Assignop ::= (Assignop) ASSIGN;
 

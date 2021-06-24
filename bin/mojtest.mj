@@ -5,19 +5,51 @@ int a[],b[];
 char f, c[];
 bool boo;
 {
-	int fja(int g, bool b, char f [])
+	int meth(int g)
 	int l; int t;
 	{
-			fja(a, jabuka, null);
+			
 	}
 	
 	void main()	
 	int g;
 	{		
-		fja(a[0], true, c);
-		b[0] = fjag(a, dasd, a, a);
-		fja(fja(fja(a[0], true, c), true, c), fja(a[0], true, c), c);
-		fja(a[0], boo, c);
+	
+		g = switch(g){
+			case 0: g++;
+			case 1: yield g;
+			default: g= 3;
+					a[0] = 5;
+					yield switch(a[0]){
+						case 1:
+						case 100: yield 3;
+						default: yield 3;
+					};
+		};
+		
+		g = switch(g){
+			case 0: g++;
+			case 1: yield g;
+			default: g= 3;
+					a[0] = 5;
+					yield switch(a[0]){
+						case 1:
+						case 100: yield 3;
+						default: yield switch(a[0]){
+							case 1:
+							case 100: yield 3;
+							default: yield 3;
+						};
+					};
+		};
+		
+		
+		a[0] = 5;
+		
+		
+		
+		
+		a[0] = 20;
 	}
 }
 

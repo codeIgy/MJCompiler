@@ -72,10 +72,11 @@ nonterminal DesignatorStatement DesignatorStatement;
 nonterminal DesignatorArray DesignatorArray;
 nonterminal IfOrElseStatement IfOrElseStatement;
 nonterminal Condition Condition;
-nonterminal SwitchBody SwitchBody;
 nonterminal ReturnStatement ReturnStatement;
 nonterminal ToPrint ToPrint;
 nonterminal StatementList StatementList;
+nonterminal DoDummy DoDummy;
+nonterminal SwitchDummy SwitchDummy;
 nonterminal OperationsWithDesignator OperationsWithDesignator;
 nonterminal Assignop Assignop;
 nonterminal ActParsList ActParsList;
@@ -88,9 +89,10 @@ nonterminal ExprList ExprList;
 nonterminal Mulop Mulop;
 nonterminal SwitchBodyWithoutDefault SwitchBodyWithoutDefault;
 nonterminal StatementListWithYield StatementListWithYield;
+nonterminal DummyColon DummyColon;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr, SwitchBody;
 
 precedence left ELSE;
 
@@ -156,7 +158,7 @@ FormPar ::= (FormPar) Type:T1 IDENT:I2 IsArray:I3 {: RESULT=new FormPar(T1, I2, 
 
 Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new DesignatorStatement1(D1); RESULT.setLine(D1left); :}
 			| (IfOrElseStatement1) IfOrElseStatement:I1 {: RESULT=new IfOrElseStatement1(I1); RESULT.setLine(I1left); :}
-			| (DoWhileStatement_) DO Statement:S1 WHILE LPAREN Condition:C2 RPAREN SEMI {: RESULT=new DoWhileStatement_(S1, C2); RESULT.setLine(S1left); :}
+			| (DoWhileStatement_) DoDummy:D1 Statement:S2 WHILE LPAREN Condition:C3 RPAREN SEMI {: RESULT=new DoWhileStatement_(D1, S2, C3); RESULT.setLine(D1left); :}
 			| (YieldStatement_) YIELD Expr:E1 SEMI {: RESULT=new YieldStatement_(E1); RESULT.setLine(E1left); :}
 			| (BreakStatement_) Break:B1 SEMI {: RESULT=new BreakStatement_(B1); RESULT.setLine(B1left); :}
 			| (ContinueStatement_) Continue:C1 SEMI {: RESULT=new ContinueStatement_(C1); RESULT.setLine(C1left); :}
@@ -165,6 +167,8 @@ Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new D
 			| (PrintStatement_) PRINT LPAREN ToPrint:T1 RPAREN SEMI {: RESULT=new PrintStatement_(T1); RESULT.setLine(T1left); :}
 			| (StatementList1) LBRACE StatementList:S1 RBRACE {: RESULT=new StatementList1(S1); RESULT.setLine(S1left); :} 
 			; 
+
+DoDummy ::= (DoDummy) DO {: RESULT=new DoDummy(); :};
 
 Break ::= (Break1) BREAK {: RESULT=new Break1(); :};
 
@@ -217,10 +221,10 @@ CondFact ::= (CondFactExpr_) Expr:E1 {: RESULT=new CondFactExpr_(E1); RESULT.set
 Expr ::= (MinusExpr_) MINUS Term:T1 {: RESULT=new MinusExpr_(T1); RESULT.setLine(T1left); :}
 			| (PlusExpr_) Term:T1 {: RESULT=new PlusExpr_(T1); RESULT.setLine(T1left); :}
 			| (ExprList1) Expr:E1 Addop:A2 Term:T3 {: RESULT=new ExprList1(E1, A2, T3); RESULT.setLine(E1left); :}
-			| (SwitchStatement_) SWITCH LPAREN Expr:E1 RPAREN LBRACE SwitchBody:S2 RBRACE {: RESULT=new SwitchStatement_(E1, S2); RESULT.setLine(E1left); :}
+			| (SwitchStatement_) SwitchDummy:S1 LPAREN Expr:E2 RPAREN LBRACE SwitchBody:S3 RBRACE {: RESULT=new SwitchStatement_(S1, E2, S3); RESULT.setLine(S1left); :}
 			;
 
-
+SwitchDummy ::= (SwitchDummy) SWITCH {: RESULT=new SwitchDummy(); :};
 
 Term ::= (Term_) Term:T1 Mulop:M2 Factor:F3 {: RESULT=new Term_(T1, M2, F3); RESULT.setLine(T1left); :}
 			| (Factor1) Factor:F1 {: RESULT=new Factor1(F1); RESULT.setLine(F1left); :}
@@ -242,13 +246,13 @@ Designator ::= (DesignatorNotArray_) IDENT:I1 {: RESULT=new DesignatorNotArray_(
 			
 DesignatorArray ::= (DesignatorArray) IDENT:I1 {: RESULT=new DesignatorArray(I1); RESULT.setLine(I1left); :};
 			
-SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault:S1 DEFAULT COLON StatementListWithYield:S2 {: RESULT=new SwitchBody(S1, S2); RESULT.setLine(S1left); :};
+SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault:S1 DEFAULT DummyColon:D2 StatementList:S3 {: RESULT=new SwitchBody(S1, D2, S3); RESULT.setLine(S1left); :};
+
+DummyColon ::= (DummyColon) COLON {: RESULT=new DummyColon(); :};
 
 SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault:S1 CASE NUMCONST:N2 COLON StatementList:S3 {: RESULT=new SwitchBodyWithoutDefault_(S1, N2, S3); RESULT.setLine(S1left); :}
 							| (NoSwitchBodyWithoutDefault_) {: RESULT=new NoSwitchBodyWithoutDefault_(); :} /* epsilon */
 							;
-							
-StatementListWithYield ::= (StatementListWithYield) StatementList:S1 YIELD Expr:E2 SEMI {: RESULT=new StatementListWithYield(S1, E2); RESULT.setLine(S1left); :};
 
 Assignop ::= (Assignop) ASSIGN {: RESULT=new Assignop(); :};
 

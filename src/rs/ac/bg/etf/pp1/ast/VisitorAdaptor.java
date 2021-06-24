@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 23/5/2021 14:7:45
+// 24/5/2021 17:17:7
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -22,8 +22,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(CondTerm CondTerm) { }
     public void visit(IsArray IsArray) { }
     public void visit(Designator Designator) { }
-    public void visit(ConstIdents ConstIdents) { }
     public void visit(IsMinus IsMinus) { }
+    public void visit(ConstIdents ConstIdents) { }
     public void visit(Term Term) { }
     public void visit(FormParsList FormParsList) { }
     public void visit(Condition Condition) { }
@@ -32,6 +32,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(NonMethodDecl NonMethodDecl) { }
     public void visit(ExprList ExprList) { }
     public void visit(IfOrElseStatement IfOrElseStatement) { }
+    public void visit(StatementListWithYield StatementListWithYield) { }
     public void visit(ReturnStatement ReturnStatement) { }
     public void visit(Continue Continue) { }
     public void visit(Expr Expr) { }
@@ -53,9 +54,9 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Difop1 Difop1) { visit(); }
     public void visit(Eqop1 Eqop1) { visit(); }
     public void visit(Assignop Assignop) { visit(); }
-    public void visit(StatementListWithYield StatementListWithYield) { visit(); }
     public void visit(NoSwitchBodyWithoutDefault_ NoSwitchBodyWithoutDefault_) { visit(); }
     public void visit(SwitchBodyWithoutDefault_ SwitchBodyWithoutDefault_) { visit(); }
+    public void visit(DummyColon DummyColon) { visit(); }
     public void visit(SwitchBody SwitchBody) { visit(); }
     public void visit(DesignatorArray DesignatorArray) { visit(); }
     public void visit(DesignatorArray1 DesignatorArray1) { visit(); }
@@ -70,6 +71,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Designator1 Designator1) { visit(); }
     public void visit(Factor1 Factor1) { visit(); }
     public void visit(Term_ Term_) { visit(); }
+    public void visit(SwitchDummy SwitchDummy) { visit(); }
     public void visit(SwitchStatement_ SwitchStatement_) { visit(); }
     public void visit(ExprList1 ExprList1) { visit(); }
     public void visit(PlusExpr_ PlusExpr_) { visit(); }
@@ -99,6 +101,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(IfStatement_ IfStatement_) { visit(); }
     public void visit(Continue1 Continue1) { visit(); }
     public void visit(Break1 Break1) { visit(); }
+    public void visit(DoDummy DoDummy) { visit(); }
     public void visit(StatementList1 StatementList1) { visit(); }
     public void visit(PrintStatement_ PrintStatement_) { visit(); }
     public void visit(ReadStatement_ ReadStatement_) { visit(); }

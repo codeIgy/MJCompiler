@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 23/5/2021 14:7:45
+// 24/5/2021 17:17:7
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -22,8 +22,8 @@ public interface Visitor {
     public void visit(CondTerm CondTerm);
     public void visit(IsArray IsArray);
     public void visit(Designator Designator);
-    public void visit(ConstIdents ConstIdents);
     public void visit(IsMinus IsMinus);
+    public void visit(ConstIdents ConstIdents);
     public void visit(Term Term);
     public void visit(FormParsList FormParsList);
     public void visit(Condition Condition);
@@ -32,6 +32,7 @@ public interface Visitor {
     public void visit(NonMethodDecl NonMethodDecl);
     public void visit(ExprList ExprList);
     public void visit(IfOrElseStatement IfOrElseStatement);
+    public void visit(StatementListWithYield StatementListWithYield);
     public void visit(ReturnStatement ReturnStatement);
     public void visit(Continue Continue);
     public void visit(Expr Expr);
@@ -53,9 +54,9 @@ public interface Visitor {
     public void visit(Difop1 Difop1);
     public void visit(Eqop1 Eqop1);
     public void visit(Assignop Assignop);
-    public void visit(StatementListWithYield StatementListWithYield);
     public void visit(NoSwitchBodyWithoutDefault_ NoSwitchBodyWithoutDefault_);
     public void visit(SwitchBodyWithoutDefault_ SwitchBodyWithoutDefault_);
+    public void visit(DummyColon DummyColon);
     public void visit(SwitchBody SwitchBody);
     public void visit(DesignatorArray DesignatorArray);
     public void visit(DesignatorArray1 DesignatorArray1);
@@ -70,6 +71,7 @@ public interface Visitor {
     public void visit(Designator1 Designator1);
     public void visit(Factor1 Factor1);
     public void visit(Term_ Term_);
+    public void visit(SwitchDummy SwitchDummy);
     public void visit(SwitchStatement_ SwitchStatement_);
     public void visit(ExprList1 ExprList1);
     public void visit(PlusExpr_ PlusExpr_);
@@ -99,6 +101,7 @@ public interface Visitor {
     public void visit(IfStatement_ IfStatement_);
     public void visit(Continue1 Continue1);
     public void visit(Break1 Break1);
+    public void visit(DoDummy DoDummy);
     public void visit(StatementList1 StatementList1);
     public void visit(PrintStatement_ PrintStatement_);
     public void visit(ReadStatement_ ReadStatement_);
