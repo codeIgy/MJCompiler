@@ -5,9 +5,27 @@
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class NoFormParamsList extends FormParsList {
+public class DummyRparen implements SyntaxNode {
 
-    public NoFormParamsList () {
+    private SyntaxNode parent;
+    private int line;
+    public DummyRparen () {
+    }
+
+    public SyntaxNode getParent() {
+        return parent;
+    }
+
+    public void setParent(SyntaxNode parent) {
+        this.parent=parent;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line=line;
     }
 
     public void accept(Visitor visitor) {
@@ -28,10 +46,10 @@ public class NoFormParamsList extends FormParsList {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("NoFormParamsList(\n");
+        buffer.append("DummyRparen(\n");
 
         buffer.append(tab);
-        buffer.append(") [NoFormParamsList]");
+        buffer.append(") [DummyRparen]");
         return buffer.toString();
     }
 }

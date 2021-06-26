@@ -1,55 +1,17 @@
 // mojtest
 
 program mojtest
+const bool boolconst = true;
+const char charconst1 = 'a', charconst2 = 'b';
+const int integerino = 5;
 int a[],b[];
 char f, c[];
 bool boo;
 {
-	int meth(int g)
-	int l; int t;
-	{
-			
-	}
-	
 	void main()	
 	int g;
-	{		
-	
-		g = switch(g){
-			case 0: g++;
-			case 1: yield g;
-			default: g= 3;
-					a[0] = 5;
-					yield switch(a[0]){
-						case 1:
-						case 100: yield 3;
-						default: yield 3;
-					};
-		};
-		
-		g = switch(g){
-			case 0: g++;
-			case 1: yield g;
-			default: g= 3;
-					a[0] = 5;
-					yield switch(a[0]){
-						case 1:
-						case 100: yield 3;
-						default: yield switch(a[0]){
-							case 1:
-							case 100: yield 3;
-							default: yield 3;
-						};
-					};
-		};
-		
-		
-		a[0] = 5;
-		
-		
-		
-		
-		a[0] = 20;
+	{	
+		g++;
 	}
 }
 

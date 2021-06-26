@@ -64,6 +64,8 @@ nonterminal VarIdents VarIdents;
 nonterminal VarIdent VarIdent;
 nonterminal Addop Addop;
 nonterminal MethodVarDecls MethodVarDecls;
+nonterminal DummyLparen DummyLparen;
+nonterminal DummyRparen DummyRparen;
 nonterminal FormPars FormPars;
 nonterminal FormPar FormPar;
 nonterminal Statement Statement;
@@ -193,10 +195,13 @@ StatementList ::= (StatementList_) StatementList:S1 Statement:S2 {: RESULT=new S
 DesignatorStatement ::= (DesignatorStatement) Designator:D1 OperationsWithDesignator:O2 {: RESULT=new DesignatorStatement(D1, O2); RESULT.setLine(D1left); :};
 
 OperationsWithDesignator ::= (AssignExpression_) Assignop:A1 Expr:E2 {: RESULT=new AssignExpression_(A1, E2); RESULT.setLine(A1left); :}
-							| (ActParsListExpression_) LPAREN ActParsList:A1 RPAREN {: RESULT=new ActParsListExpression_(A1); RESULT.setLine(A1left); :} 
+							| (ActParsListExpression_) DummyLparen:D1 ActParsList:A2 DummyRparen:D3 {: RESULT=new ActParsListExpression_(D1, A2, D3); RESULT.setLine(D1left); :} 
 							| (IncExpression_) INC {: RESULT=new IncExpression_(); :}
 							| (DecExpression_) DEC {: RESULT=new DecExpression_(); :}
 							; 
+							
+DummyLparen ::= (DummyLparen) LPAREN {: RESULT=new DummyLparen(); :};
+DummyRparen ::= (DummyRparen) RPAREN {: RESULT=new DummyRparen(); :};							
 
 ActParsList ::= (ActParsList_) ActPars:A1 {: RESULT=new ActParsList_(A1); RESULT.setLine(A1left); :}
 			| (NoActParsList_) {: RESULT=new NoActParsList_(); :} /* epsilon */
@@ -231,7 +236,7 @@ Term ::= (Term_) Term:T1 Mulop:M2 Factor:F3 {: RESULT=new Term_(T1, M2, F3); RES
 			;
 			
 Factor ::=  (Designator1) Designator:dName {: RESULT=new Designator1(dName); RESULT.setLine(dNameleft); :}
-			| (Designator2) Designator:dName LPAREN ActParsList:A1 RPAREN {: RESULT=new Designator2(dName, A1); RESULT.setLine(dNameleft); :}
+			| (Designator2) Designator:dName DummyLparen:D1 ActParsList:A2 DummyRparen:D3 {: RESULT=new Designator2(dName, D1, A2, D3); RESULT.setLine(dNameleft); :}
 			| (NumConst2) NUMCONST:cValue {: RESULT=new NumConst2(cValue); RESULT.setLine(cValueleft); :}
 			| (CharConst2) CHARCONST:cValue {: RESULT=new CharConst2(cValue); RESULT.setLine(cValueleft); :}
 			| (BoolConst2) BOOLCONST:cValue {: RESULT=new BoolConst2(cValue); RESULT.setLine(cValueleft); :}

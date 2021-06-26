@@ -50,7 +50,7 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
-nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls;
+nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
 nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
 nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon;
 
@@ -156,10 +156,13 @@ StatementList ::= (StatementList_) StatementList Statement
 DesignatorStatement ::= (DesignatorStatement) Designator OperationsWithDesignator;
 
 OperationsWithDesignator ::= (AssignExpression_) Assignop Expr
-							| (ActParsListExpression_) LPAREN ActParsList RPAREN 
+							| (ActParsListExpression_) DummyLparen ActParsList DummyRparen 
 							| (IncExpression_) INC
 							| (DecExpression_) DEC
 							; 
+							
+DummyLparen ::= (DummyLparen) LPAREN;
+DummyRparen ::= (DummyRparen) RPAREN;							
 
 ActParsList ::= (ActParsList_) ActPars
 			| (NoActParsList_) /* epsilon */
@@ -194,7 +197,7 @@ Term ::= (Term_) Term Mulop Factor
 			;
 			
 Factor ::=  (Designator1) Designator:dName
-			| (Designator2) Designator:dName LPAREN ActParsList RPAREN
+			| (Designator2) Designator:dName DummyLparen ActParsList DummyRparen
 			| (NumConst2) NUMCONST:cValue
 			| (CharConst2) CHARCONST:cValue
 			| (BoolConst2) BOOLCONST:cValue

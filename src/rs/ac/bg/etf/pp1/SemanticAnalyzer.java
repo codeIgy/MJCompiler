@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.etf.pp1.symboltable.concepts.*;
 
+//TO DO: napraviti Struct voidType kako bi prijavilo gresku u slucaju meth(main());
+
 public class SemanticAnalyzer extends VisitorAdaptor {
 	boolean errorDetected = false;
 	Obj currentMethod = null;
@@ -15,8 +17,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	Struct lastType = null;
 	List<List<BreakStatement_>> breaks = new ArrayList<>();
 	List<List<ContinueStatement_>> continues = new ArrayList<>();
-	List<Struct> actParsList = new ArrayList<>();
-	Set<Integer> caseConsts = new HashSet<>();
+	List<List<Struct>> actParsList = new ArrayList<>();
+	List<Set<Integer>> caseConsts = new ArrayList<>();
 	List<List<YieldStatement_>> yieldReturnTypes = new ArrayList<>();
 	List<Boolean> inDefault = new ArrayList<>();
 	List<Boolean> yieldFoundInDefault = new ArrayList<>();
@@ -41,10 +43,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void report_info(String message, SyntaxNode info) {
-		StringBuilder msg = new StringBuilder(message); 
+		StringBuilder msg = new StringBuilder("Info"); 
 		int line = (info == null) ? 0: info.getLine();
 		if (line != 0)
 			msg.append (" na liniji ").append(line);
+		msg.append(": ").append(message);
 		log.info(msg.toString());
 	}
 	
@@ -104,7 +107,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		Obj ident = TabWithBool.find(numconst.getVName());
 		if(ident == TabWithBool.noObj) {
-			TabWithBool.insert(Obj.Con, numconst.getVName(), lastType);
+			report_info("Deklaracija " + numconst.getVName(), numconst);
+			Obj obj = TabWithBool.insert(Obj.Con, numconst.getVName(), lastType);
+			obj.setAdr(numconst.getVValue());
 		}
 		else {
 			report_error("Simbol \"" + ident.getName() + "\" je vec deklarisan!", numconst);
@@ -117,7 +122,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		Obj ident = TabWithBool.find(charconst.getVName());
 		if(ident == TabWithBool.noObj) {
-			TabWithBool.insert(Obj.Con, charconst.getVName(), lastType);
+			report_info("Deklaracija " + charconst.getVName(), charconst);
+			Obj obj = TabWithBool.insert(Obj.Con, charconst.getVName(), lastType);
+			obj.setAdr(charconst.getVValue());
 		}
 		else {
 			report_error("Simbol \"" + ident.getName() + "\" je vec deklarisan!", charconst);
@@ -130,7 +137,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		Obj ident = TabWithBool.find(boolconst.getVName());
 		if(ident == TabWithBool.noObj) {
-			TabWithBool.insert(Obj.Con, boolconst.getVName(), lastType);
+			report_info("Deklaracija " +  boolconst.getVName(), boolconst);
+			Obj obj = TabWithBool.insert(Obj.Con, boolconst.getVName(), lastType);
+			obj.setAdr(boolconst.getVValue().equals("true") ? 1 : 0);
 		}
 		else {
 			report_error("Simbol \"" + ident.getName() + "\" je vec deklarisan!", boolconst);
@@ -144,6 +153,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		else {
 			if(varIdent.getIsArray() instanceof IsArray_) {
+				report_info("Deklaracija " + varIdent.getI1(), varIdent);
 				TabWithBool.insert(Obj.Var, varIdent.getI1(), new Struct(Struct.Array, lastType));
 			}
 			else {
@@ -159,7 +169,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			designator.obj = TabWithBool.noObj;
 		}
 		else {
-			//rep_info}
+			report_info("Upotreba " + ident.getName(), designator);
 			designator.obj = ident;
 		}
 	}
@@ -182,7 +192,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			designatorArr.obj = TabWithBool.noObj;
 		}
 		else {
-			//rep_info
+			report_info("Upotreba " + designatorArr.obj.getName(), designatorArr);
 		}
 	}
 	
@@ -205,8 +215,10 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			designator1.struct = TabWithBool.noType;
 		}
 		else if (designator1.getDesignator() instanceof DesignatorArray1) {
-			if(designator1.getDesignator().obj != TabWithBool.noObj)
+			if(designator1.getDesignator().obj != TabWithBool.noObj) {
 				designator1.struct = ident.getType().getElemType(); //access to an element of an array, so the type is not array but the type of an array element
+				report_info("Upotreba " + ident.getName(), designator1);
+			}
 			else
 				designator1.struct = TabWithBool.noType; //in case of an error
 		}
@@ -283,8 +295,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 	}
 	
-	public void visit(ActParsListExpression_ actParsListExpression) {
-		
+	public void visit(DummyLparen DummyLparen) {
+		actParsList.add(new ArrayList<>());
 	}
 	
 	public void visit(DesignatorStatement designatorStatement) {
@@ -346,19 +358,19 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		else if(designatorStatement.getOperationsWithDesignator() instanceof ActParsListExpression_) {
 			
 			if(designator.obj == TabWithBool.noObj) {
-				actParsList.clear();
+				actParsList.remove(actParsList.size() - 1);
 				return; //exit if there was a previous error in designator side
 			}
 			
 			if(designator.obj.getType() == TabWithBool.nullType) {
-				actParsList.clear();
+				actParsList.remove(actParsList.size() - 1);
 				report_error("null ne moze da bude designator!", designatorStatement);
 				return;
 			}
 			
 			if(designator.obj.getKind() != Obj.Meth) {
 				report_error("Poziv funkcije se moze vrsiti samo nad funkcijom!",designator);
-				actParsList.clear();
+				actParsList.remove(actParsList.size() - 1);
 				return;
 			}
 			
@@ -374,16 +386,18 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			
 			Iterator<Obj> formParsIterator= col.iterator();
 			
-			if(methodBeingAccesed.getLevel() < actParsList.size()) {
+			List<Struct> actPars = actParsList.remove(actParsList.size() - 1);
+			
+			if(methodBeingAccesed.getLevel() < actPars.size()) {
 				report_error("Previse argumenata pri pozivu funkcije!", designatorStatement);
 			}
-			else if (methodBeingAccesed.getLevel() > actParsList.size()){
+			else if (methodBeingAccesed.getLevel() > actPars.size()){
 				report_error("Premalo argumenata pri pozivu funkcije!", designatorStatement);
 			}
 			else{
 				for(int i = methodBeingAccesed.getLevel() - 1; i >= 0; i--) {
 					Struct formal = formParsIterator.next().getType();
-					Struct actual = actParsList.get(i);
+					Struct actual = actPars.get(i);
 					if(formal == TabWithBool.noType || actual == TabWithBool.noType) continue; //there was an error with formal type
 					
 					if(formal.isRefType() != actual.isRefType()) {
@@ -401,8 +415,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 					}
 				}
 			}
-			
-			actParsList.clear();
 		}
 		else if(designatorStatement.getOperationsWithDesignator() instanceof IncExpression_) {
 			
@@ -455,14 +467,14 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		if(designator.obj == TabWithBool.noObj) { //in case of previous error
 			designatorMeth.struct = TabWithBool.noType; 
-			actParsList.clear();
+			actParsList.remove(actParsList.size() - 1);
 			return;
 		}
 		
 		if(designator.obj.getKind() != Obj.Meth) {
 			report_error("Pri pozivu funkcije designator mora da bude funkcija!", designatorMeth);
 			designatorMeth.struct = TabWithBool.noType;
-			actParsList.clear();
+			actParsList.remove(actParsList.size() - 1);
 			return;
 		}
 		
@@ -478,19 +490,20 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		Iterator<Obj> formParsIterator= col.iterator();
+		List<Struct> actPars = actParsList.remove(actParsList.size() - 1);
 		
-		if(methodBeingAccesed.getLevel() < actParsList.size()) {
+		if(methodBeingAccesed.getLevel() < actPars.size()) {
 			report_error("Previse argumenata pri pozivu funkcije!", designatorMeth);
 			errorOccurred = true;
 		}
-		else if (methodBeingAccesed.getLevel() > actParsList.size()){
+		else if (methodBeingAccesed.getLevel() > actPars.size()){
 			report_error("Premalo argumenata pri pozivu funkcije!", designatorMeth);
 			errorOccurred = true;
 		}
 		else{
 			for(int i = methodBeingAccesed.getLevel() - 1; i >= 0; i--) {
 				Struct formal = formParsIterator.next().getType();
-				Struct actual = actParsList.get(i);
+				Struct actual = actPars.get(i);
 				if(formal == TabWithBool.noType || actual == TabWithBool.noType) continue; //there was an error with formal type
 				
 				if(formal.isRefType() != actual.isRefType()) {
@@ -511,8 +524,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				}
 			}
 		}
-		
-		actParsList.clear();
 		
 		designatorMeth.struct = errorOccurred ? TabWithBool.noType : designator.obj.getType();
 		//rep_info
@@ -583,6 +594,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(TypeReturn methNameAndReturnType) {
 		methNameAndReturnType.obj = currentMethod = TabWithBool.insert(Obj.Meth, methNameAndReturnType.getMName(), methNameAndReturnType.getType().struct);
+		numOfFormPars = 0;
 		TabWithBool.openScope();
 	}
 	
@@ -613,11 +625,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(ActPar_ actPar) {
-		actParsList.add(actPar.getExpr().struct);
+		actParsList.get(actParsList.size() - 1).add(actPar.getExpr().struct);
 	}
 	
 	public void visit(ActPars_ actPars) {
-		actParsList.add(actPars.getExpr().struct);
+		actParsList.get(actParsList.size() - 1).add(actPars.getExpr().struct);
 	}
 	
 	public void visit(NoNumConstPrint_ print) {
@@ -678,14 +690,14 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(SwitchBodyWithoutDefault_ switchBody) {
 		Integer numConst = switchBody.getN2(); //get NUMCONST
-		if(caseConsts.contains(numConst))
+		if(caseConsts.get(caseConsts.size() - 1).contains(numConst))
 			report_error("Konstanta " + numConst + " je vec stavljena u case i ne moze da se ponovi!", switchBody);
 		else
-			caseConsts.add(numConst);
+			caseConsts.get(caseConsts.size() - 1).add(numConst);
 	}
 	
 	public void visit(NoSwitchBodyWithoutDefault_ switchBody) {
-		caseConsts.clear();//reset the set
+		caseConsts.add(new HashSet<>());//reset the set
 		yieldReturnTypes.add(new ArrayList<YieldStatement_>());
 		inDefault.add(false);
 		yieldFoundInDefault.add(false);
@@ -713,6 +725,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		switchBody.struct = null;
 		
 		inDefault.remove(inDefault.size() - 1);
+		caseConsts.remove(caseConsts.size() - 1);
 		
 		List<YieldStatement_> list = yieldReturnTypes.remove(yieldReturnTypes.size() - 1);
 		Struct previous = list.size() > 0 ? list.get(0).getExpr().struct : null;
