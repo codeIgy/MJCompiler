@@ -51,6 +51,10 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		log.info(msg.toString());
 	}
 	
+	public boolean passed() {
+		return !errorDetected;
+	}
+	
 	@Override
 	public void visit(Program program) {
 		nVars = TabWithBool.currentScope.getnVars();
@@ -192,6 +196,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			designatorArr.obj = TabWithBool.noObj;
 		}
 		else {
+			designatorArr.obj = new Obj(Obj.Elem, "", designatorArr.obj.getType().getElemType());
 			report_info("Upotreba " + designatorArr.obj.getName(), designatorArr);
 		}
 	}
@@ -210,19 +215,14 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(Designator1 designator1) {
 		Obj ident = designator1.getDesignator().obj;
-		if(ident.getKind() != Obj.Var && ident != TabWithBool.find("null")) {
+		if(ident.getKind() != Obj.Var && ident.getKind() != Obj.Elem && ident != TabWithBool.find("null")) {
 			report_error("Simbol \"" + ident.getName() + "\" nije varijabla!", designator1);
 			designator1.struct = TabWithBool.noType;
 		}
-		else if (designator1.getDesignator() instanceof DesignatorArray1) {
-			if(designator1.getDesignator().obj != TabWithBool.noObj) {
-				designator1.struct = ident.getType().getElemType(); //access to an element of an array, so the type is not array but the type of an array element
-				report_info("Upotreba " + ident.getName(), designator1);
-			}
-			else
-				designator1.struct = TabWithBool.noType; //in case of an error
+		else {
+			designator1.struct = ident.getType();
+			//report_info("Upotreba " + ident.getName(), designator1);
 		}
-		else designator1.struct = ident.getType();
 	}
 	
 	public void visit(NumConst2 numconst2) {
@@ -303,9 +303,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Designator designator = designatorStatement.getDesignator();
 		OperationsWithDesignator operationsWithDesig = designatorStatement.getOperationsWithDesignator();
 		
-		
-		
-		
 		if(operationsWithDesig instanceof AssignExpression_) {
 			
 			if(designator.obj == TabWithBool.noObj) {
@@ -321,8 +318,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			
 			if(assignExpr.getExpr().struct == TabWithBool.noType) return; //exit in case there was a previous error in expression side
 			
-			if(designator.obj.getKind() != Obj.Var) {
-				report_error("Sa lijeve strane znaka jedankosti mora biti promjenljiva!", designatorStatement);
+			if(designator.obj.getKind() != Obj.Var && designator.obj.getKind() != Obj.Elem) {
+				report_error("Sa lijeve strane znaka jedankosti mora biti promjenljiva ili element niza!", designatorStatement);
 				return;
 			}
 			
@@ -349,7 +346,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				}
 			}
 			else {
-				Struct desigElemType = designator.obj.getType().getElemType();
+				Struct desigElemType = designator.obj.getType();
 				if(desigElemType.getKind() != assignExpr.getExpr().struct.getKind()) {
 					report_error("Tipovi su nekompatiblni!", designatorStatement);
 				}
@@ -427,7 +424,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				return;
 			}
 			
-			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
+			if(designator.obj.getKind() != Obj.Var && designator.obj.getKind() != Obj.Elem || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
 				report_error("Operator ++ mora da bude izvrsen nad promjenljivom ili clanom niza!", designatorStatement);
 				return;
 			}
@@ -449,7 +446,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				return;
 			}
 			
-			if(designator.obj.getKind() != Obj.Var || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
+			if(designator.obj.getKind() != Obj.Var && designator.obj.getKind() != Obj.Elem || (designator.obj.getType().getKind() == Struct.Array && designator instanceof DesignatorNotArray_)) {//in case designator is a method or designator is an array, not an array element
 				report_error("Operator -- mora da bude izvrsen nad promjenljivom ili clanom niza!", designatorStatement);
 				return;
 			}
@@ -526,7 +523,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		designatorMeth.struct = errorOccurred ? TabWithBool.noType : designator.obj.getType();
-		//rep_info
+		//report_info("Pozvana funkcija" + methodBeingAccesed.getName(), designatorMeth);
 		
 	}
 	
@@ -668,13 +665,13 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			return;
 		
 		if(designator instanceof DesignatorNotArray_) {
-			if(designator.obj.getKind() == Obj.Meth || designator.obj.getType().getKind() != Struct.Bool && designator.obj.getType().getKind() != Struct.Int && designator.obj.getType().getKind() != Struct.Char) {
+			if(designator.obj.getKind() != Obj.Var && designator.obj.getKind() != Obj.Elem || designator.obj.getType().getKind() != Struct.Bool && designator.obj.getType().getKind() != Struct.Int && designator.obj.getType().getKind() != Struct.Char) {
 				report_error("Designator unutar read iskaza mora da bude tipa int, char ili bool!", readStatement);
 			}
 		}
 		else {
 			Struct type = designator.obj.getType();
-			if(type.getElemType().getKind() != Struct.Bool && type.getElemType().getKind() != Struct.Int && type.getElemType().getKind() != Struct.Char) {
+			if(type.getKind() != Struct.Bool && type.getKind() != Struct.Int && type.getKind() != Struct.Char) {
 				report_error("Designator unutar read iskaza mora da bude tipa int, char ili bool!", readStatement);
 			}
 		}

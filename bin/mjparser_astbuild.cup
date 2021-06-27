@@ -8,6 +8,8 @@ import rs.ac.bg.etf.pp1.ast.*;
 
 parser code {:
 
+	
+	boolean errorDetected = false;
 	Logger log = Logger.getLogger(getClass());
    
    
@@ -27,12 +29,17 @@ parser code {:
     }
 
     public void report_error(String message, Object info) {
+    	errorDetected = true;
     	StringBuilder msg = new StringBuilder(message); 
     	if (info instanceof Symbol)
             msg.append (" na liniji ").append(((Symbol)info).left);
         log.error(msg.toString());
     }
 
+:}
+
+init with {:
+	errorDetected = false;
 :}
 
 scan with {:

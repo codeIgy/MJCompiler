@@ -11,6 +11,7 @@ bool boo;
 	void main()	
 	int g;
 	{	
+		g=g+;
 		g++;
 	}
 }
