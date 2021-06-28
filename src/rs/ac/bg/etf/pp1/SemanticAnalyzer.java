@@ -178,6 +178,10 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 	}
 	
+	public void visit(DesignatorArray designatorArray) {
+		designatorArray.obj = TabWithBool.find(designatorArray.getI1());
+	}
+	
 	public void visit(DesignatorArray1 designatorArr) {
 		designatorArr.obj = TabWithBool.find(designatorArr.getDesignatorArray().getI1());
 		if(designatorArr.getExpr().struct.getKind() != Struct.Int && designatorArr.getExpr().struct.getKind() != Struct.None) {
@@ -196,7 +200,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			designatorArr.obj = TabWithBool.noObj;
 		}
 		else {
-			designatorArr.obj = new Obj(Obj.Elem, "", designatorArr.obj.getType().getElemType());
+			designatorArr.obj = new Obj(Obj.Elem, designatorArr.obj.getName() + "[]", designatorArr.obj.getType().getElemType());
 			report_info("Upotreba " + designatorArr.obj.getName(), designatorArr);
 		}
 	}
@@ -209,13 +213,10 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 	}
 	
-	public void visit(New1 new1) {
-		new1.struct = new1.getType().struct;
-	}
 	
 	public void visit(Designator1 designator1) {
 		Obj ident = designator1.getDesignator().obj;
-		if(ident.getKind() != Obj.Var && ident.getKind() != Obj.Elem && ident != TabWithBool.find("null")) {
+		if(ident.getKind() != Obj.Var && ident.getKind() != Obj.Elem && ident.getKind() != Obj.Con && ident != TabWithBool.find("null")) {
 			report_error("Simbol \"" + ident.getName() + "\" nije varijabla!", designator1);
 			designator1.struct = TabWithBool.noType;
 		}
@@ -474,6 +475,12 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			actParsList.remove(actParsList.size() - 1);
 			return;
 		}
+		else if(designator.obj.getType() == TabWithBool.nullType) {
+			report_error("Funkcija ne moze da bude tipa void!", designatorMeth);
+			designatorMeth.struct = TabWithBool.noType;
+			actParsList.remove(actParsList.size() - 1);
+			return;
+		}
 		
 		Obj methodBeingAccesed = designator.obj;
 		Collection<Obj> col = null;
@@ -585,6 +592,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(MethodDecl method) {
 		if(currentMethod.getName().equals("main") && currentMethod.getLevel() == 0 && currentMethod.getType() == TabWithBool.noType)
 			mainDeclared = true;
+		method.obj = currentMethod;
 		TabWithBool.chainLocalSymbols(currentMethod);
 		TabWithBool.closeScope();
 	}
@@ -653,7 +661,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		if(currentMethod.getType().getKind() == TabWithBool.noType.getKind()) {
 			report_error("Void metod ne smije da vraca izraz!", returnExpr.getParent());
 		}
-		else if(currentMethod.getType().getKind() != returnExpr.getExpr().struct.getKind()) {
+		else if(currentMethod.getType().getKind() != returnExpr.getExpr().struct.getKind() && returnExpr.getExpr().struct != TabWithBool.noType) {
 			report_error("Povratni tip funkcije i tip return izraza se ne poklapaju!", returnExpr);
 		}
 	}

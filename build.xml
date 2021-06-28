@@ -11,6 +11,7 @@
 				<exclude name="DumpSymbolTableVisitorBool.java"/>
 				<exclude name="TabWithBool.java"/>
 				<exclude name="CodeGenerator.java"/>
+				<exclude name="CounterVisitor.java"/>
 			</fileset>
 		</delete>
 		<delete>
@@ -72,6 +73,7 @@
 
 	<target name="runObj" depends="disasm" >
 		<java classname="rs.etf.pp1.mj.runtime.Run">
+			<arg value="-debug"/>
 			<arg value="test/program.obj"/>
 			<classpath>
 				<pathelement location="lib/mj-runtime.jar"/>

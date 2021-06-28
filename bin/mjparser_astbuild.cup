@@ -73,12 +73,12 @@ nonterminal Addop Addop;
 nonterminal MethodVarDecls MethodVarDecls;
 nonterminal DummyLparen DummyLparen;
 nonterminal DummyRparen DummyRparen;
+nonterminal NewDummy NewDummy;
 nonterminal FormPars FormPars;
 nonterminal FormPar FormPar;
 nonterminal Statement Statement;
 nonterminal FormParsList FormParsList;
 nonterminal DesignatorStatement DesignatorStatement;
-nonterminal DesignatorArray DesignatorArray;
 nonterminal IfOrElseStatement IfOrElseStatement;
 nonterminal Condition Condition;
 nonterminal ReturnStatement ReturnStatement;
@@ -100,7 +100,7 @@ nonterminal SwitchBodyWithoutDefault SwitchBodyWithoutDefault;
 nonterminal StatementListWithYield StatementListWithYield;
 nonterminal DummyColon DummyColon;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl, DesignatorArray;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr, SwitchBody;
 
 precedence left ELSE;
@@ -247,10 +247,11 @@ Factor ::=  (Designator1) Designator:dName {: RESULT=new Designator1(dName); RES
 			| (NumConst2) NUMCONST:cValue {: RESULT=new NumConst2(cValue); RESULT.setLine(cValueleft); :}
 			| (CharConst2) CHARCONST:cValue {: RESULT=new CharConst2(cValue); RESULT.setLine(cValueleft); :}
 			| (BoolConst2) BOOLCONST:cValue {: RESULT=new BoolConst2(cValue); RESULT.setLine(cValueleft); :}
-			| (New1) NEW Type:T1 {: RESULT=new New1(T1); RESULT.setLine(T1left); :}
 			| (New2) NEW Type:T1 LBRACKET Expr:E2 RBRACKET {: RESULT=new New2(T1, E2); RESULT.setLine(T1left); :}
 			| (NestedExpr1) LPAREN Expr:E1 RPAREN {: RESULT=new NestedExpr1(E1); RESULT.setLine(E1left); :}
 			;
+
+NewDummy ::= (NewDummy) NEW {: RESULT=new NewDummy(); :};
 
 Designator ::= (DesignatorNotArray_) IDENT:I1 {: RESULT=new DesignatorNotArray_(I1); RESULT.setLine(I1left); :}
 			| (DesignatorArray1) DesignatorArray:D1 LBRACKET Expr:E2 RBRACKET {: RESULT=new DesignatorArray1(D1, E2); RESULT.setLine(D1left); :}

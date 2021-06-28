@@ -6,13 +6,30 @@ const char charconst1 = 'a', charconst2 = 'b';
 const int integerino = 5;
 int a[],b[];
 char f, c[];
+int g;
 bool boo;
 {
+	int m1(){
+		return 5 * 5 - g;
+	}
+	void hrkljus(){
+		g = 33;
+		boo = false;
+	}
 	void main()	
-	int g;
 	{	
-		g=g+;
-		g++;
+		g = 5 * 2 + 10 / 2 - 3 % 2 * integerino;
+		a = new int[1];
+		a[0] = m1();
+		print(a[0]);
+		c = new char[5];
+		c[0] = charconst1;
+		print(c[0]);
+		
+		hrkljus();
+		
+		print(g, 10);
+		print(false, 5);
 	}
 }
 

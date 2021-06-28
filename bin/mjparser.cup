@@ -58,10 +58,10 @@ terminal String BOOLCONST;
 terminal String IDENT;
 
 nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
-nonterminal FormPars, FormPar, Statement, FormParsList, DesignatorStatement, DesignatorArray, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
+nonterminal NewDummy, FormPars, FormPar, Statement, FormParsList, DesignatorStatement, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
 nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl, DesignatorArray;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr, SwitchBody;
 
 precedence left ELSE;
@@ -208,10 +208,11 @@ Factor ::=  (Designator1) Designator:dName
 			| (NumConst2) NUMCONST:cValue
 			| (CharConst2) CHARCONST:cValue
 			| (BoolConst2) BOOLCONST:cValue
-			| (New1) NEW Type
 			| (New2) NEW Type LBRACKET Expr RBRACKET
 			| (NestedExpr1) LPAREN Expr RPAREN
 			;
+
+NewDummy ::= (NewDummy) NEW;
 
 Designator ::= (DesignatorNotArray_) IDENT
 			| (DesignatorArray1) DesignatorArray LBRACKET Expr RBRACKET
