@@ -6,10 +6,17 @@ program mojtest
 	int x, y;
 	{	
 		x = 5;
-		if(x != 3 && x != 4 && x != 5 || x == 5 && 'a' == 'a') x = 4;
-		else x = 2;
+		y = 3;
+		if(x != 3 && x != 4 && x != 5 || false && 'a' == 'a'){ if(x != 2 && x != 22 && y != 3 || 'b' == 'a'){ x = 4; x = 4;}
+		}
+		else{
+		 x = 1;
+		 x = 1;
+		}
+		y = 6;
 		
 		print(x);
+		print(y);
 	}
 }
 

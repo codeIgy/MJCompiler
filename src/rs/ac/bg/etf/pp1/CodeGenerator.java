@@ -10,9 +10,9 @@ import rs.etf.pp1.symboltable.concepts.*;
 
 public class CodeGenerator extends VisitorAdaptor {
 	private int mainPC;
-	List<Integer> fixCondFactAdress = new ArrayList<>();
-	List<Integer> lastCondTermAdress = new ArrayList<>();// ?
-	Integer ElseAddr = 0;
+	List<List<Integer>> fixCondFactAdress = new ArrayList<>();
+	List<Integer> lastCondTermAdress = new ArrayList<>();
+	List<Integer> ElseAddr = new ArrayList<>();
 	
 	public CodeGenerator() {
 		//fixCondFactAdress.add(new ArrayList<>());
@@ -263,7 +263,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		else Code.putFalseJump(op, 0);
 		
 		int adr = Code.pc - 2;
-		fixCondFactAdress.add(adr); //add the adress that needs to be fixed to the list
+		fixCondFactAdress.get(fixCondFactAdress.size() - 1).add(adr); //add the adress that needs to be fixed to the list
 	}
 	
 	public void visit(CondFactExpr_ condExpr) {
@@ -274,19 +274,16 @@ public class CodeGenerator extends VisitorAdaptor {
 		else Code.putFalseJump(Code.ne, 0);
 		
 		int adr = Code.pc - 2;
-		fixCondFactAdress.add(adr); //add the adress that needs to be fixed to the list
+		fixCondFactAdress.get(fixCondFactAdress.size() - 1).add(adr); //add the adress that needs to be fixed to the list
 	}
 	
 	public void visit(OrDummy or) {//let all point to the next CondTerm only if this is not the last CondTerm
-		//SyntaxNode grandParent = or.getParent().getParent();
-		
-		//if(grandParent instanceof Conditions_  || grandParent instanceof CondTerm1) {
-			for(int i =0; i < fixCondFactAdress.size() - 1; i++) {
-				Code.fixup(fixCondFactAdress.get(i));
-			}
-			lastCondTermAdress.add(fixCondFactAdress.get(fixCondFactAdress.size() - 1));
-			fixCondFactAdress.clear();
-		//}
+		List<Integer> fixCondList = fixCondFactAdress.get(fixCondFactAdress.size() - 1);
+		for(int i =0; i < fixCondList.size() - 1; i++) {
+			Code.fixup(fixCondList.get(i));
+		}
+		lastCondTermAdress.add(fixCondList.get(fixCondList.size() - 1));
+		fixCondFactAdress.get(fixCondFactAdress.size() - 1).clear();
 	}
 	
 	public void visit(CondFact1 condTermFactOnly) {
@@ -322,31 +319,37 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	public void visit(DummyLparen DummyL) {
-		
+		SyntaxNode parent = DummyL.getParent(); 
+		if(parent instanceof IfStatement_) {
+			fixCondFactAdress.add(new ArrayList<>());
+		}
+		else if(parent instanceof ElseStatement_) {
+			fixCondFactAdress.add(new ArrayList<>());
+		}
 	}
 	
 	public void visit(DummyElse DummyElse) {
 		Code.putJump(0); //After if branch has been executed, don't execute else branch too
 		int addr = Code.pc - 2;
-		ElseAddr = addr; //save address of jump instruction
+		ElseAddr.add(addr); //save address of jump instruction
 		
-		for(int i = 0; i < fixCondFactAdress.size(); i++) { // if any CondFact within last CondTerm is false, we jump directly to else
-			Code.fixup(fixCondFactAdress.get(i));
+		for(int i = 0; i < fixCondFactAdress.get(fixCondFactAdress.size() - 1).size(); i++) { // if any CondFact within last CondTerm is false, we jump directly to else
+			Code.fixup(fixCondFactAdress.get(fixCondFactAdress.size() - 1).get(i));
 		}
 		
-		fixCondFactAdress.clear();
+		fixCondFactAdress.remove(fixCondFactAdress.size() - 1);
 		
 	}
 	
 	public void visit(IfStatement_ ifStat) {
-		for(int i = 0; i < fixCondFactAdress.size(); i++) { // if any CondFact within last CondTerm is false, we jump directly to else
-			Code.fixup(fixCondFactAdress.get(i));
+		for(int i = 0; i < fixCondFactAdress.get(fixCondFactAdress.size() - 1).size(); i++) { // if any CondFact within last CondTerm is false, we jump directly to else
+			Code.fixup(fixCondFactAdress.get(fixCondFactAdress.size() - 1).get(i));
 		}
 		
-		fixCondFactAdress.clear();
+		fixCondFactAdress.remove(fixCondFactAdress.size() - 1);
 	}
 	
 	public void visit(ElseStatement_ elseStat) {
-		Code.fixup(ElseAddr);
+		Code.fixup(ElseAddr.remove(ElseAddr.size() - 1));
 	}
 }
