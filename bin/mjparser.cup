@@ -57,7 +57,7 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
-nonterminal OrDummy, AndDummy, Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
+nonterminal OrDummy, AndDummy, WhileDummy,  Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
 nonterminal NewDummy, FormPars, FormPar, Statement, DummyElse, FormParsList, DesignatorStatement, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
 nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon;
 
@@ -128,7 +128,7 @@ FormPar ::= (FormPar) Type IDENT IsArray;
 
 Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (IfOrElseStatement1) IfOrElseStatement
-			| (DoWhileStatement_) DoDummy Statement WHILE LPAREN Condition RPAREN SEMI
+			| (DoWhileStatement_) DoDummy Statement WhileDummy DummyLparen Condition DummyRparen SEMI
 			| (YieldStatement_) YIELD Expr SEMI
 			| (BreakStatement_) Break SEMI
 			| (ContinueStatement_) Continue SEMI
@@ -139,6 +139,8 @@ Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			; 
 
 DoDummy ::= (DoDummy) DO;
+
+WhileDummy ::= (WhileDummy) WHILE;
 
 Break ::= (Break1) BREAK;
 

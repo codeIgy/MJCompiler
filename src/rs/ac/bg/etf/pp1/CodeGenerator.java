@@ -14,6 +14,10 @@ public class CodeGenerator extends VisitorAdaptor {
 	List<Integer> lastCondTermAdress = new ArrayList<>();
 	List<Integer> ElseAddr = new ArrayList<>();
 	
+	List<Integer> whileTop = new ArrayList<>(); //adress of the first instruction in do while
+	List<Integer> exitWhileAddr = new ArrayList<>(); //addresses that need to be fixed if while condition is not true
+	//List<Integer> fixCondFactAddressWhile = new ArrayList<>();
+	
 	public CodeGenerator() {
 		//fixCondFactAdress.add(new ArrayList<>());
 	}
@@ -212,13 +216,13 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(NoNumConstPrint_ print) {
 		Struct type = print.getExpr().struct;
 		
-		if(type == TabWithBool.intType) {
-			Code.loadConst(5);
-			Code.put(Code.print);
-		}
-		else {
+		if(type != TabWithBool.intType) {
 			Code.loadConst(1);
 			Code.put(Code.bprint);
+		}
+		else {
+			Code.loadConst(5);
+			Code.put(Code.print);
 		}
 	}
 	
@@ -259,8 +263,17 @@ public class CodeGenerator extends VisitorAdaptor {
 			op = Code.ge;
 		}
 		
-		if((grandParent instanceof Conditions_ || grandParent instanceof CondTerm1) && (grandParent.getParent() instanceof Conditions_)) Code.putFalseJump(Code.inverse[op], 0);
-		else Code.putFalseJump(op, 0);
+		if((grandParent instanceof Conditions_ || grandParent instanceof CondTerm1) && (grandParent.getParent() instanceof Conditions_)) {
+			Code.putFalseJump(Code.inverse[op], 0);
+		}
+		else {
+			if(grandParent.getParent() instanceof DoWhileStatement_) {
+				int topAddr = whileTop.get(whileTop.size() - 1) - Code.pc;
+				Code.put(Code.jcc + op); Code.put2(whileTop.get(whileTop.size() - 1) - Code.pc + 1);
+			}
+			else Code.putFalseJump(op, 0);
+			
+		}
 		
 		int adr = Code.pc - 2;
 		fixCondFactAdress.get(fixCondFactAdress.size() - 1).add(adr); //add the adress that needs to be fixed to the list
@@ -316,6 +329,16 @@ public class CodeGenerator extends VisitorAdaptor {
 			}
 			lastCondTermAdress.clear();
 		}
+		else {
+			List<Integer> list = fixCondFactAdress.get(fixCondFactAdress.size() - 1);
+			for(int i = 0; i < list.size() - 1; i++) {
+				Code.fixup(list.get(i));
+			}
+			for(int i = 0; i < lastCondTermAdress.size(); i++) {
+				int storeAddr = lastCondTermAdress.get(i);
+				Code.put2(storeAddr, (whileTop.get(whileTop.size() - 1) - storeAddr + 1));//put adress of statement within if since all of the CondFacts within CondTerm were true
+			}
+		}
 	}
 	
 	public void visit(DummyLparen DummyL) {
@@ -351,5 +374,31 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(ElseStatement_ elseStat) {
 		Code.fixup(ElseAddr.remove(ElseAddr.size() - 1));
+	}
+	
+	public void visit(ReadStatement_ read) {
+		Obj designator = read.getDesignator().obj;
+		if(designator.getType() == TabWithBool.charType) {
+			Code.put(Code.bread);
+		}
+		else {
+			Code.put(Code.read);
+		}
+			
+		Code.store(designator);
+	}
+	
+	public void visit(DoWhileStatement_ doWhile) {
+		whileTop.remove(whileTop.size() - 1);
+		fixCondFactAdress.remove(fixCondFactAdress.size() - 1);
+		lastCondTermAdress.clear();
+	}
+	
+	public void visit(DoDummy doDummy) {
+		whileTop.add(Code.pc);
+	}
+	
+	public void visit(WhileDummy whileDummy) {
+		fixCondFactAdress.add(new ArrayList<>());
 	}
 }

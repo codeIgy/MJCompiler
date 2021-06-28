@@ -1,22 +1,17 @@
 // mojtest
 
 program mojtest
+int c;
+bool boo;
 {
 	void main()	
 	int x, y;
 	{	
-		x = 5;
-		y = 3;
-		if(x != 3 && x != 4 && x != 5 || false && 'a' == 'a'){ if(x != 2 && x != 22 && y != 3 || 'b' == 'a'){ x = 4; x = 4;}
-		}
-		else{
-		 x = 1;
-		 x = 1;
-		}
-		y = 6;
-		
-		print(x);
-		print(y);
+		x = 0;
+		do{
+			x++;
+			print(x);
+		}while(x < 3);		
 	}
 }
 

@@ -59,7 +59,8 @@ terminal String IDENT;
 
 nonterminal OrDummy OrDummy;
 nonterminal AndDummy AndDummy;
-nonterminal Break Break;
+nonterminal WhileDummy WhileDummy;
+nonterminal  Break Break;
 nonterminal Continue Continue;
 nonterminal MethodDeclList MethodDeclList;
 nonterminal NonMethodDeclList NonMethodDeclList;
@@ -170,7 +171,7 @@ FormPar ::= (FormPar) Type:T1 IDENT:I2 IsArray:I3 {: RESULT=new FormPar(T1, I2, 
 
 Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new DesignatorStatement1(D1); RESULT.setLine(D1left); :}
 			| (IfOrElseStatement1) IfOrElseStatement:I1 {: RESULT=new IfOrElseStatement1(I1); RESULT.setLine(I1left); :}
-			| (DoWhileStatement_) DoDummy:D1 Statement:S2 WHILE LPAREN Condition:C3 RPAREN SEMI {: RESULT=new DoWhileStatement_(D1, S2, C3); RESULT.setLine(D1left); :}
+			| (DoWhileStatement_) DoDummy:D1 Statement:S2 WhileDummy:W3 DummyLparen:D4 Condition:C5 DummyRparen:D6 SEMI {: RESULT=new DoWhileStatement_(D1, S2, W3, D4, C5, D6); RESULT.setLine(D1left); :}
 			| (YieldStatement_) YIELD Expr:E1 SEMI {: RESULT=new YieldStatement_(E1); RESULT.setLine(E1left); :}
 			| (BreakStatement_) Break:B1 SEMI {: RESULT=new BreakStatement_(B1); RESULT.setLine(B1left); :}
 			| (ContinueStatement_) Continue:C1 SEMI {: RESULT=new ContinueStatement_(C1); RESULT.setLine(C1left); :}
@@ -181,6 +182,8 @@ Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new D
 			; 
 
 DoDummy ::= (DoDummy) DO {: RESULT=new DoDummy(); :};
+
+WhileDummy ::= (WhileDummy) WHILE {: RESULT=new WhileDummy(); :};
 
 Break ::= (Break1) BREAK {: RESULT=new Break1(); :};
 

@@ -5,11 +5,11 @@
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class SwitchDummy implements SyntaxNode {
+public class WhileDummy implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
-    public SwitchDummy () {
+    public WhileDummy () {
     }
 
     public SyntaxNode getParent() {
@@ -46,10 +46,10 @@ public class SwitchDummy implements SyntaxNode {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("SwitchDummy(\n");
+        buffer.append("WhileDummy(\n");
 
         buffer.append(tab);
-        buffer.append(") [SwitchDummy]");
+        buffer.append(") [WhileDummy]");
         return buffer.toString();
     }
 }
