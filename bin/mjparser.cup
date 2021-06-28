@@ -57,8 +57,8 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
-nonterminal Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
-nonterminal NewDummy, FormPars, FormPar, Statement, FormParsList, DesignatorStatement, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
+nonterminal OrDummy, AndDummy, Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
+nonterminal NewDummy, FormPars, FormPar, Statement, DummyElse, FormParsList, DesignatorStatement, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
 nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl, DesignatorArray;
@@ -144,9 +144,11 @@ Break ::= (Break1) BREAK;
 
 Continue ::= (Continue1) CONTINUE;
 
-IfOrElseStatement ::= (IfStatement_) IF LPAREN Condition RPAREN Statement
-					| (ElseStatement_) IF LPAREN Condition RPAREN Statement ELSE Statement
+IfOrElseStatement ::= (IfStatement_) IF DummyLparen Condition DummyRparen Statement
+					| (ElseStatement_) IF DummyLparen Condition DummyRparen Statement DummyElse Statement
 					;
+
+DummyElse ::= (DummyElse) ELSE;					
 
 ReturnStatement ::= (ReturnVoidStatement_) RETURN
 					| (ReturnExprStatement_) RETURN Expr
@@ -179,13 +181,16 @@ ActPars ::= (ActPars_)  Expr COMMA ActPars
 			| (ActPar_) Expr
 			;
 			
-Condition ::= (Conditions_) Condition OR CondTerm
+Condition ::= (Conditions_) Condition OrDummy CondTerm
 			| (CondTerm1) CondTerm
 			;
 
-CondTerm ::= (CondTerm_) CondTerm AND CondFact
+OrDummy ::= (OrDummy) OR;
+
+CondTerm ::= (CondTerm_) CondTerm AndDummy CondFact
 			| (CondFact1) CondFact
 			;
+AndDummy ::= (AndDummy) AND;
 
 CondFact ::= (CondFactExpr_) Expr
 			| (CondFactExprs_) Expr Relop Expr

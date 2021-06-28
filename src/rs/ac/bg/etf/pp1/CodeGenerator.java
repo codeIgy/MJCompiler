@@ -1,5 +1,7 @@
 package rs.ac.bg.etf.pp1;
 
+import java.util.*;
+
 import rs.ac.bg.etf.pp1.CounterVisitor.*;
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.ac.bg.etf.pp1.ast.VisitorAdaptor;
@@ -8,6 +10,13 @@ import rs.etf.pp1.symboltable.concepts.*;
 
 public class CodeGenerator extends VisitorAdaptor {
 	private int mainPC;
+	List<Integer> fixCondFactAdress = new ArrayList<>();
+	List<Integer> lastCondTermAdress = new ArrayList<>();// ?
+	Integer ElseAddr = 0;
+	
+	public CodeGenerator() {
+		//fixCondFactAdress.add(new ArrayList<>());
+	}
 	
 	public int getMainPC() {
 		return mainPC;
@@ -224,5 +233,120 @@ public class CodeGenerator extends VisitorAdaptor {
 		else {
 			Code.put(Code.bprint);
 		}
+	}
+	
+	public void visit(CondFactExprs_ condExprs) {//on the last CondFact we need to change the jump condition since we jump if the condition is true
+		SyntaxNode grandParent = condExprs.getParent().getParent();
+		
+		Relop relop = condExprs.getRelop();
+		int op;
+		if(relop instanceof Eqop1) {
+			op = Code.eq;
+		}
+		else if(relop instanceof Difop1) {
+			op = Code.ne;
+		}
+		else if(relop instanceof Ltop1) {
+			op = Code.lt;
+		}
+		else if(relop instanceof Leop1) {
+			op = Code.le;
+		}
+		else if(relop instanceof Gtop1) {
+			op = Code.gt;
+		}
+		else {
+			op = Code.ge;
+		}
+		
+		if((grandParent instanceof Conditions_ || grandParent instanceof CondTerm1) && (grandParent.getParent() instanceof Conditions_)) Code.putFalseJump(Code.inverse[op], 0);
+		else Code.putFalseJump(op, 0);
+		
+		int adr = Code.pc - 2;
+		fixCondFactAdress.add(adr); //add the adress that needs to be fixed to the list
+	}
+	
+	public void visit(CondFactExpr_ condExpr) {
+		SyntaxNode grandParent = condExpr.getParent().getParent();
+		
+		Code.loadConst(0);
+		if((grandParent instanceof Conditions_ || grandParent instanceof CondTerm1) && (grandParent.getParent() instanceof Conditions_)) Code.putFalseJump(Code.inverse[Code.ne], 0); //if this is the last expression for this term the we switch the condition
+		else Code.putFalseJump(Code.ne, 0);
+		
+		int adr = Code.pc - 2;
+		fixCondFactAdress.add(adr); //add the adress that needs to be fixed to the list
+	}
+	
+	public void visit(OrDummy or) {//let all point to the next CondTerm only if this is not the last CondTerm
+		//SyntaxNode grandParent = or.getParent().getParent();
+		
+		//if(grandParent instanceof Conditions_  || grandParent instanceof CondTerm1) {
+			for(int i =0; i < fixCondFactAdress.size() - 1; i++) {
+				Code.fixup(fixCondFactAdress.get(i));
+			}
+			lastCondTermAdress.add(fixCondFactAdress.get(fixCondFactAdress.size() - 1));
+			fixCondFactAdress.clear();
+		//}
+	}
+	
+	public void visit(CondFact1 condTermFactOnly) {
+		/*if(condTermFactOnly.getParent() instanceof CondTerm_) {
+			fixCondFactAdress.add(new ArrayList<>());
+			startCondTermAdress.add(Code.pc); //save next term adress
+		}*/
+	}
+	
+	public void visit(CondTerm_ condTerm) {
+		/*if(condTerm.getParent() instanceof CondTerm_) {
+			fixCondFactAdress.add(new ArrayList<>());
+			startCondTermAdress.add(Code.pc); //save next term adress
+		}*/
+	}
+	
+	public void visit(Conditions_ cond) {
+		
+	}
+	
+	public void visit(CondTerm1 condTermOnly) {
+		
+		
+	}
+	
+	public void visit(DummyRparen DummyR) {
+		if(DummyR.getParent() instanceof IfStatement_ || DummyR.getParent() instanceof ElseStatement_) {
+			for(int i = 0; i < lastCondTermAdress.size(); i++) {
+				Code.fixup(lastCondTermAdress.get(i));//put adress of statement within if since all of the CondFacts within CondTerm were true
+			}
+			lastCondTermAdress.clear();
+		}
+	}
+	
+	public void visit(DummyLparen DummyL) {
+		
+	}
+	
+	public void visit(DummyElse DummyElse) {
+		Code.putJump(0); //After if branch has been executed, don't execute else branch too
+		int addr = Code.pc - 2;
+		ElseAddr = addr; //save address of jump instruction
+		
+		for(int i = 0; i < fixCondFactAdress.size(); i++) { // if any CondFact within last CondTerm is false, we jump directly to else
+			Code.fixup(fixCondFactAdress.get(i));
+		}
+		
+		fixCondFactAdress.clear();
+		
+	}
+	
+	public void visit(IfStatement_ ifStat) {
+		for(int i = 0; i < fixCondFactAdress.size(); i++) { // if any CondFact within last CondTerm is false, we jump directly to else
+			Code.fixup(fixCondFactAdress.get(i));
+		}
+		
+		fixCondFactAdress.clear();
+	}
+	
+	public void visit(ElseStatement_ elseStat) {
+		Code.fixup(ElseAddr);
 	}
 }

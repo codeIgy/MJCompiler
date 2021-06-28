@@ -57,6 +57,8 @@ terminal Character CHARCONST;
 terminal String BOOLCONST;
 terminal String IDENT;
 
+nonterminal OrDummy OrDummy;
+nonterminal AndDummy AndDummy;
 nonterminal Break Break;
 nonterminal Continue Continue;
 nonterminal MethodDeclList MethodDeclList;
@@ -77,6 +79,7 @@ nonterminal NewDummy NewDummy;
 nonterminal FormPars FormPars;
 nonterminal FormPar FormPar;
 nonterminal Statement Statement;
+nonterminal DummyElse DummyElse;
 nonterminal FormParsList FormParsList;
 nonterminal DesignatorStatement DesignatorStatement;
 nonterminal IfOrElseStatement IfOrElseStatement;
@@ -183,9 +186,11 @@ Break ::= (Break1) BREAK {: RESULT=new Break1(); :};
 
 Continue ::= (Continue1) CONTINUE {: RESULT=new Continue1(); :};
 
-IfOrElseStatement ::= (IfStatement_) IF LPAREN Condition:C1 RPAREN Statement:S2 {: RESULT=new IfStatement_(C1, S2); RESULT.setLine(C1left); :}
-					| (ElseStatement_) IF LPAREN Condition:C1 RPAREN Statement:S2 ELSE Statement:S3 {: RESULT=new ElseStatement_(C1, S2, S3); RESULT.setLine(C1left); :}
+IfOrElseStatement ::= (IfStatement_) IF DummyLparen:D1 Condition:C2 DummyRparen:D3 Statement:S4 {: RESULT=new IfStatement_(D1, C2, D3, S4); RESULT.setLine(D1left); :}
+					| (ElseStatement_) IF DummyLparen:D1 Condition:C2 DummyRparen:D3 Statement:S4 DummyElse:D5 Statement:S6 {: RESULT=new ElseStatement_(D1, C2, D3, S4, D5, S6); RESULT.setLine(D1left); :}
 					;
+
+DummyElse ::= (DummyElse) ELSE {: RESULT=new DummyElse(); :};					
 
 ReturnStatement ::= (ReturnVoidStatement_) RETURN {: RESULT=new ReturnVoidStatement_(); :}
 					| (ReturnExprStatement_) RETURN Expr:E1 {: RESULT=new ReturnExprStatement_(E1); RESULT.setLine(E1left); :}
@@ -218,13 +223,16 @@ ActPars ::= (ActPars_)  Expr:E1 COMMA ActPars:A2 {: RESULT=new ActPars_(E1, A2);
 			| (ActPar_) Expr:E1 {: RESULT=new ActPar_(E1); RESULT.setLine(E1left); :}
 			;
 			
-Condition ::= (Conditions_) Condition:C1 OR CondTerm:C2 {: RESULT=new Conditions_(C1, C2); RESULT.setLine(C1left); :}
+Condition ::= (Conditions_) Condition:C1 OrDummy:O2 CondTerm:C3 {: RESULT=new Conditions_(C1, O2, C3); RESULT.setLine(C1left); :}
 			| (CondTerm1) CondTerm:C1 {: RESULT=new CondTerm1(C1); RESULT.setLine(C1left); :}
 			;
 
-CondTerm ::= (CondTerm_) CondTerm:C1 AND CondFact:C2 {: RESULT=new CondTerm_(C1, C2); RESULT.setLine(C1left); :}
+OrDummy ::= (OrDummy) OR {: RESULT=new OrDummy(); :};
+
+CondTerm ::= (CondTerm_) CondTerm:C1 AndDummy:A2 CondFact:C3 {: RESULT=new CondTerm_(C1, A2, C3); RESULT.setLine(C1left); :}
 			| (CondFact1) CondFact:C1 {: RESULT=new CondFact1(C1); RESULT.setLine(C1left); :}
 			;
+AndDummy ::= (AndDummy) AND {: RESULT=new AndDummy(); :};
 
 CondFact ::= (CondFactExpr_) Expr:E1 {: RESULT=new CondFactExpr_(E1); RESULT.setLine(E1left); :}
 			| (CondFactExprs_) Expr:E1 Relop:R2 Expr:E3 {: RESULT=new CondFactExprs_(E1, R2, E3); RESULT.setLine(E1left); :}

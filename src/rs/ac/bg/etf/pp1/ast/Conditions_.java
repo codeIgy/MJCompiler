@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 28/5/2021 3:3:24
+// 28/5/2021 18:1:4
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,11 +8,14 @@ package rs.ac.bg.etf.pp1.ast;
 public class Conditions_ extends Condition {
 
     private Condition Condition;
+    private OrDummy OrDummy;
     private CondTerm CondTerm;
 
-    public Conditions_ (Condition Condition, CondTerm CondTerm) {
+    public Conditions_ (Condition Condition, OrDummy OrDummy, CondTerm CondTerm) {
         this.Condition=Condition;
         if(Condition!=null) Condition.setParent(this);
+        this.OrDummy=OrDummy;
+        if(OrDummy!=null) OrDummy.setParent(this);
         this.CondTerm=CondTerm;
         if(CondTerm!=null) CondTerm.setParent(this);
     }
@@ -23,6 +26,14 @@ public class Conditions_ extends Condition {
 
     public void setCondition(Condition Condition) {
         this.Condition=Condition;
+    }
+
+    public OrDummy getOrDummy() {
+        return OrDummy;
+    }
+
+    public void setOrDummy(OrDummy OrDummy) {
+        this.OrDummy=OrDummy;
     }
 
     public CondTerm getCondTerm() {
@@ -39,17 +50,20 @@ public class Conditions_ extends Condition {
 
     public void childrenAccept(Visitor visitor) {
         if(Condition!=null) Condition.accept(visitor);
+        if(OrDummy!=null) OrDummy.accept(visitor);
         if(CondTerm!=null) CondTerm.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(Condition!=null) Condition.traverseTopDown(visitor);
+        if(OrDummy!=null) OrDummy.traverseTopDown(visitor);
         if(CondTerm!=null) CondTerm.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(Condition!=null) Condition.traverseBottomUp(visitor);
+        if(OrDummy!=null) OrDummy.traverseBottomUp(visitor);
         if(CondTerm!=null) CondTerm.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -61,6 +75,12 @@ public class Conditions_ extends Condition {
 
         if(Condition!=null)
             buffer.append(Condition.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        if(OrDummy!=null)
+            buffer.append(OrDummy.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
