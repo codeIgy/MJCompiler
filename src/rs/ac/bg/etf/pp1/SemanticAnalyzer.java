@@ -5,11 +5,14 @@ import java.util.*;
 import org.apache.log4j.Logger;
 
 import rs.ac.bg.etf.pp1.ast.*;
+import rs.ac.bg.etf.pp1.test.*;
+import rs.ac.bg.etf.pp1.test.CompilerError.CompilerErrorType;
 import rs.etf.pp1.symboltable.concepts.*;
 
 //TO DO: napraviti Struct voidType kako bi prijavilo gresku u slucaju meth(main());
 
 public class SemanticAnalyzer extends VisitorAdaptor {
+	List<CompilerError> errors = new ArrayList<>();
 	boolean errorDetected = false;
 	Obj currentMethod = null;
 	boolean returnFound = false;
@@ -36,10 +39,16 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		errorDetected = true;
 		StringBuilder msg = new StringBuilder("Greska");
 		int line = (info == null) ? 0: info.getLine();
+		add_error(message, line);
 		if (line != 0)
 			msg.append (" na liniji ").append(line);
 		msg.append(": ").append(message);
 		log.error(msg.toString());
+	}
+	
+	public void add_error(String message, int line){
+		CompilerError error = new CompilerError(line, message, CompilerErrorType.SEMANTIC_ERROR);
+		errors.add(error);
 	}
 	
 	public void report_info(String message, SyntaxNode info) {

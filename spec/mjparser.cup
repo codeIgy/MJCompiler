@@ -4,6 +4,9 @@ package rs.ac.bg.etf.pp1;
 
 import java_cup.runtime.*;
 import org.apache.log4j.*;
+import java.util.*;
+import rs.ac.bg.etf.pp1.test.*;
+import rs.ac.bg.etf.pp1.test.CompilerError.CompilerErrorType;
 import rs.ac.bg.etf.pp1.ast.*;
 
 parser code {:
@@ -11,7 +14,7 @@ parser code {:
 	
 	boolean errorDetected = false;
 	Logger log = Logger.getLogger(getClass());
-   
+   	public List<CompilerError> errors = new ArrayList();
    
     // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
      
@@ -33,8 +36,14 @@ parser code {:
     	StringBuilder msg = new StringBuilder(message); 
     	if (info instanceof Symbol)
             msg.append (" na liniji ").append(((Symbol)info).left);
+        add_error(msg, ((Symbol)info).left);
         log.error(msg.toString());
     }
+    
+    add_error(String message, int line){
+		CompilerError error = new CompilerError(line, message, CompilerErrorType.SYNTAX_ERROR);
+		errors.add(error);
+	}
 
 :}
 

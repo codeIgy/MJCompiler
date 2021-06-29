@@ -7,11 +7,15 @@ bool boo;
 	void main()	
 	int x, y;
 	{	
-		x = 0;
-		do{
-			x++;
-			print(x);
-		}while(x < 3);		
+		if(true && true){
+			if(true){
+				print('m');
+			}
+			print('t');
+		}
+		else{
+			print('e');
+		}
 	}
 }
 
