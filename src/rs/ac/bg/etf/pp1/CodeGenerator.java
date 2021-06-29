@@ -115,6 +115,10 @@ public class CodeGenerator extends VisitorAdaptor {
 		//cases when we need to load from this location
 		if(parent instanceof DesignatorStatement) {
 			OperationsWithDesignator od = ((DesignatorStatement) parent).getOperationsWithDesignator();
+			if(od instanceof IncExpression_ || od instanceof DecExpression_) {
+				Code.put(Code.dup2);//we need two times array address and element number since we are loading and storing from that adress
+			}
+			
 			if(!(od instanceof AssignExpression_)) {
 				Code.load(designatorObj);		
 			}

@@ -485,7 +485,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			actParsList.remove(actParsList.size() - 1);
 			return;
 		}
-		else if(designator.obj.getType() == TabWithBool.nullType) {
+		else if(designator.obj.getType() == TabWithBool.noType) {
 			report_error("Funkcija ne moze da bude tipa void!", designatorMeth);
 			designatorMeth.struct = TabWithBool.noType;
 			actParsList.remove(actParsList.size() - 1);

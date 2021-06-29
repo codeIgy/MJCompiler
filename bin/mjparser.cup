@@ -43,7 +43,7 @@ parser code {:
     public void report_error_int(String message, int line) {
     	errorDetected = true;
     	StringBuilder msg = new StringBuilder(message); 
-    	msg.append (" na liniji ").append(line);
+    	//msg.append (" na liniji ").append(line);
         add_error(msg.toString(), line);
         log.error(msg.toString());
     }
@@ -109,11 +109,11 @@ VarDecl ::= (VarDecl) Type VarIdents SEMI;
 
 VarIdents ::= (VarIdents_) VarIdents COMMA VarIdent
 			| (VarIdent1) VarIdent
+			| (VarIdentError) error:e
+			{: parser.report_error_int("Greska pri definiciji globalne promjenljive na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft);:}
 			;
 			
 VarIdent ::= (VarIdent_) IDENT IsArray
-			| (ErrorVarIdent) error:e 
-			{: parser.report_error_int("Greska pri definiciji globalne promjenljive na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft);:}
 			;
 
 IsArray ::= (IsArray_) LBRACKET RBRACKET
