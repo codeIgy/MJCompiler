@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.ac.bg.etf.pp1.test.*;
 import rs.ac.bg.etf.pp1.test.CompilerError.CompilerErrorType;
+import rs.etf.pp1.symboltable.Tab;
 import rs.etf.pp1.symboltable.concepts.*;
 
 //TO DO: napraviti Struct voidType kako bi prijavilo gresku u slucaju meth(main());
@@ -607,12 +608,18 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(TypeReturn methNameAndReturnType) {
+		if(TabWithBool.find(methNameAndReturnType.getMName()) != TabWithBool.noObj) {
+			report_error("Metod " + methNameAndReturnType.getMName() + " je vec definisan!", methNameAndReturnType);
+		}
 		methNameAndReturnType.obj = currentMethod = TabWithBool.insert(Obj.Meth, methNameAndReturnType.getMName(), methNameAndReturnType.getType().struct);
 		numOfFormPars = 0;
 		TabWithBool.openScope();
 	}
 	
 	public void visit(Void1 voidMethName) {
+		if(TabWithBool.find(voidMethName.getMName()) != TabWithBool.noObj) {
+			report_error("Metod " + voidMethName.getMName() + " je vec definisan!", voidMethName);
+		}
 		voidMethName.obj = currentMethod = TabWithBool.insert(Obj.Meth, voidMethName.getMName(), TabWithBool.noType);
 		numOfFormPars = 0;
 		TabWithBool.openScope();
