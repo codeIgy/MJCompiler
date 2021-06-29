@@ -3,24 +3,35 @@
 program mojtest
 {
 	void main()	
-	int x;
+	int x, y, z, pt;
 	{	
 		x = 0;
-		
-		do{
-			x++;
-			do{
+		y = 3;
+		z = 3;
+		pt = switch(x){
+			case 0:
+				x = 2;
+				yield switch(x){
+						default: yield 1000;
+					};
+				y++;
+			case 1:
+				y = 2;
+				y++;
+			case 3:
+				z = 2;
+				y++;
+			case 4:
 				x++;
-				if(x > 3) break;
-				else continue;
-				if(x < 2) continue;
-			}while(x < 10);
-			
-			if(x > 4) break;
-			else if(x > 0) continue;
-			
-			x = 1;
-		}while(x < 8);
+				y++;
+			default:
+				yield x + z;
+				z++;
+		};
+		
+		y = 100;
+		
+		print(pt);
 	}
 }
 

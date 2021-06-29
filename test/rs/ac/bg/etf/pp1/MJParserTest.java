@@ -79,7 +79,7 @@ public class MJParserTest {
 		}*/
 		
 		Compiler compiler = new CompilerClass();
-		List<CompilerError> errors = compiler.compile("test/mojtest.mj", "test/program.obj");
+		List<CompilerError> errors = compiler.compile("test/test302.mj", "test/program.obj");
 		System.out.println(errors.toString());
 	}
 	

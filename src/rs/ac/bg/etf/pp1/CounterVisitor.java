@@ -12,13 +12,13 @@ public class CounterVisitor extends VisitorAdaptor {
 	}
 	
 	public static class FormParamCounter extends CounterVisitor{
-		public void visit(FormPar formParamDecl) {
+		public void visit(FormPar_ formParamDecl) {
 			count++;
 		}
 	}
 	
 	public static class VarCounter extends CounterVisitor{
-		public void visit(VarIdent varDecl) {
+		public void visit(VarIdent_ varDecl) {
 			count++;
 		}
 	}

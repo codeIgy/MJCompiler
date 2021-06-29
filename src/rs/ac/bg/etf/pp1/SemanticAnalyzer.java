@@ -703,7 +703,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 	
 	public void visit(SwitchBodyWithoutDefault_ switchBody) {
-		Integer numConst = switchBody.getN2(); //get NUMCONST
+		Integer numConst = switchBody.getN3(); //get NUMCONST
 		if(caseConsts.get(caseConsts.size() - 1).contains(numConst))
 			report_error("Konstanta " + numConst + " je vec stavljena u case i ne moze da se ponovi!", switchBody);
 		else

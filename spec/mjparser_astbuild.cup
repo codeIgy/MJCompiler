@@ -107,6 +107,7 @@ nonterminal ToPrint ToPrint;
 nonterminal StatementList StatementList;
 nonterminal DoDummy DoDummy;
 nonterminal SwitchDummy SwitchDummy;
+nonterminal CaseDummy CaseDummy;
 nonterminal OperationsWithDesignator OperationsWithDesignator;
 nonterminal Assignop Assignop;
 nonterminal ActParsList ActParsList;
@@ -120,6 +121,8 @@ nonterminal Mulop Mulop;
 nonterminal SwitchBodyWithoutDefault SwitchBodyWithoutDefault;
 nonterminal StatementListWithYield StatementListWithYield;
 nonterminal DummyColon DummyColon;
+nonterminal YieldDummy YieldDummy;
+nonterminal DefaultDummy DefaultDummy;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl, DesignatorArray;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr, SwitchBody;
@@ -195,7 +198,7 @@ FormPar ::= (FormPar_) Type:T1 IDENT:I2 IsArray:I3 {: RESULT=new FormPar_(T1, I2
 Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new DesignatorStatement1(D1); RESULT.setLine(D1left); :}
 			| (IfOrElseStatement1) IfOrElseStatement:I1 {: RESULT=new IfOrElseStatement1(I1); RESULT.setLine(I1left); :}
 			| (DoWhileStatement_) DoDummy:D1 Statement:S2 WhileDummy:W3 DummyLparen:D4 Condition:C5 DummyRparen:D6 SEMI {: RESULT=new DoWhileStatement_(D1, S2, W3, D4, C5, D6); RESULT.setLine(D1left); :}
-			| (YieldStatement_) YIELD Expr:E1 SEMI {: RESULT=new YieldStatement_(E1); RESULT.setLine(E1left); :}
+			| (YieldStatement_) YieldDummy:Y1 Expr:E2 SEMI {: RESULT=new YieldStatement_(Y1, E2); RESULT.setLine(Y1left); :}
 			| (BreakStatement_) Break:B1 SEMI {: RESULT=new BreakStatement_(B1); RESULT.setLine(B1left); :}
 			| (ContinueStatement_) Continue:C1 SEMI {: RESULT=new ContinueStatement_(C1); RESULT.setLine(C1left); :}
 			| (ReturnStatement1) ReturnStatement:R1 SEMI {: RESULT=new ReturnStatement1(R1); RESULT.setLine(R1left); :}
@@ -205,6 +208,8 @@ Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new D
 			; 
 
 DoDummy ::= (DoDummy) DO {: RESULT=new DoDummy(); :};
+
+YieldDummy ::= (YieldDummy) YIELD {: RESULT=new YieldDummy(); :}; 
 
 WhileDummy ::= (WhileDummy) WHILE {: RESULT=new WhileDummy(); :};
 
@@ -297,13 +302,17 @@ Designator ::= (DesignatorNotArray_) IDENT:I1 {: RESULT=new DesignatorNotArray_(
 			
 DesignatorArray ::= (DesignatorArray) IDENT:I1 {: RESULT=new DesignatorArray(I1); RESULT.setLine(I1left); :};
 			
-SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault:S1 DEFAULT DummyColon:D2 StatementList:S3 {: RESULT=new SwitchBody(S1, D2, S3); RESULT.setLine(S1left); :};
+SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault:S1 DefaultDummy:D2 DummyColon:D3 StatementList:S4 {: RESULT=new SwitchBody(S1, D2, D3, S4); RESULT.setLine(S1left); :};
+
+DefaultDummy ::= (DefaultDummy) DEFAULT {: RESULT=new DefaultDummy(); :};
 
 DummyColon ::= (DummyColon) COLON {: RESULT=new DummyColon(); :};
 
-SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault:S1 CASE NUMCONST:N2 COLON StatementList:S3 {: RESULT=new SwitchBodyWithoutDefault_(S1, N2, S3); RESULT.setLine(S1left); :}
+SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault:S1 CaseDummy:C2 NUMCONST:N3 COLON StatementList:S4 {: RESULT=new SwitchBodyWithoutDefault_(S1, C2, N3, S4); RESULT.setLine(S1left); :}
 							| (NoSwitchBodyWithoutDefault_) {: RESULT=new NoSwitchBodyWithoutDefault_(); :} /* epsilon */
 							;
+
+CaseDummy ::= (CaseDummy) CASE {: RESULT=new CaseDummy(); :};
 
 Assignop ::= (Assignop) ASSIGN {: RESULT=new Assignop(); :};
 

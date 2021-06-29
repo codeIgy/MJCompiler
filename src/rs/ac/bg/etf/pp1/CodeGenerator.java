@@ -19,12 +19,44 @@ public class CodeGenerator extends VisitorAdaptor {
 	List<List<Integer>> continueAddr = new ArrayList<>();
 	List<List<Integer>> breakAddr = new ArrayList<>();
 	
-	public CodeGenerator() {
-		//fixCondFactAdress.add(new ArrayList<>());
-	}
+	List<List<Integer>> yields = new ArrayList<>();
+	int jumpOverConditionAddr = 0;
+	List<Integer> previousCaseAddress = new ArrayList<>();
 	
 	public int getMainPC() {
 		return mainPC;
+	}
+	
+	public void visit(ProgName progName) {
+		//add predefined methods
+		
+		Obj chrMethod = TabWithBool.find("chr");
+		chrMethod.setAdr(Code.pc);
+		Code.put(Code.enter);
+		Code.put(1);
+		Code.put(1);
+		Code.put(Code.load_n);
+		Code.put(Code.exit);
+		Code.put(Code.return_);
+		
+		Obj ordMethod = TabWithBool.find("ord");
+		ordMethod.setAdr(Code.pc);
+		Code.put(Code.enter);
+		Code.put(1);
+		Code.put(1);
+		Code.put(Code.load_n);
+		Code.put(Code.exit);
+		Code.put(Code.return_);
+		
+		Obj lenMethod = TabWithBool.find("len");
+		lenMethod.setAdr(Code.pc);
+		Code.put(Code.enter);
+		Code.put(1);
+		Code.put(1);
+		Code.put(Code.load_n);
+		Code.put(Code.arraylength);
+		Code.put(Code.exit);
+		Code.put(Code.return_);
 	}
 	
 	public void visit(TypeReturn methName) {
@@ -269,7 +301,6 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		else {
 			if(grandParent.getParent() instanceof DoWhileStatement_) {
-				int topAddr = whileTop.get(whileTop.size() - 1) - Code.pc;
 				Code.put(Code.jcc + op); Code.put2(whileTop.get(whileTop.size() - 1) - Code.pc + 1);
 			}
 			else Code.putFalseJump(op, 0);
@@ -330,7 +361,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			}
 			lastCondTermAdress.clear();
 		}
-		else {
+		else if(DummyR.getParent() instanceof DoWhileStatement_){
 			List<Integer> list = fixCondFactAdress.get(fixCondFactAdress.size() - 1);
 			for(int i = 0; i < list.size() - 1; i++) {
 				Code.fixup(list.get(i));
@@ -423,5 +454,59 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(BreakStatement_ breakStat) {
 		Code.putJump(0);
 		breakAddr.get(continueAddr.size() - 1).add(Code.pc - 2);
+	}
+	
+	public void visit(SwitchDummy switchD) {
+		//entering nested switch
+		yields.add(new ArrayList<>());
+		previousCaseAddress.add(-1);
+	}
+	
+	public void visit(SwitchStatement_ switchStat) {
+		//exiting nested switch
+		yields.remove(yields.size() - 1);
+		previousCaseAddress.remove(previousCaseAddress.size() - 1);
+	}
+	
+	public void visit(CaseDummy caseD) {
+		int prevCase = previousCaseAddress.get(previousCaseAddress.size() - 1);
+		if(prevCase != -1) { //there is no need to put jump over condition before first case
+			Code.putJump(0);
+			jumpOverConditionAddr = Code.pc - 2;
+			
+			Code.fixup(prevCase);//fix previous case jump addres
+		}
+		
+		Code.put(Code.dup);
+		int numConst = ((SwitchBodyWithoutDefault_) caseD.getParent()).getN3();
+		Code.loadConst(numConst);
+		Code.putFalseJump(Code.eq, 0);
+		previousCaseAddress.set(previousCaseAddress.size() - 1, Code.pc - 2);
+		
+		if(prevCase != -1) 
+			Code.put2(jumpOverConditionAddr, Code.pc - jumpOverConditionAddr + 1); //adress at which conditions are skipped
+	}
+	
+	public void visit(YieldDummy yield) {
+		Code.put(Code.pop);
+	}
+	
+	public void visit(YieldStatement_ yield) {
+		Code.putJump(0);
+		yields.get(yields.size() - 1).add(Code.pc - 2);
+	}
+	
+	public void visit(DefaultDummy defaultD) {
+		int prevCase = previousCaseAddress.get(previousCaseAddress.size() - 1);
+		if(prevCase != -1) { //let last case point to default if it exist
+			Code.fixup(prevCase);
+		}
+	}
+	
+	public void visit(SwitchBody sb) {
+		List<Integer> list = yields.get(yields.size() - 1);
+		for(int x : list) {
+			Code.fixup(x);
+		}
 	}
 }

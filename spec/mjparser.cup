@@ -75,8 +75,8 @@ terminal String BOOLCONST;
 terminal String IDENT;
 
 nonterminal OrDummy, AndDummy, WhileDummy,  Break, Continue, MethodDeclList, NonMethodDeclList, NonMethodDecl, ConstDecl, VarDecl, ConstIdents, ConstIdent, IsArray, VarIdents, VarIdent, Addop, MethodVarDecls, DummyLparen, DummyRparen;
-nonterminal NewDummy, FormPars, FormPar, Statement, DummyElse, FormParsList, DesignatorStatement, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy;
-nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon;
+nonterminal NewDummy, FormPars, FormPar, Statement, DummyElse, FormParsList, DesignatorStatement, IfOrElseStatement, Condition, ReturnStatement, ToPrint, StatementList, DoDummy, SwitchDummy, CaseDummy;
+nonterminal OperationsWithDesignator, Assignop, ActParsList, ActPars, CondTerm, CondFact, Relop, IsMinus, ExprList, Mulop, SwitchBodyWithoutDefault, StatementListWithYield, DummyColon, YieldDummy, DefaultDummy;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgName, Designator, MethodNameAndReturnType, MethodDecl, DesignatorArray;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Term, Factor, Expr, SwitchBody;
@@ -152,7 +152,7 @@ FormPar ::= (FormPar_) Type IDENT IsArray
 Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (IfOrElseStatement1) IfOrElseStatement
 			| (DoWhileStatement_) DoDummy Statement WhileDummy DummyLparen Condition DummyRparen SEMI
-			| (YieldStatement_) YIELD Expr SEMI
+			| (YieldStatement_) YieldDummy Expr SEMI
 			| (BreakStatement_) Break SEMI
 			| (ContinueStatement_) Continue SEMI
 			| (ReturnStatement1) ReturnStatement SEMI
@@ -162,6 +162,8 @@ Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			; 
 
 DoDummy ::= (DoDummy) DO;
+
+YieldDummy ::= (YieldDummy) YIELD; 
 
 WhileDummy ::= (WhileDummy) WHILE;
 
@@ -254,13 +256,17 @@ Designator ::= (DesignatorNotArray_) IDENT
 			
 DesignatorArray ::= (DesignatorArray) IDENT;
 			
-SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault DEFAULT DummyColon StatementList;
+SwitchBody ::= (SwitchBody) SwitchBodyWithoutDefault DefaultDummy DummyColon StatementList;
+
+DefaultDummy ::= (DefaultDummy) DEFAULT;
 
 DummyColon ::= (DummyColon) COLON;
 
-SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault CASE NUMCONST COLON StatementList
+SwitchBodyWithoutDefault ::= (SwitchBodyWithoutDefault_) SwitchBodyWithoutDefault CaseDummy NUMCONST COLON StatementList
 							| (NoSwitchBodyWithoutDefault_) /* epsilon */
 							;
+
+CaseDummy ::= (CaseDummy) CASE;
 
 Assignop ::= (Assignop) ASSIGN;
 
