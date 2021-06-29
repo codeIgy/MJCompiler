@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 28/5/2021 23:52:25
+// 29/5/2021 4:34:32
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,6 +8,7 @@ package rs.ac.bg.etf.pp1.ast;
 public abstract class VisitorAdaptor implements Visitor { 
 
     public void visit(Mulop Mulop) { }
+    public void visit(VarIdent VarIdent) { }
     public void visit(Relop Relop) { }
     public void visit(ToPrint ToPrint) { }
     public void visit(ConstIdent ConstIdent) { }
@@ -40,6 +41,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(MethodNameAndReturnType MethodNameAndReturnType) { }
     public void visit(Statement Statement) { }
     public void visit(CondFact CondFact) { }
+    public void visit(FormPar FormPar) { }
     public void visit(MethodDeclList MethodDeclList) { }
     public void visit(FormPars FormPars) { }
     public void visit(Modop1 Modop1) { visit(); }
@@ -82,6 +84,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(CondFact1 CondFact1) { visit(); }
     public void visit(CondTerm_ CondTerm_) { visit(); }
     public void visit(OrDummy OrDummy) { visit(); }
+    public void visit(ErrorCondition ErrorCondition) { visit(); }
     public void visit(CondTerm1 CondTerm1) { visit(); }
     public void visit(Conditions_ Conditions_) { visit(); }
     public void visit(ActPar_ ActPar_) { visit(); }
@@ -90,6 +93,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ActParsList_ ActParsList_) { visit(); }
     public void visit(DummyRparen DummyRparen) { visit(); }
     public void visit(DummyLparen DummyLparen) { visit(); }
+    public void visit(ErrorAssign ErrorAssign) { visit(); }
     public void visit(DecExpression_ DecExpression_) { visit(); }
     public void visit(IncExpression_ IncExpression_) { visit(); }
     public void visit(ActParsListExpression_ ActParsListExpression_) { visit(); }
@@ -118,7 +122,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(DoWhileStatement_ DoWhileStatement_) { visit(); }
     public void visit(IfOrElseStatement1 IfOrElseStatement1) { visit(); }
     public void visit(DesignatorStatement1 DesignatorStatement1) { visit(); }
-    public void visit(FormPar FormPar) { visit(); }
+    public void visit(FormParError FormParError) { visit(); }
+    public void visit(FormPar_ FormPar_) { visit(); }
     public void visit(FormPar1 FormPar1) { visit(); }
     public void visit(FormPars_ FormPars_) { visit(); }
     public void visit(NoFormParamsList NoFormParamsList) { visit(); }
@@ -133,7 +138,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Type Type) { visit(); }
     public void visit(NoArray_ NoArray_) { visit(); }
     public void visit(IsArray_ IsArray_) { visit(); }
-    public void visit(VarIdent VarIdent) { visit(); }
+    public void visit(ErrorVarIdent ErrorVarIdent) { visit(); }
+    public void visit(VarIdent_ VarIdent_) { visit(); }
     public void visit(VarIdent1 VarIdent1) { visit(); }
     public void visit(VarIdents_ VarIdents_) { visit(); }
     public void visit(VarDecl VarDecl) { visit(); }

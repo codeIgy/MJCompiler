@@ -1,21 +1,26 @@
 // mojtest
 
 program mojtest
-int c;
-bool boo;
 {
 	void main()	
-	int x, y;
+	int x;
 	{	
-		if(true && true){
-			if(true){
-				print('m');
-			}
-			print('t');
-		}
-		else{
-			print('e');
-		}
+		x = 0;
+		
+		do{
+			x++;
+			do{
+				x++;
+				if(x > 3) break;
+				else continue;
+				if(x < 2) continue;
+			}while(x < 10);
+			
+			if(x > 4) break;
+			else if(x > 0) continue;
+			
+			x = 1;
+		}while(x < 8);
 	}
 }
 

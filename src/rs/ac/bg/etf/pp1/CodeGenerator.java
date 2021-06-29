@@ -16,7 +16,8 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	List<Integer> whileTop = new ArrayList<>(); //adress of the first instruction in do while
 	List<Integer> exitWhileAddr = new ArrayList<>(); //addresses that need to be fixed if while condition is not true
-	//List<Integer> fixCondFactAddressWhile = new ArrayList<>();
+	List<List<Integer>> continueAddr = new ArrayList<>();
+	List<List<Integer>> breakAddr = new ArrayList<>();
 	
 	public CodeGenerator() {
 		//fixCondFactAdress.add(new ArrayList<>());
@@ -338,6 +339,11 @@ public class CodeGenerator extends VisitorAdaptor {
 				int storeAddr = lastCondTermAdress.get(i);
 				Code.put2(storeAddr, (whileTop.get(whileTop.size() - 1) - storeAddr + 1));//put adress of statement within if since all of the CondFacts within CondTerm were true
 			}
+			for(int addr : breakAddr.get(breakAddr.size() - 1)) {
+				Code.put2(addr, Code.pc - addr + 1);
+			}
+			continueAddr.remove(continueAddr.size() - 1);
+			breakAddr.remove(breakAddr.size() - 1);
 		}
 	}
 	
@@ -348,6 +354,11 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		else if(parent instanceof ElseStatement_) {
 			fixCondFactAdress.add(new ArrayList<>());
+		}
+		else if(parent instanceof DoWhileStatement_) {
+			for(int addr : continueAddr.get(continueAddr.size() - 1)) {
+				Code.put2(addr, Code.pc - addr + 1);
+			}
 		}
 	}
 	
@@ -396,9 +407,21 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	public void visit(DoDummy doDummy) {
 		whileTop.add(Code.pc);
+		continueAddr.add(new ArrayList<>());
+		breakAddr.add(new ArrayList<>());
 	}
 	
 	public void visit(WhileDummy whileDummy) {
 		fixCondFactAdress.add(new ArrayList<>());
+	}
+	
+	public void visit(ContinueStatement_ continueStat) {
+		Code.putJump(0);
+		continueAddr.get(continueAddr.size() - 1).add(Code.pc - 2);
+	}
+	
+	public void visit(BreakStatement_ breakStat) {
+		Code.putJump(0);
+		breakAddr.get(continueAddr.size() - 1).add(Code.pc - 2);
 	}
 }

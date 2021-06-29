@@ -19,7 +19,7 @@ import java.util.*;
 		return new Symbol(type, yyline + 1, yycolumn, value);
 	}
 	
-	report_error(String message, int line){
+	private void report_error(String message, int line){
 		CompilerError error = new CompilerError(line, message, CompilerErrorType.LEXICAL_ERROR);
 		errors.add(error);
 	}

@@ -24,7 +24,7 @@ public class CompilerClass implements Compiler {
 	public List<CompilerError> compile(String sourceFilePath, String outputFilePath) {
 		List<CompilerError> errors = new ArrayList<>();
 		
-		Logger log = Logger.getLogger(MJParserTest.class);
+		Logger log = Logger.getLogger(CompilerClass.class);
 		
 		Reader br = null;
 		try {
@@ -38,6 +38,9 @@ public class CompilerClass implements Compiler {
 			MJParser p = new MJParser(lexer);
 	        Symbol s = p.parse();  //pocetak parsiranja
 	        
+	        errors.addAll(lexer.errors);
+	        
+	        errors.addAll(p.errors);
 	        
 	        Program prog = (Program)(s.value); 
 			// ispis sintaksnog stabla
@@ -49,6 +52,7 @@ public class CompilerClass implements Compiler {
 			TabWithBool.init();
 			prog.traverseBottomUp(v); 
 			
+			errors.addAll(v.errors);
 			
 			TabWithBool.dump();
 			

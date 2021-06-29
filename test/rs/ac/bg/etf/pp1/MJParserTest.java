@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import java_cup.runtime.Symbol;
 
@@ -14,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import rs.ac.bg.etf.pp1.ast.Program;
+import rs.ac.bg.etf.pp1.test.Compiler;
+import rs.ac.bg.etf.pp1.test.CompilerError;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
 import rs.etf.pp1.mj.runtime.Code;
 import rs.etf.pp1.symboltable.Tab;
@@ -29,7 +32,7 @@ public class MJParserTest {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Logger log = Logger.getLogger(MJParserTest.class);
+		/*Logger log = Logger.getLogger(MJParserTest.class);
 		
 		Reader br = null;
 		try {
@@ -73,8 +76,11 @@ public class MJParserTest {
 		} 
 		finally {
 			if (br != null) try { br.close(); } catch (IOException e1) { log.error(e1.getMessage(), e1); }
-		}
-
+		}*/
+		
+		Compiler compiler = new CompilerClass();
+		List<CompilerError> errors = compiler.compile("test/mojtest.mj", "test/program.obj");
+		System.out.println(errors.toString());
 	}
 	
 	

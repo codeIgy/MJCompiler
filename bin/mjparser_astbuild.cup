@@ -4,6 +4,9 @@ package rs.ac.bg.etf.pp1;
 
 import java_cup.runtime.*;
 import org.apache.log4j.*;
+import java.util.*;
+import rs.ac.bg.etf.pp1.test.*;
+import rs.ac.bg.etf.pp1.test.CompilerError.CompilerErrorType;
 import rs.ac.bg.etf.pp1.ast.*;
 
 parser code {:
@@ -11,7 +14,7 @@ parser code {:
 	
 	boolean errorDetected = false;
 	Logger log = Logger.getLogger(getClass());
-   
+   	public List<CompilerError> errors = new ArrayList();
    
     // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
      
@@ -33,8 +36,22 @@ parser code {:
     	StringBuilder msg = new StringBuilder(message); 
     	if (info instanceof Symbol)
             msg.append (" na liniji ").append(((Symbol)info).left);
+        add_error(msg.toString(), ((Symbol)info).left);
         log.error(msg.toString());
     }
+    
+    public void report_error_int(String message, int line) {
+    	errorDetected = true;
+    	StringBuilder msg = new StringBuilder(message); 
+    	msg.append (" na liniji ").append(line);
+        add_error(msg.toString(), line);
+        log.error(msg.toString());
+    }
+    
+    public void add_error(String message, int line){
+		CompilerError error = new CompilerError(line, message, CompilerErrorType.SYNTAX_ERROR);
+		errors.add(error);
+	}
 
 :}
 
@@ -137,7 +154,10 @@ VarIdents ::= (VarIdents_) VarIdents:V1 COMMA VarIdent:V2 {: RESULT=new VarIdent
 			| (VarIdent1) VarIdent:V1 {: RESULT=new VarIdent1(V1); RESULT.setLine(V1left); :}
 			;
 			
-VarIdent ::= (VarIdent) IDENT:I1 IsArray:I2 {: RESULT=new VarIdent(I1, I2); RESULT.setLine(I1left); :};
+VarIdent ::= (VarIdent_) IDENT:I1 IsArray:I2 {: RESULT=new VarIdent_(I1, I2); RESULT.setLine(I1left); :}
+			| (ErrorVarIdent) error:e 
+			{: parser.report_error_int("Greska pri definiciji globalne promjenljive na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft);:} {: RESULT=new ErrorVarIdent(); :}
+			;
 
 IsArray ::= (IsArray_) LBRACKET RBRACKET {: RESULT=new IsArray_(); :}
 			| (NoArray_) {: RESULT=new NoArray_(); :} /* epsilon */
@@ -167,7 +187,10 @@ FormPars ::= (FormPars_) FormPar:F1 COMMA FormPars:F2 {: RESULT=new FormPars_(F1
 			| (FormPar1) FormPar:F1 {: RESULT=new FormPar1(F1); RESULT.setLine(F1left); :}
 			;
 
-FormPar ::= (FormPar) Type:T1 IDENT:I2 IsArray:I3 {: RESULT=new FormPar(T1, I2, I3); RESULT.setLine(T1left); :};
+FormPar ::= (FormPar_) Type:T1 IDENT:I2 IsArray:I3 {: RESULT=new FormPar_(T1, I2, I3); RESULT.setLine(T1left); :}
+			| (FormParError) error:e
+			{: parser.report_error_int("Greska pri deklaraciji formalnog parametra na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft); :} {: RESULT=new FormParError(); :}
+			;
 
 Statement ::= (DesignatorStatement1) DesignatorStatement:D1 SEMI {: RESULT=new DesignatorStatement1(D1); RESULT.setLine(D1left); :}
 			| (IfOrElseStatement1) IfOrElseStatement:I1 {: RESULT=new IfOrElseStatement1(I1); RESULT.setLine(I1left); :}
@@ -213,6 +236,8 @@ OperationsWithDesignator ::= (AssignExpression_) Assignop:A1 Expr:E2 {: RESULT=n
 							| (ActParsListExpression_) DummyLparen:D1 ActParsList:A2 DummyRparen:D3 {: RESULT=new ActParsListExpression_(D1, A2, D3); RESULT.setLine(D1left); :} 
 							| (IncExpression_) INC {: RESULT=new IncExpression_(); :}
 							| (DecExpression_) DEC {: RESULT=new DecExpression_(); :}
+							| (ErrorAssign) error:e
+							{: parser.report_error_int("Greska pri operaciji dodele na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft); :} {: RESULT=new ErrorAssign(); :}
 							; 
 							
 DummyLparen ::= (DummyLparen) LPAREN {: RESULT=new DummyLparen(); :};
@@ -228,6 +253,8 @@ ActPars ::= (ActPars_)  Expr:E1 COMMA ActPars:A2 {: RESULT=new ActPars_(E1, A2);
 			
 Condition ::= (Conditions_) Condition:C1 OrDummy:O2 CondTerm:C3 {: RESULT=new Conditions_(C1, O2, C3); RESULT.setLine(C1left); :}
 			| (CondTerm1) CondTerm:C1 {: RESULT=new CondTerm1(C1); RESULT.setLine(C1left); :}
+			| (ErrorCondition) error:e
+			{: parser.report_error_int("Greska u logickom izrazu na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft); :} {: RESULT=new ErrorCondition(); :}
 			;
 
 OrDummy ::= (OrDummy) OR {: RESULT=new OrDummy(); :};

@@ -159,7 +159,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 	}
 	
-	public void visit(VarIdent varIdent) {
+	public void visit(VarIdent_ varIdent) {
 		Obj ident = TabWithBool.find(varIdent.getI1());
 		if(ident != TabWithBool.noObj) {
 			report_error("Simbol \"" + ident.getName() + "\" je vec deklarisan!", varIdent);
@@ -626,7 +626,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		currentMethod.setLevel(numOfFormPars);
 	}
 	
-	public void visit(FormPar formPar) {
+	public void visit(FormPar_ formPar) {
 		numOfFormPars++;
 		Struct type = null;
 		if(formPar.getIsArray() instanceof IsArray_) {

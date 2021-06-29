@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 28/5/2021 23:52:25
+// 29/5/2021 4:34:32
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,6 +8,7 @@ package rs.ac.bg.etf.pp1.ast;
 public interface Visitor { 
 
     public void visit(Mulop Mulop);
+    public void visit(VarIdent VarIdent);
     public void visit(Relop Relop);
     public void visit(ToPrint ToPrint);
     public void visit(ConstIdent ConstIdent);
@@ -40,6 +41,7 @@ public interface Visitor {
     public void visit(MethodNameAndReturnType MethodNameAndReturnType);
     public void visit(Statement Statement);
     public void visit(CondFact CondFact);
+    public void visit(FormPar FormPar);
     public void visit(MethodDeclList MethodDeclList);
     public void visit(FormPars FormPars);
     public void visit(Modop1 Modop1);
@@ -82,6 +84,7 @@ public interface Visitor {
     public void visit(CondFact1 CondFact1);
     public void visit(CondTerm_ CondTerm_);
     public void visit(OrDummy OrDummy);
+    public void visit(ErrorCondition ErrorCondition);
     public void visit(CondTerm1 CondTerm1);
     public void visit(Conditions_ Conditions_);
     public void visit(ActPar_ ActPar_);
@@ -90,6 +93,7 @@ public interface Visitor {
     public void visit(ActParsList_ ActParsList_);
     public void visit(DummyRparen DummyRparen);
     public void visit(DummyLparen DummyLparen);
+    public void visit(ErrorAssign ErrorAssign);
     public void visit(DecExpression_ DecExpression_);
     public void visit(IncExpression_ IncExpression_);
     public void visit(ActParsListExpression_ ActParsListExpression_);
@@ -118,7 +122,8 @@ public interface Visitor {
     public void visit(DoWhileStatement_ DoWhileStatement_);
     public void visit(IfOrElseStatement1 IfOrElseStatement1);
     public void visit(DesignatorStatement1 DesignatorStatement1);
-    public void visit(FormPar FormPar);
+    public void visit(FormParError FormParError);
+    public void visit(FormPar_ FormPar_);
     public void visit(FormPar1 FormPar1);
     public void visit(FormPars_ FormPars_);
     public void visit(NoFormParamsList NoFormParamsList);
@@ -133,7 +138,8 @@ public interface Visitor {
     public void visit(Type Type);
     public void visit(NoArray_ NoArray_);
     public void visit(IsArray_ IsArray_);
-    public void visit(VarIdent VarIdent);
+    public void visit(ErrorVarIdent ErrorVarIdent);
+    public void visit(VarIdent_ VarIdent_);
     public void visit(VarIdent1 VarIdent1);
     public void visit(VarIdents_ VarIdents_);
     public void visit(VarDecl VarDecl);

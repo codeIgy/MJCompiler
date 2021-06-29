@@ -36,11 +36,19 @@ parser code {:
     	StringBuilder msg = new StringBuilder(message); 
     	if (info instanceof Symbol)
             msg.append (" na liniji ").append(((Symbol)info).left);
-        add_error(msg, ((Symbol)info).left);
+        add_error(msg.toString(), ((Symbol)info).left);
         log.error(msg.toString());
     }
     
-    add_error(String message, int line){
+    public void report_error_int(String message, int line) {
+    	errorDetected = true;
+    	StringBuilder msg = new StringBuilder(message); 
+    	msg.append (" na liniji ").append(line);
+        add_error(msg.toString(), line);
+        log.error(msg.toString());
+    }
+    
+    public void add_error(String message, int line){
 		CompilerError error = new CompilerError(line, message, CompilerErrorType.SYNTAX_ERROR);
 		errors.add(error);
 	}
@@ -103,7 +111,10 @@ VarIdents ::= (VarIdents_) VarIdents COMMA VarIdent
 			| (VarIdent1) VarIdent
 			;
 			
-VarIdent ::= (VarIdent) IDENT IsArray;
+VarIdent ::= (VarIdent_) IDENT IsArray
+			| (ErrorVarIdent) error:e 
+			{: parser.report_error_int("Greska pri definiciji globalne promjenljive na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft);:}
+			;
 
 IsArray ::= (IsArray_) LBRACKET RBRACKET
 			| (NoArray_) /* epsilon */
@@ -133,7 +144,10 @@ FormPars ::= (FormPars_) FormPar COMMA FormPars
 			| (FormPar1) FormPar
 			;
 
-FormPar ::= (FormPar) Type IDENT IsArray;
+FormPar ::= (FormPar_) Type IDENT IsArray
+			| (FormParError) error:e
+			{: parser.report_error_int("Greska pri deklaraciji formalnog parametra na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft); :}
+			;
 
 Statement ::= (DesignatorStatement1) DesignatorStatement SEMI
 			| (IfOrElseStatement1) IfOrElseStatement
@@ -179,6 +193,8 @@ OperationsWithDesignator ::= (AssignExpression_) Assignop Expr
 							| (ActParsListExpression_) DummyLparen ActParsList DummyRparen 
 							| (IncExpression_) INC
 							| (DecExpression_) DEC
+							| (ErrorAssign) error:e
+							{: parser.report_error_int("Greska pri operaciji dodele na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft); :}
 							; 
 							
 DummyLparen ::= (DummyLparen) LPAREN;
@@ -194,6 +210,8 @@ ActPars ::= (ActPars_)  Expr COMMA ActPars
 			
 Condition ::= (Conditions_) Condition OrDummy CondTerm
 			| (CondTerm1) CondTerm
+			| (ErrorCondition) error:e
+			{: parser.report_error_int("Greska u logickom izrazu na liniji " + eleft + ". Izvrsen je oporavak od greske.", eleft); :}
 			;
 
 OrDummy ::= (OrDummy) OR;
